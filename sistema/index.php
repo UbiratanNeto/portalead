@@ -1,3 +1,8 @@
+<?php
+require_once('conexao.php');
+//CRIAR UM USUARIO ADMINISTRADOR CASO NÃO EXISTA NENHUM USUÁRIO
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +11,10 @@
     <title>Portal Hugo Cursos</title>
 </head>
 <body>
-    <form>
+    <form method="POST" action="autenticar.php">
         <input type="text" name="usuario" placeholder="Email ou Cpf">
-        <input type="password" name="senha" placeholder="Digite sua senha" >
+        <input type="password" name="senha" placeholder="Digite sua senha">
+        <button type="submit">Logar</button>
     </form>
 </body>
 </html>
