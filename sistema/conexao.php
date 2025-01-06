@@ -11,4 +11,8 @@ try {
 }
 
 
+//VARIÁVEIS DO SISTEMA
+$nome_sistema = 'Portal Hugo Cursos';
+$email_sistema = 'contato@hugocursos.com.br'
+
 ?>
