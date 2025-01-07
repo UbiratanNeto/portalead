@@ -14,8 +14,13 @@ $usuario = $_POST['usuario'];
 $senha = $_POST['senha'];
 $senha_crip = md5($senha);
 
-$query = $pdo->query("SELECT * FROM usuarios where (cpf = '$usuario' or usuario = '$usuario') and senha = '$senha'");
+$query = $pdo->prepare("SELECT * FROM usuarios where (cpf = :usuario or usuario = :usuario) and senha_crip = :senha");
+$query->bindValue(":usuario", "$usuario");
+$query->bindValue(":senha", "$senha_crip");
+$query->execute();
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
 if (@count($res) > 0) {
     //recuperar o nivel do usuario
     $_SESSION['nivel'] = $res[0]['nivel'];
