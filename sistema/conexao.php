@@ -13,6 +13,7 @@ try {
 
 //VARIÁVEIS DO SISTEMA
 $nome_sistema = 'Portal Hugo Cursos';
-$email_sistema = 'contato@hugocursos.com.br'
+$email_sistema = 'contato@hugocursos.com.br';
+$tel_sistema = '(31) 00000-0000';
 
 ?>
