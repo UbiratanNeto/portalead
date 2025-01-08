@@ -20,12 +20,17 @@ $pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $nome_sistema ?></title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<link rel="stylesheet" type="text/css" href="css/login.css">
-	<link rel="stylesheet" type="text/css" href="css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -65,7 +70,7 @@ $pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.
                         </form>
 
                         <div class="copy-text">
-                            <a class="text-danger">
+                            <a href="#" class="text-danger" data-toggle="modal" data-target="#modalRecuperar">
                                 Recuperar Senha?
                             </a>
                         </div>
@@ -73,7 +78,7 @@ $pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.
                         <div class="text-center p-t-8 p-b-31">
                             Não tem Cadastro?
 
-                            <a class="text-primary">Cadastre-se</a>
+                            <a href="#" class="text-primary" data-toggle="modal" data-target=#modalCadastro>Cadastre-se</a>
 
                         </div>
 
@@ -110,3 +115,81 @@ $pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.
 </body>
 
 </html>
+
+
+<!-- Modal Cadastro -->
+<div class="modal fade" id="modalCadastro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Faça seu Cadastro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" id="form-cadastro">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Nome</label>
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome e Sobrenome">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">E-mail</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="E-mail">
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleFormControlInput1">Senha</label>
+                            <input type="password" class="form-control" id="senha" name="senha">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="exampleFormControlInput1">Confirmar Senha</label>
+                            <input type="password" class="form-control" id="conf_senha" name="conf_senha">
+                        </div>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="termos" name="termos" value="Sim">
+                        <label class="form-check-label" for="exampleCheck1">Aceitar<a href="termos.php" target="_blank"> termos e condições</a></label>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Recuperar Senha -->
+<div class="modal fade" id="modalRecuperar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Recuperar Senha</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" id="form-recuperar">
+
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">E-mail ou CPF</label>
+                        <input type="text" class="form-control" name="recuperar" placeholder="Seu E-mail cadastrado ou CPF">
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Recuperar</button>
+            </div>
+        </div>
+    </div>
+</div>
