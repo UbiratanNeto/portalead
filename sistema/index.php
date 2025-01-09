@@ -118,7 +118,7 @@ $pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.
 
 
 <!-- Modal Cadastro -->
-<div class="modal fade" id="modalCadastro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalCadastro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -127,40 +127,47 @@ $pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form method="POST" id="form-cadastro">
+            <form id="form-cadastro">
+                <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Nome</label>
-                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome e Sobrenome">
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome e Sobrenome" required>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">E-mail</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="E-mail">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="exampleFormControlInput1">Senha</label>
-                            <input type="password" class="form-control" id="senha" name="senha">
+                            <input type="password" class="form-control" id="senha" name="senha" required>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="exampleFormControlInput1">Confirmar Senha</label>
-                            <input type="password" class="form-control" id="conf_senha" name="conf_senha">
+                            <input type="password" class="form-control" id="conf_senha" name="conf_senha" required>
                         </div>
                     </div>
 
                     <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="termos" name="termos" value="Sim">
+                        <input type="checkbox" class="form-check-input" id="termos" name="termos" value="Sim" required>
                         <label class="form-check-label" for="exampleCheck1">Aceitar<a href="termos.php" target="_blank"> termos e condições</a></label>
                     </div>
 
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Cadastrar</button>
-            </div>
+
+
+                    <small>
+                        <div align="center" id="mensagem-cadastro"></div>
+                    </small>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
+
+            </form>
         </div>
     </div>
 </div>
@@ -176,20 +183,63 @@ $pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form method="POST" id="form-recuperar">
 
+            <form id="form-recuperar">
+                <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleFormControlInput1">E-mail ou CPF</label>
-                        <input type="text" class="form-control" name="recuperar" placeholder="Seu E-mail cadastrado ou CPF">
+                        <input type="text" class="form-control" name="recuperar" placeholder="Seu E-mail cadastrado ou CPF" required>
                     </div>
+                </div>
 
+                <small>
+                    <div align="center" id="mensagem-recuperar"></div>
+                </small>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Recuperar</button>
+                </div>
 
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Recuperar</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $("#form-cadastro").submit(function() {
+
+        event.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: "cadastro.php",
+            type: 'POST',
+            data: formData,
+
+            success: function(mensagem) {
+                $('#mensagem-cadastro').text('');
+                $('#mensagem-cadastro').removeClass()
+                if (mensagem.trim() == "Cadastrado com Sucesso") {
+                    //$('#btn-fechar-usu').click();
+                    $('#mensagem-cadastro').addClass('text-success')
+                    $('#mensagem-cadastro').text(mensagem)
+
+                } else {
+
+                    $('#mensagem-cadastro').addClass('text-danger')
+                    $('#mensagem-cadastro').text(mensagem)
+                }
+
+
+            },
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+        });
+
+    });
+</script>
