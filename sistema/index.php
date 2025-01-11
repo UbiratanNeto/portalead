@@ -46,13 +46,13 @@ $pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.
                         <form class="login100-form validate-form" action="autenticar.php" method="post">
                             <div class="wrap-input100 validate-input">
                                 <span class="label-input100">Usuário</span><br>
-                                <input type="text" name="usuario" class="input100" placeholder="Usuário" pattern="[A-Za-z0-9_-@.]{1,15}" required>
+                                <input type="text" name="usuario"  id="usuario" class="input100" placeholder="Usuário" pattern="[A-Za-z0-9_-@.]{1,15}" required>
                                 <span class="focus-input100"></span>
                             </div>
 
                             <div class="wrap-input100 validate-input">
                                 <span class="label-input100">Senha</span>
-                                <input type="password" name="senha" class="input100" placeholder="Senha" pattern="[A-Za-z0-9_-@.]áêã{1,15}" required>
+                                <input type="password" name="senha" id="senha" class="input100" placeholder="Senha" pattern="[A-Za-z0-9_-@.]áêã{1,15}" required>
                                 <span class="focus-input100 password"></span>
                             </div>
 
@@ -136,13 +136,13 @@ $pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">E-mail</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required>
+                        <input type="email" class="form-control" id="email_cadastro" name="email" placeholder="E-mail" required>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="exampleFormControlInput1">Senha</label>
-                            <input type="password" class="form-control" id="senha" name="senha" required>
+                            <input type="password" class="form-control" id="senha_cadastro" name="senha" required>
                         </div>
 
                         <div class="form-group col-md-6">
@@ -225,11 +225,51 @@ $pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.
                     //$('#btn-fechar-usu').click();
                     $('#mensagem-cadastro').addClass('text-success')
                     $('#mensagem-cadastro').text(mensagem)
+                    $('#usuario').val($('#email_cadastro').val())
+                    $('#senha').val($('#senha_cadastro').val())
 
                 } else {
 
                     $('#mensagem-cadastro').addClass('text-danger')
                     $('#mensagem-cadastro').text(mensagem)
+                }
+
+
+            },
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+        });
+
+    });
+</script>
+
+
+<script type="text/javascript">
+    $("#form-recuperar").submit(function() {
+
+        event.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: "recuperar.php",
+            type: 'POST',
+            data: formData,
+
+            success: function(mensagem) {
+                $('#mensagem-recuperar').text('');
+                $('#mensagem-recuperar').removeClass()
+                if (mensagem.trim() == "Senha eviada para o E-mail") {
+                    //$('#btn-fechar-usu').click();
+                    $('#mensagem-recuperar').addClass('text-success')
+                    $('#mensagem-recuperar').text(mensagem)
+
+                } else {
+
+                    $('#mensagem-recuperar').addClass('text-danger')
+                    $('#mensagem-recuperar').text(mensagem)
                 }
 
 
