@@ -11,7 +11,9 @@ if($senha != $conf_senha){
     exit();
 }
 
-$query = $pdo->query("SELECT * FROM alunos where email = '$email'");
+$query = $pdo->prepare("SELECT * FROM alunos where email = :email");
+$query->bindValue(":email", "$email");
+$query->execute();
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 if (@count($res) > 0) {
     echo 'Este email já está cadastrado, recupere sua senha!';

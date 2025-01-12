@@ -46,7 +46,7 @@ $pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.
                         <form class="login100-form validate-form" action="autenticar.php" method="post">
                             <div class="wrap-input100 validate-input">
                                 <span class="label-input100">Usuário</span><br>
-                                <input type="text" name="usuario"  id="usuario" class="input100" placeholder="Usuário" pattern="[A-Za-z0-9_-@.]{1,15}" required>
+                                <input type="text" name="usuario" id="usuario" class="input100" placeholder="Usuário" pattern="[A-Za-z0-9_-@.]{1,15}" required>
                                 <span class="focus-input100"></span>
                             </div>
 
@@ -254,25 +254,30 @@ $pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.
         var formData = new FormData(this);
 
         $.ajax({
-            url: "recuperar.php",
-            type: 'POST',
-            data: formData,
+                url: "recuperar.php",
+                type: 'POST',
+                data: formData,
 
-            success: function(mensagem) {
-                $('#mensagem-recuperar').text('');
-                $('#mensagem-recuperar').removeClass()
-                if (mensagem.trim() == "Senha eviada para o E-mail") {
-                    //$('#btn-fechar-usu').click();
-                    $('#mensagem-recuperar').addClass('text-success')
-                    $('#mensagem-recuperar').text(mensagem)
+                success: function(mensagem) {
+                    $('#mensagem-recuperar').text('');
+                    $('#mensagem-recuperar').removeClass()
+                    if (mensagem.trim() == "") {
+                        //$('#btn-fechar-usu').click();
+                        $('#mensagem-recuperar').addClass('text-success')
+                        $('#mensagem-recuperar').text('Senha enviada para o E-mail!')
 
-                } else {
+                    } else {
 
-                    $('#mensagem-recuperar').addClass('text-danger')
-                    $('#mensagem-recuperar').text(mensagem)
+                        if (mensagem.trim() == "Não possui cadastro com este email ou cpf digitado!") {
+                            $('#mensagem-recuperar').addClass('text-danger')
+                            $('#mensagem-recuperar').text(mensagem)
+                        } else {
+                            $('#mensagem-recuperar').addClass('text-danger')
+                            $('#mensagem-recuperar').text('Você não está conectado a um servidor SMTP,pode ser que esteja em um servidor local (não é possível disparar e-mail no servidor local) ou o seu servidor de hospedagem está com este serviço desativado, precisa ativá-lo!')
+                        }
+
+
                 }
-
-
             },
 
             cache: false,
