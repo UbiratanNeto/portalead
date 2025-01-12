@@ -6,7 +6,7 @@ $senha_crip = md5($senha);
 //VERIFICAR SE EXISTE UM USUÁRIO ADMINISTRADOR CRIADO NO BANCO
 $query = $pdo->query("SELECT * FROM usuarios where nivel = 'Administrador'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
-if (count($res) == 0) {
+if (@count($res) == 0) {
     //CRIAR UM USUARIO ADMINISTRADOR CASO NÃO EXISTA NENHUM USUÁRIO'
     $pdo->query("INSERT INTO usuarios SET nome = 'Administrador', cpf = '000.000.000-00', usuario = '$email_sistema', senha = '$senha', senha_crip = '$senha_crip', nivel = 'Administrador', foto = 'sem-perfil.jpg', id_pessoa = 1, ativo = 'Sim', data = curDate() ");
 
@@ -42,7 +42,7 @@ if (count($res) == 0) {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-4 login-sec">
-                        <h5 class="text-center mb-4"><img class="mr-1" src="img/logo.png" width="50px">Faça seu Login</h5>
+                        <h5 class="text-center mb-4"><a href="../" title="Voltar para o site"><img class="mr-1" src="img/logo.png" width="50px"></a>Faça seu Login</h5>
 
 
                         <form class="login100-form validate-form" action="autenticar.php" method="post">
@@ -95,7 +95,7 @@ if (count($res) == 0) {
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <a href="#" target="_blank">
-                                            <img src="img/login/banner-login.jpg" height="" width="100%">
+                                            <img src="painel-admin/img/login/banner-login.jpg" height="" width="100%">
                                         </a>
 
                                     </div>
