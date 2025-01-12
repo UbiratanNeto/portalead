@@ -11,6 +11,9 @@
 
 <body>
     <div class="container"></div>
+    <h3>Termos e Condições</h3>
+    <hr>
+    <p>Texto com os  termos e condições</p>
 </body>
 
 </html>

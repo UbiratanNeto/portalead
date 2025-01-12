@@ -9,10 +9,12 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 if (count($res) == 0) {
     //CRIAR UM USUARIO ADMINISTRADOR CASO NÃO EXISTA NENHUM USUÁRIO'
     $pdo->query("INSERT INTO usuarios SET nome = 'Administrador', cpf = '000.000.000-00', usuario = '$email_sistema', senha = '$senha', senha_crip = '$senha_crip', nivel = 'Administrador', foto = 'sem-perfil.jpg', id_pessoa = 1, ativo = 'Sim', data = curDate() ");
+
+    //CRIAR UM ADMINISTRADOR NA TABELA ADMINISTRADORES
+    $pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.000.000-00', email = '$email_sistema', telefone = '$tel_sistema', foto = 'sem-perfil.jpg', ativo = 'Sim', data = curDate() ");
 }
 
-//CRIAR UM ADMINISTRADOR NA TABELA ADMINISTRADORES
-$pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.000.000-00', email = '$email_sistema', telefone = '$tel_sistema', foto = 'sem-perfil.jpg', ativo = 'Sim', data = curDate() ");
+
 
 ?>
 <!DOCTYPE html>
