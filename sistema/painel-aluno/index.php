@@ -1,3 +1,3 @@
-<?php
-    echo 'Painel aluno'
-?>
+<?php 
+echo 'Painel aluno';
+ ?>
