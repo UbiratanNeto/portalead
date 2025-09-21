@@ -418,6 +418,45 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 </div>
 
 
+<!-- Modal Sessão -->
+<div class="modal fade" id="modalSessao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title"><span id="nome_curso_sessao"> </span> </h4>
+				<button id="btn-fechar-sessao" type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+				<div class="row">
+					<form id="form-aulas">
+						<div class="col-md-6">
+
+								<div class="form-group">
+									<label>Nome Sessão</label>
+									<input type="number" name="nome_sessao" id="nome_sessao" class="form-control" required>
+								</div>
+
+							<div>
+								<button type="submit" class="btn btn-primary" style="">Salvar</button>
+							</div>
+						</div>
+						<input type="hidden" name="id" id="id-curso-sessao">
+					</form>
+						<small>
+							<div id="mensagem_sessao" align="center" class="mt-3"></div>
+						</small>
+					<div class="col-md-6">
+						<div id="listar-sessao"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <script type="text/javascript">
 	var pag = "<?= $pag ?>"
@@ -569,6 +608,26 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 		});
 	});
 </script>
+
+<script type="text/javascript">
+	function listarSessao() {
+		var id_curso = $('#id-curso-sessao').val();
+		$.ajax({
+			url: 'paginas/' + pag + "/listar-sessao.php",
+			method: 'POST',
+			data: {id_curso},
+			dataType: "text",
+
+			success: function(result) {
+				$("#listar-aulas").html(result);
+				$('#mensagem-excluir-aulas').text('');
+				$('#mensagem-aulas').text('');
+				limparCamposAulas();
+			}
+		});
+	}
+</script>
+
 
 <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
 <script type="text/javascript">
