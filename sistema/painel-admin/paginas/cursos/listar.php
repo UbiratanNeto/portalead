@@ -133,6 +133,8 @@ HTML;
 		</ul>
 		</li>
 
+		<big><a href="#" onclick="sessao('{$id}', '{$nome}')" title="Criar Sessão"><i class="fa fa-globe verde"></i></a></big>
+
 		<big><a class="{$acesso}" href="#" onclick="ativar('{$id}', '{$acao}')" title="{$titulo_link}"><i class="fa {$icone} $classe_square"></i></a></big>
 
 		<big><a href="#" onclick="obs('{$id}', '{$nome}', '{$mensagem}')" title="Ver Mensagens"><i class="fa fa-comment-o {$classe_mensagem}"></i></a></big>
@@ -263,4 +265,13 @@ HTML;
 		$('#modalAulas').modal('show');
 		listarAulas();
 	}
+
+	function sessao(curso, nome){
+		$('#id-curso-sessao').val(curso);
+		$('#nome_curso_sessao').text(nome);
+		$('#nome_sessao').val('');
+		$('#modalSessao').modal('show');
+		listarSessao();
+	}
+
 </script>

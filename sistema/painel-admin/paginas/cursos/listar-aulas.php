@@ -10,9 +10,10 @@ HTML;
 
 $query = $pdo->query("SELECT * FROM $tabela where curso = '$id_curso' ORDER BY num_aula desc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
-$ultima_aula = $res[0]['num_aula'] + 1;
+$ultima_aula = 1;
 $total_reg = @count($res);
 if ($total_reg > 0) {
+$ultima_aula = $res[0]['num_aula'] + 1;
 	echo <<<HTML
 	<small><table class="table table-hover" id="tabela2">
 	<thead> 
