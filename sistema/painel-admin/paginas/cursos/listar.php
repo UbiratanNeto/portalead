@@ -264,6 +264,7 @@ HTML;
 		$('#nome_aula_titulo').text(nome);
 		$('#modalAulas').modal('show');
 		listarAulas();
+		listarSessaoAulas(id);
 	}
 
 	function sessao(curso, nome){
@@ -273,5 +274,19 @@ HTML;
 		$('#modalSessao').modal('show');
 		listarSessao();
 	}
+
+	function listarSessaoAulas(curso){
+			$.ajax({
+			url: 'paginas/' + pag + "/listar-sessao-aulas.php",
+			method: 'POST',
+			data: {curso},
+			dataType: "html",
+
+			success: function(result) {
+				$("#listar-sessao-aula").html(result);
+			}
+		});
+	}
+
 
 </script>

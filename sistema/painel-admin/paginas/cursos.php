@@ -384,14 +384,28 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 									</div>
 
 								<div class="col-md-9">
-									<div class="form-group">
-										<label>Nome Sessão <small>(caso exista)</small></label>
-										<input type="text" name="sessao_aula" id="sessao_aula" class="form-control" placeholder="Ex: básico, módulo 1, etc">
-									</div>
+									<label>Módulo ou Sessão</label>
+									<div id="listar-sessao-aula">
+									<select class="form-control sel2" name="sessao" id="sessao" style="width:100%;">
+									<?php
+									$query = $pdo->query("SELECT * FROM sessao where curso = '' order by id asc");
+									$res = $query->fetchAll(PDO::FETCH_ASSOC);
+									if(@count($res) > 0){
+									
+									for($i=0; $i < @count($res); $i++){
+										foreach ($res[$i] as $key => $value) {}
+									?>
+									<option value="<?php echo $res[$i]['id'] ?>"><?php echo $res[$i]['nome'] ?></option>
+									<?php }
+									}else{
+										echo '<option value="0">Nenhuma Sessão Criada</option>';
+									}
+									?>
+								</select>
 								</div>
 
 								<div class="col-md-3">
-									<button type="submit" class="btn btn-primary" style="margin-top:21px;">Salvar</button>
+									<button type="submit" class="btn btn-primary" style="">Salvar</button>
 								</div>
 							</div>
 
@@ -431,12 +445,11 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 
 			<div class="modal-body">
 				<div class="row">
-					<form id="form-aulas">
+					<form id="form-sessao">
 						<div class="col-md-6">
-
 								<div class="form-group">
 									<label>Nome Sessão</label>
-									<input type="number" name="nome_sessao" id="nome_sessao" class="form-control" required>
+									<input type="text" name="nome_sessao" id="nome_sessao" class="form-control" required>
 								</div>
 
 							<div>
@@ -445,9 +458,7 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 						</div>
 						<input type="hidden" name="id" id="id-curso-sessao">
 					</form>
-						<small>
-							<div id="mensagem_sessao" align="center" class="mt-3"></div>
-						</small>
+					<small><div id="mensagem_sessao" align="center" class="mt-3"></div></small>
 					<div class="col-md-6">
 						<div id="listar-sessao"></div>
 					</div>
@@ -616,18 +627,43 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 			url: 'paginas/' + pag + "/listar-sessao.php",
 			method: 'POST',
 			data: {id_curso},
-			dataType: "text",
+			dataType: "html",
 
 			success: function(result) {
-				$("#listar-aulas").html(result);
-				$('#mensagem-excluir-aulas').text('');
-				$('#mensagem-aulas').text('');
-				limparCamposAulas();
+				$("#listar-sessao").html(result);
+				$('#mensagem-excluir-sessao').text('');
+				$('#mensagem-sessao').text('');
 			}
 		});
 	}
 </script>
 
+<script type="text/javascript">
+	$("#form-sessao").submit(function() {
+		event.preventDefault();
+		var formData = new FormData(this);
+		$.ajax({
+			url: 'paginas/' + pag + "/inserir-sessao.php",
+			type: 'POST',
+			data: formData,
+			success: function(mensagem) {
+				$('#mensagem_sessao').text('');
+				$('#mensagem_sessao').removeClass()
+				if (mensagem.trim() == "Salvo com Sucesso") {
+					//$('#btn-fechar').click();
+					$('#nome_sessao').val('')
+					listarSessao();
+				} else {
+					$('#mensagem_sessao').addClass('text-danger')
+					$('#mensagem_sessao').text(mensagem)
+				}
+			},
+			cache: false,
+			contentType: false,
+			processData: false,
+		});
+	});
+</script>
 
 <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
 <script type="text/javascript">
