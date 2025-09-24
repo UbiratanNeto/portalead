@@ -12,7 +12,7 @@ $query = $pdo->query("SELECT * FROM $tabela where curso = '$id_curso' ORDER BY i
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if ($total_reg > 0) {
-	echo <<<HTML
+echo <<<HTML
 	<small><table class="table table-hover" id="tabela2">
 	<thead> 
 	<tr> 
@@ -31,10 +31,9 @@ HTML;
 		echo <<<HTML
 <tr> 
 		<td class="esc">{$nome}</td>
-
+		<td>
 		<li class="dropdown head-dpdn2" style="display: inline-block;">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><big><i class="fa fa-trash-o text-danger"></i></big></a>
-
 		<ul class="dropdown-menu" style="margin-left:-230px;">
 		<li>
 		<div class="notification_desc2">
@@ -72,23 +71,23 @@ HTML;
 	});
 
 	function excluirSessao(id) {
-    $.ajax({
-        url: 'paginas/' + pag + "/excluir-sessao.php",
-        method: 'POST',
-        data: { id },
-        dataType: "text",
+		$.ajax({
+			url: 'paginas/' + pag + "/excluir-sessao.php",
+			method: 'POST',
+			data: { id },
+			dataType: "text",
 
-        success: function (mensagem) {
-            if (mensagem.trim() == "Excluído com Sucesso") {
-                listarAulas();
-            } else {
-                $('#mensagem-excluir-sessao').addClass('text-danger')
-                $('#mensagem-excluir-sessao').text(mensagem)
-            }
+			success: function (mensagem) {
+				if (mensagem.trim() == "Excluído com Sucesso") {
+					listarSessao();
+				} else {
+					$('#mensagem-excluir-sessao').addClass('text-danger')
+					$('#mensagem-excluir-sessao').text(mensagem)
+				}
 
-        },
+			},
 
-    });
+		});
 }
 
 
