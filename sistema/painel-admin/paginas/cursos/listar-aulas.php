@@ -3,17 +3,108 @@ require_once("../../../conexao.php");
 $tabela = 'aulas';
 
 $id_curso = $_POST['id_curso'];
+$sessao_sel = @$_POST['sessao_sel'];
 
 echo <<<HTML
-<small>
 HTML;
+$query_m = $pdo->query("SELECT * FROM sessao where curso = '$id_curso' ORDER BY id asc");
+$res_m = $query_m->fetchAll(PDO::FETCH_ASSOC);
+$total_reg_m = @count($res_m);
+if($total_reg_m > 0){
+	for ($i_m=0; $i_m < $total_reg_m; $i_m++){
+	foreach ($res_m[$i_m] as $key => $value){}
+	$sessao = $res_m[$i_m]['id'];
+	$nome_sessao = $res_m[$i_m]['nome'];
+
+	//Pegar o ID da primeira sessão
+	if($i_m == 0){
+		$primeira_sessao = $res_m[$i_m]['id'];
+	}
+
+
+	echo $nome_sessao;
+	echo '<hr>';
+$query = $pdo->query("SELECT * FROM $tabela where curso = '$id_curso' and sessao = '$sessao' ORDER BY num_aula desc");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$total_reg = @count($res);
+if ($total_reg > 0) {
+
+	echo <<<HTML
+	<small>
+	<small><table class="table table-hover" id="tabela2">
+	<thead> 
+	<tr> 
+	<th>Aula</th> 
+	<th class="">Nome</th>
+    <th class="esc">Link</th>
+	<th>Ações</th>
+	</tr> 
+	</thead> 
+	<tbody>
+HTML;
+
+	for ($i = 0; $i < $total_reg; $i++) {
+		foreach ($res[$i] as $key => $value){}
+		$id = $res[$i]['id'];
+		$nome = $res[$i]['nome'];
+        $num_aula = $res[$i]['num_aula'];
+        $link = $res[$i]['link'];
+		$sessao = $res[$i]['sessao'];
+
+        $linkF = mb_strimwidth($link, 0, 15, "...");
+
+
+
+		echo <<<HTML
+<tr> 
+		<td>
+		{$num_aula}	
+		</td>
+		<td class="esc">{$nome}</td>
+        <td class="esc"><a title="{$link}" href="{$link}" target="_blank">{$linkF}</a></td>	
+		
+		<td>
+		<big><a href="#" onclick="editarAula('{$id}', '{$num_aula}', '{$nome}', '{$link}', '{$sessao}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+
+		<li class="dropdown head-dpdn2" style="display: inline-block;">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><big><i class="fa fa-trash-o text-danger"></i></big></a>
+
+		<ul class="dropdown-menu" style="margin-left:-230px;">
+		<li>
+		<div class="notification_desc2">
+		<p>Confirmar Exclusão? <a href="#" onclick="excluirAula('{$id}')"><span class="text-danger">Sim</span></a></p>
+		</div>
+		</li>										
+		</ul>
+		</li>
+
+		</td>
+</tr>
+HTML;
+	}
+
+echo <<<HTML
+</tbody>
+<small><div align="center" id="mensagem-excluir-aulas"></div></small>
+</table>
+</small>
+HTML;
+} else {
+	echo '<small>Não possui nenhuma aula cadastrada!</small>';
+}
+echo <<<HTML
+</small>
+HTML;
+
+echo '<br><br>';
+}
+
+} else {
 
 $query = $pdo->query("SELECT * FROM $tabela where curso = '$id_curso' ORDER BY num_aula desc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
-$ultima_aula = 1;
 $total_reg = @count($res);
 if ($total_reg > 0) {
-$ultima_aula = $res[0]['num_aula'] + 1;
 	echo <<<HTML
 	<small><table class="table table-hover" id="tabela2">
 	<thead> 
@@ -74,13 +165,27 @@ HTML;
 </small>
 HTML;
 } else {
-	echo 'Não possui nenhuma aula cadastrada!';
+	echo '<small>Não possui nenhuma aula cadastrada!</small>';
 }
 echo <<<HTML
 </small>
 HTML;
 
+}
 
+//Totalizar número da aula
+$ultima_aula = 1;
+
+if($sessao_sel == ""){
+	$sessao_sel = $primeira_sessao;
+}
+
+$query = $pdo->query("SELECT * FROM $tabela where curso = '$id_curso' and sessao = '$sessao_sel' ORDER BY num_aula desc");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$total_reg = @count($res);
+if ($total_reg > 0) {
+	$ultima_aula = $res[0]['num_aula'] +1;
+}
 ?>
 
 

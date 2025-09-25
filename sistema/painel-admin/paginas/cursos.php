@@ -374,58 +374,36 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 										<input type="text" name="nome_aula" id="nome_aula" class="form-control" required>
 									</div>
 								</div>
-							</div>
 
-							
 								<div class="col-md-12">
-									<div class="form-group">
-										<label>Link <small>(Url Incorporada ou Link do Drive)</small></label>
-										<input type="text" name="link_aula" id="link_aula" class="form-control">
-									</div>
+								<div class="form-group">
+									<label>Link <small>(Url Incorporada ou Link do Drive)</small></label>
+									<input type="text" name="link_aula" id="link_aula" class="form-control">
+								</div>
+								</div>
 
 								<div class="col-md-9">
 									<label>Módulo ou Sessão</label>
-									<div id="listar-sessao-aula">
-									<select class="form-control sel2" name="sessao" id="sessao" style="width:100%;">
-									<?php
-									$query = $pdo->query("SELECT * FROM sessao where curso = '' order by id asc");
-									$res = $query->fetchAll(PDO::FETCH_ASSOC);
-									if(@count($res) > 0){
-									
-									for($i=0; $i < @count($res); $i++){
-										foreach ($res[$i] as $key => $value) {}
-									?>
-									<option value="<?php echo $res[$i]['id'] ?>"><?php echo $res[$i]['nome'] ?></option>
-									<?php }
-									}else{
-										echo '<option value="0">Nenhuma Sessão Criada</option>';
-									}
-									?>
-								</select>
+									<div id="listar-sessao-aula"></div>
 								</div>
 
 								<div class="col-md-3">
-									<button type="submit" class="btn btn-primary" style="">Salvar</button>
+									<button type="submit" class="btn btn-primary" style="margin-top:21px">Salvar</button>
 								</div>
 							</div>
 
 							<input type="hidden" name="id" id="id-aulas">
 							<input type="hidden" name="id_aula" id="id-da-aula">
 
-							<small>
-								<div id="mensagem_aulas" align="center" class="mt-3"></div>
-							</small>
+							<small><small><div id="mensagem_aulas" align="center" class="mt-3 col-md-12"></div></small></small>
+						
 						</form>
-
 					</div>
 
 					<div class="col-md-6">
 						<div id="listar-aulas"></div>
 					</div>
 				</div>
-
-
-
 			</div>
 		</div>
 	</div>
@@ -444,34 +422,36 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 			</div>
 
 			<div class="modal-body">
+
 				<div class="row">
 					<form id="form-sessao">
 						<div class="col-md-6">
-								<div class="form-group">
-									<label>Nome Sessão</label>
-									<input type="text" name="nome_sessao" id="nome_sessao" class="form-control" required>
-								</div>
+
+							<div class="form-group">
+								<label>Nome Sessão</label>
+								<input type="text" name="nome_sessao" id="nome_sessao" class="form-control" required>
+							</div>
 
 							<div>
 								<button type="submit" class="btn btn-primary" style="">Salvar</button>
 							</div>
-						</div>
-						<input type="hidden" name="id" id="id-curso-sessao">
-					</form>
-					<small><div id="mensagem_sessao" align="center" class="mt-3"></div></small>
-					<div class="col-md-6">
-						<div id="listar-sessao"></div>
+
+							<input type="hidden" name="id" id="id-curso-sessao">
+
+							</form>
+							<br>
+							<small><small><div id="mensagem_sessao" align="center" class="mt-3 col-md-12"></div></small></small>
+							</div>
+
+							<div class="col-md-6">
+							<div id="listar-sessao"></div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </div>
 
-
-<script type="text/javascript">
-	var pag = "<?= $pag ?>"
-</script>
+<script type="text/javascript">var pag = "<?= $pag ?>"</script>
 <script src="js/ajax.js"></script>
 
 
@@ -576,12 +556,11 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 <script type="text/javascript">
 	function listarAulas() {
 		var id_curso = $('#id-aulas').val();
+		var sessao_sel = $('#sessao_aula').val();
 		$.ajax({
 			url: 'paginas/' + pag + "/listar-aulas.php",
 			method: 'POST',
-			data: {
-				id_curso
-			},
+			data: {id_curso, sessao_sel},
 			dataType: "text",
 
 			success: function(result) {
