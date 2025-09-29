@@ -10,6 +10,7 @@ HTML;
 $query_m = $pdo->query("SELECT * FROM sessao where curso = '$id_curso' ORDER BY id asc");
 $res_m = $query_m->fetchAll(PDO::FETCH_ASSOC);
 $total_reg_m = @count($res_m);
+$ultima_aula = 1;
 if($total_reg_m > 0){
 	for ($i_m=0; $i_m < $total_reg_m; $i_m++){
 	foreach ($res_m[$i_m] as $key => $value){}
@@ -22,13 +23,24 @@ if($total_reg_m > 0){
 	}
 
 
-	echo $nome_sessao;
+	echo '<small><b>' .$nome_sessao. '</small></b>';
 	echo '<hr>';
+
 $query = $pdo->query("SELECT * FROM $tabela where curso = '$id_curso' and sessao = '$sessao' ORDER BY num_aula desc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if ($total_reg > 0) {
 
+if($sessao_sel == "undefined" || $sessao_sel == 0){
+	$sessao_sel = $primeira_sessao;
+}
+$query2 = $pdo->query("SELECT * FROM $tabela where curso = '$id_curso' and sessao = '$sessao_sel' ORDER BY num_aula desc");
+$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+if(@count($res2) > 0){
+$ultima_aula = $res2[0]['num_aula'] +1;
+}else{
+	$ultima_aula = 1;
+}
 	echo <<<HTML
 	<small>
 	<small><table class="table table-hover" id="tabela2">
@@ -53,8 +65,6 @@ HTML;
 
         $linkF = mb_strimwidth($link, 0, 15, "...");
 
-
-
 		echo <<<HTML
 <tr> 
 		<td>
@@ -96,7 +106,7 @@ echo <<<HTML
 </small>
 HTML;
 
-echo '<br><br>';
+echo '<br>';
 }
 
 } else {
@@ -104,7 +114,10 @@ echo '<br><br>';
 $query = $pdo->query("SELECT * FROM $tabela where curso = '$id_curso' ORDER BY num_aula desc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
+$ultima_aula = 1;
 if ($total_reg > 0) {
+$ultima_aula = $res[0]['num_aula'] +1;
+
 	echo <<<HTML
 	<small><table class="table table-hover" id="tabela2">
 	<thead> 
@@ -173,19 +186,7 @@ HTML;
 
 }
 
-//Totalizar número da aula
-$ultima_aula = 1;
 
-if($sessao_sel == ""){
-	$sessao_sel = $primeira_sessao;
-}
-
-$query = $pdo->query("SELECT * FROM $tabela where curso = '$id_curso' and sessao = '$sessao_sel' ORDER BY num_aula desc");
-$res = $query->fetchAll(PDO::FETCH_ASSOC);
-$total_reg = @count($res);
-if ($total_reg > 0) {
-	$ultima_aula = $res[0]['num_aula'] +1;
-}
 ?>
 
 
@@ -200,6 +201,7 @@ if ($total_reg > 0) {
 		$('#link_aula').val(link);
 		$('#nome_aula').val(nome);
 		$('#num_aula').val(aula);
+		$('#sessao_aula').val(sessao);
 	}
 
 

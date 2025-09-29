@@ -29,3 +29,9 @@ echo '</select>';
 
 ?>
 
+<script type="text/javascript">
+	$("#sessao_aula").change(function () {
+		listarAulas();
+	});
+</script>
+
