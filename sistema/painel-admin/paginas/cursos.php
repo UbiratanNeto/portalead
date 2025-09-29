@@ -377,8 +377,8 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 
 								<div class="col-md-12">
 								<div class="form-group">
-									<label>Link <small>(Url Incorporada ou Link do Drive)</small></label>
-									<input type="text" name="link_aula" id="link_aula" class="form-control">
+									<label>Link <small>(Url Incorporada)</small></label>
+									<input onkeyup="carregarVideo();" type="text" name="link_aula" id="link_aula" class="form-control">
 								</div>
 								</div>
 
@@ -390,6 +390,11 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 								<div class="col-md-3">
 									<button type="submit" class="btn btn-primary" style="margin-top:21px">Salvar</button>
 								</div>
+
+								<div class="col-md-12" style="margin-top:15px">
+									<iframe width="100%" height="200" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen id="target-video"></iframe>
+								</div>
+
 							</div>
 
 							<input type="hidden" name="id" id="id-aulas">
@@ -644,7 +649,13 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 	});
 </script>
 
-<script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+
 <script type="text/javascript">
-	bkLib.onDomLoaded(nicEditors.allTextAreas);
+	function carregarVideo() {
+		$('#target-video').attr('src', $('#link_aula').val());
+	}
 </script>
+
+
+<script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
