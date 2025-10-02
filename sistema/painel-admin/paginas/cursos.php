@@ -265,19 +265,29 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 				</div>
 
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
-					<div class="col-md-4">
+					<div class="col-md-9">
 						<span><b>Pacote: </b></span>
 						<a target="_blank" href="" id="linkpacote"> <span id="pacote_mostrar"></span> </a>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<span><b>Sistema: </b></span>
 						<span id="sistema_mostrar"></span>
 					</div>
-					<div class="col-md-6">
+				</div>
+
+				<div class="row" style="border-bottom: 1px solid #cac7c7;">
+					<div class="col-md-9">
 						<span><b>Tecnologias: </b></span>
 						<span id="tecnologias_mostrar"></span>
 					</div>
+
+					<div class="col-md-3">
+						<span><b>Valor Promoção: </b></span>
+						<span id="promocao_mostrar"></span>
+					</div>
+
 				</div>
+
 
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
 

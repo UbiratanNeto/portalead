@@ -57,6 +57,7 @@ HTML;
 		$sistema = $res[$i]['sistema'];
 		$link = $res[$i]['link'];
 		$tecnologias = $res[$i]['tecnologias'];
+		$promocao = $res[$i]['promocao'];
 
 
 		$query2 = $pdo->query("SELECT * FROM usuarios where id = '$professor'");
@@ -99,7 +100,13 @@ HTML;
 		//FORMATAR VALORES
 		$valorF = number_format($valor, 2, ',', '.');
 		$desc_longa = str_replace('"', "**", $desc_longa);
+		$promocaoF = number_format($promocao, 2, ',', '.');
 
+		if($promocao > 0 ){
+			$promo = ' / '.$promocaoF;
+		} else {
+			$promo = '';
+		}
 
 		echo <<<HTML
 <tr class="{$classe_linha}"> 
@@ -110,16 +117,19 @@ HTML;
 		</a>
 		</td> 
 		<td class="esc">
-		R$ {$valorF}
+		R$ {$valorF} <small><b><span class="text-danger">{$promo}</span></b></small>
 		</td>
 		<td class="esc">{$nome_professor}</td>		
 		<td class="esc">{$nome_categoria}</td>
 		<td class="esc">0</td>
 		<td class="esc">{$aulas}</td>
 		<td>
-		<big><a href="#" onclick="editar('{$id}', '{$nome}', '{$desc_rapida}', '{$desc_longa}', '{$valor}', '{$categoria}', '{$foto}', '{$carga}' , '{$arquivo}', '{$ano}', '{$palavras}','{$grupo}', '{$pacote}','{$sistema}', '{$link}' ,'{$tecnologias}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+		<big><a href="#" onclick="editar('{$id}', '{$nome}', '{$desc_rapida}', '{$desc_longa}', '{$valor}', '{$categoria}', '{$foto}', '{$carga}' , '{$arquivo}', '{$ano}', 
+		'{$palavras}','{$grupo}', '{$pacote}','{$sistema}', '{$link}' ,'{$tecnologias}','{$promocao}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
-		<big><a href="#" onclick="mostrar('{$nome}', '{$desc_rapida}','{$desc_longa}','{$valorF}','{$nome_professor}','{$nome_categoria}','{$foto}','{$status}', '{$carga}', '{$arquivo}', '{$ano}', '{$palavras}', '{$nome_grupo}', '{$pacote}', '{$sistema}', '{$link}', '{$tecnologias}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
+		<big><a href="#" onclick="mostrar('{$nome}', '{$desc_rapida}','{$desc_longa}','{$valorF}','{$nome_professor}','{$nome_categoria}','{$foto}','{$status}', 
+		'{$carga}', '{$arquivo}', '{$ano}', '{$palavras}', '{$nome_grupo}', '{$pacote}', '{$sistema}', '{$link}', '{$tecnologias}', '{$promocaoF}')" 
+		title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
 
 		<li class="dropdown head-dpdn2 {$excluir}" style="display: inline-block;">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><big><i class="fa fa-trash-o text-danger"></i></big></a>
@@ -169,7 +179,7 @@ HTML;
 		$('#tabela_filter label input').focus();
 	});
 
-	function editar(id, nome, desc_rapida, desc_longa, valor, categoria, foto, carga, arquivo, ano, palavras, grupo, pacote, sistema, link, tecnologias) {
+	function editar(id, nome, desc_rapida, desc_longa, valor, categoria, foto, carga, arquivo, ano, palavras, grupo, pacote, sistema, link, tecnologias, promocao) {
 
 	for (let letra of desc_longa){  				
 			if (letra === '*'){
@@ -182,6 +192,7 @@ HTML;
 		$('#desc_rapida').val(desc_rapida);
 		nicEditors.findEditor("area").setContent(desc_longa);	
 		$('#valor').val(valor);
+		$('#promocao').val(promocao);
 		$('#categoria').val(categoria).change();		
 		$('#carga').val(carga);
 		$('#arquivo').val(arquivo);
@@ -203,12 +214,13 @@ HTML;
 
 
 	
-	function mostrar(nome, desc_rapida, desc_longa, valor, professor, categoria, foto, status, carga, arquivo, ano, palavras, grupo, pacote, sistema, link, tecnologias){	
+	function mostrar(nome, desc_rapida, desc_longa, valor, professor, categoria, foto, status, carga, arquivo, ano, palavras, grupo, pacote, sistema, link, tecnologias, promocao){	
 		
 		$('#nome_mostrar').text(nome);
 		$('#desc_rapida_mostrar').text(desc_rapida);
 		$('#desc_longa_mostrar').html(desc_longa);
 		$('#valor_mostrar').text(valor);
+		$('#promocao_mostrar').text(promocao);
 		$('#professor_mostrar').text(professor);
 		$('#categoria_mostrar').text(categoria);
 		$('#status_mostrar').text(status);
@@ -247,7 +259,8 @@ HTML;
 		$('#nome').val('');
 		$('#desc_rapida').val('');
 		nicEditors.findEditor("area").setContent('');				
-		$('#valor').val('');	
+		$('#valor').val('');
+		$('#promocao').val('');
 		$('#carga').val('');	
 		$('#palavras').val('');	
 		$('#pacote').val('');	
