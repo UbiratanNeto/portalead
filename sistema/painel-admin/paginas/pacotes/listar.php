@@ -73,23 +73,36 @@ HTML;
 		$query2 = $pdo->query("SELECT * FROM cursos_pacotes where id_pacote = '$id'");
 		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
 		$cursos = @count($res2);
+		if($cursos > 0){
+				for ($i2 = 0; $i2 < $$cursos; $i2++){
+				foreach ($res[$i2] as $key => $value){}
+				$carga += $res[$i2]['carga'];
+			}
+		} else {
+			$carga = 0;
+		}
+
 
 		//FORMATAR VALORES
 		$valorF = number_format($valor, 2, ',', '.');
 		$desc_longa = str_replace('"', "**", $desc_longa);
 		$promocaoF = number_format($promocao, 2, ',', '.');
 
+		if($promocao > 0 ){
+			$promo = ' / '.$promocaoF;
+		} else {
+			$promo = '';
+		}
 
 		echo <<<HTML
 <tr class=""> 
 		<td><img src="img/pacotes/{$foto}" width="27px" class="mr-2">
 		<a href="#" onclick="cursos('{$id}', '{$nome}', '{$cursos}')" class="cinza_escuro">
 		{$nome}
-		<small><i class="fa fa-video-camera text-dark"></i></small>
 		</a>
 		</td> 
 		<td class="esc">
-		R$ {$valorF}
+		R$ {$valorF} <small><b><span class="text-danger">{$promo}</span></b></small>
 		</td>
 		<td class="esc">{$nome_professor}</td>		
 		<td class="esc">{$nome_linguagem}</td>
@@ -102,7 +115,7 @@ HTML;
 		<big><a href="#" onclick="mostrar('{$nome}', '{$desc_rapida}','{$desc_longa}','{$valorF}', '{$promocaoF}', '{$nome_professor}','{$nome_linguagem}','{$foto}', 
 		'{$ano}', '{$palavras}', '{$nome_grupo}', '{$video}', '{$carga}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
 
-		<li class="dropdown head-dpdn2 {$excluir}" style="display: inline-block;">
+		<li class="dropdown head-dpdn2" style="display: inline-block;">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><big><i class="fa fa-trash-o text-danger"></i></big></a>
 
 		<ul class="dropdown-menu" style="margin-left:-230px;">
@@ -211,11 +224,10 @@ HTML;
 	}
 
 	function cursos(id, nome, cursos){
-		$('#id-aulas').val(id);
-		$('#nome_aula_titulo').text(nome);
-		$('#modalAulas').modal('show');
-		listarAulas();
-		listarSessaoAulas(id);
+		$('#id-pacote').val(id);
+		$('#nome_pacote_titulo').text(nome);
+		$('#modalCursos').modal('show');
+		listarCursos();
 	}
 
 
