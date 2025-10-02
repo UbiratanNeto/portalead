@@ -15,6 +15,8 @@ $categoria = $_POST['categoria'];
 $grupo = $_POST['grupo'];
 $valor = $_POST['valor'];
 $valor = str_replace(',', '.', $valor);
+$promocao = $_POST['promocao'];
+$promocao = str_replace(',', '.', $promocao);
 $carga = $_POST['carga'];
 $palavras = $_POST['palavras'];
 $pacote = $_POST['pacote'];
@@ -85,12 +87,12 @@ if($id == ""){
 
 	$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, desc_rapida = :desc_rapida, desc_longa = :desc_longa, valor = :valor, professor = '$id_usuario',
 	 categoria = '$categoria', imagem = '$foto', status = 'Aguardando', carga = :carga, arquivo = :arquivo, ano = '$ano_atual', palavras = :palavras, grupo = '$grupo',
-	  nome_url = '$url', pacote = :pacote, sistema = '$sistema', link = :link, tecnologias = :tecnologias ");
+	  nome_url = '$url', pacote = :pacote, sistema = '$sistema', link = :link, tecnologias = :tecnologias, promocao = :promocao ");
 
 }else{
 	$query = $pdo->prepare("UPDATE $tabela SET nome = :nome, desc_rapida = :desc_rapida, desc_longa = :desc_longa, valor = :valor, professor = '$id_usuario',
 	 categoria = '$categoria', imagem = '$foto', status = 'Aguardando', carga = :carga, arquivo = :arquivo, palavras = :palavras, grupo = '$grupo',
-	  nome_url = '$url', pacote = :pacote, sistema = '$sistema', link = :link, tecnologias = :tecnologias WHERE id = '$id'");
+	  nome_url = '$url', pacote = :pacote, sistema = '$sistema', link = :link, tecnologias = :tecnologias, promocao = :promocao WHERE id = '$id'");
 
 }
 
@@ -104,6 +106,7 @@ $query->bindValue(":palavras", "$palavras");
 $query->bindValue(":pacote", "$pacote");
 $query->bindValue(":link", "$link");
 $query->bindValue(":tecnologias", "$tecnologias");
+$query->bindValue(":promocao", "$promocao");
 $query->execute();
 
 echo 'Salvo com Sucesso';

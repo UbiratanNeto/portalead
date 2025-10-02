@@ -93,7 +93,14 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 							</div>
 						</div>
 
-						<div class="col-md-10">
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Valor Promoção</label>
+								<input type="text" class="form-control" name="promocao" id="promocao">
+							</div>
+						</div>
+
+						<div class="col-md-8">
 							<div class="form-group">
 								<label>Palavras-chaves</label>
 								<input type="text" class="form-control" name="palavras" id="palavras" placeholder="Ex: Curso de programação, desenvolvimento web, etc...">

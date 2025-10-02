@@ -15,6 +15,8 @@ $linguagem = $_POST['linguagem'];
 $grupo = $_POST['grupo'];
 $valor = $_POST['valor'];
 $valor = str_replace(',', '.', $valor);
+$promocao = $_POST['promocao'];
+$promocao = str_replace(',', '.', $promocao);
 $palavras = $_POST['palavras'];
 $desc_longa = $_POST['desc_longa'];
 
@@ -79,12 +81,12 @@ if($id == ""){
 
 	$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, desc_rapida = :desc_rapida, desc_longa = :desc_longa, valor = :valor, professor = '$id_usuario', 
 	linguagem = '$linguagem', imagem = '$foto', ano = '$ano_atual', palavras = :palavras, grupo = '$grupo', 
-	nome_url = '$url' ");
+	nome_url = '$url', promocao = :promocao ");
 
 }else{
 	$query = $pdo->prepare("UPDATE $tabela SET nome = :nome, desc_rapida = :desc_rapida, desc_longa = :desc_longa, valor = :valor, professor = '$id_usuario', 
 	linguagem = '$linguagem', imagem = '$foto', palavras = :palavras, grupo = '$grupo',
-	 nome_url = '$url' WHERE id = '$id'");
+	 nome_url = '$url', promocao = :promocao WHERE id = '$id'");
 
 }
 
@@ -92,12 +94,8 @@ $query->bindValue(":nome", "$nome");
 $query->bindValue(":desc_rapida", "$desc_rapida");
 $query->bindValue(":desc_longa", "$desc_longa");
 $query->bindValue(":valor", "$valor");
-$query->bindValue(":carga", "$carga");
-$query->bindValue(":arquivo", "$arquivo");
 $query->bindValue(":palavras", "$palavras");
-$query->bindValue(":pacote", "$pacote");
-$query->bindValue(":link", "$link");
-$query->bindValue(":tecnologias", "$tecnologias");
+$query->bindValue(":promocao", "$promocao");
 $query->execute();
 
 echo 'Salvo com Sucesso';
