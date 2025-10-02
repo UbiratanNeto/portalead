@@ -1,6 +1,6 @@
 <?php
 require_once("../../../conexao.php");
-$tabela = 'cursos';
+$tabela = 'pacotes';
 
 @session_start();
 if($_SESSION['nivel'] == 'Administrador'){
@@ -25,9 +25,9 @@ if ($total_reg > 0) {
 	<th>Nome</th>
 	<th class="esc">Valor</th> 
 	<th class="esc">Professor</th>
-	<th class="esc">Categoria</th>
+	<th class="esc">Linguagem</th>
 	<th class="esc">Alunos</th>
-	<th class="esc">Aulas</th>
+	<th class="esc">Cursos</th>
 	<th>Ações</th>
 	</tr> 
 	</thead> 
@@ -42,69 +42,48 @@ HTML;
 		$desc_rapida = $res[$i]['desc_rapida'];
 		$desc_longa = $res[$i]['desc_longa'];
 		$valor = $res[$i]['valor'];
+		$promocao = $res[$i]['promocao'];
 		$professor = $res[$i]['professor'];
-		$categoria = $res[$i]['categoria'];
+		$linguagem = $res[$i]['linguagem'];
 		$foto = $res[$i]['imagem'];
-		$status = $res[$i]['status'];
-		$carga = $res[$i]['carga'];
-		$mensagem = $res[$i]['mensagem'];
-		$arquivo = $res[$i]['arquivo'];
 		$ano = $res[$i]['ano'];
 		$palavras = $res[$i]['palavras'];
 		$grupo = $res[$i]['grupo'];
 		$nome_url = $res[$i]['nome_url'];
-		$pacote = $res[$i]['pacote'];
-		$sistema = $res[$i]['sistema'];
-		$link = $res[$i]['link'];
-		$tecnologias = $res[$i]['tecnologias'];
+		$video = $res[$i]['video'];
 
 
 		$query2 = $pdo->query("SELECT * FROM usuarios where id = '$professor'");
 		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
 		$nome_professor = $res2[0]['nome'];
 
-		$query2 = $pdo->query("SELECT * FROM categorias where id = '$categoria'");
+		$query2 = $pdo->query("SELECT * FROM linguagens where id = '$linguagem'");
 		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-		$nome_categoria = $res2[0]['nome'];
+		if(@count($res2) > 0){
+			$nome_linguagem = $res2[0]['nome'];
+		} else {
+			$nome_linguagem = 'Sem Registro';
+		}
+		
 
 		$query2 = $pdo->query("SELECT * FROM grupos where id = '$grupo'");
 		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
 		$nome_grupo = $res2[0]['nome'];
 
-		$query2 = $pdo->query("SELECT * FROM aulas where curso = '$id'");
+		$query2 = $pdo->query("SELECT * FROM cursos_pacotes where id_pacote = '$id'");
 		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-		$aulas = @count($res2);
+		$cursos = @count($res2);
 
-		if ($status == 'Aprovado') {
-			$excluir = 'ocultar';
-			$icone = 'fa-check-square';
-			$titulo_link = 'Desaprovar Curso';
-			$acao = 'Aguardando';
-			$classe_linha = '';
-			$classe_square = 'verde';
-		} else {
-			$excluir = '';
-			$icone = 'fa-square-o';
-			$titulo_link = 'Aprovar Curso';
-			$acao = 'Aprovado';
-			$classe_linha = 'text-muted';
-			$classe_square = 'text-danger';
-		}
-
-		if($mensagem != ''){
-			$classe_mensagem = 'warning';
-		}else{
-			$classe_mensagem = 'text-warning';
-		}
 		//FORMATAR VALORES
 		$valorF = number_format($valor, 2, ',', '.');
 		$desc_longa = str_replace('"', "**", $desc_longa);
+		$promocaoF = number_format($promocao, 2, ',', '.');
 
 
 		echo <<<HTML
-<tr class="{$classe_linha}"> 
-		<td><img src="img/cursos/{$foto}" width="27px" class="mr-2">
-		<a href="#" onclick="aulas('{$id}', '{$nome}', '{$aulas}')" class="cinza_escuro">
+<tr class=""> 
+		<td><img src="img/pacotes/{$foto}" width="27px" class="mr-2">
+		<a href="#" onclick="cursos('{$id}', '{$nome}', '{$cursos}')" class="cinza_escuro">
 		{$nome}
 		<small><i class="fa fa-video-camera text-dark"></i></small>
 		</a>
@@ -113,13 +92,15 @@ HTML;
 		R$ {$valorF}
 		</td>
 		<td class="esc">{$nome_professor}</td>		
-		<td class="esc">{$nome_categoria}</td>
+		<td class="esc">{$nome_linguagem}</td>
 		<td class="esc">0</td>
-		<td class="esc">{$aulas}</td>
+		<td class="esc">{$cursos}</td>
 		<td>
-		<big><a href="#" onclick="editar('{$id}', '{$nome}', '{$desc_rapida}', '{$desc_longa}', '{$valor}', '{$categoria}', '{$foto}', '{$carga}' , '{$arquivo}', '{$ano}', '{$palavras}','{$grupo}', '{$pacote}','{$sistema}', '{$link}' ,'{$tecnologias}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+		<big><a href="#" onclick="editar('{$id}', '{$nome}', '{$desc_rapida}', '{$desc_longa}', '{$valor}', '{$promocao}', '{$linguagem}', '{$foto}', '{$palavras}','{$grupo}', '{$video}')" 
+		title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
-		<big><a href="#" onclick="mostrar('{$nome}', '{$desc_rapida}','{$desc_longa}','{$valorF}','{$nome_professor}','{$nome_categoria}','{$foto}','{$status}', '{$carga}', '{$arquivo}', '{$ano}', '{$palavras}', '{$nome_grupo}', '{$pacote}', '{$sistema}', '{$link}', '{$tecnologias}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
+		<big><a href="#" onclick="mostrar('{$nome}', '{$desc_rapida}','{$desc_longa}','{$valorF}', '{$promocaoF}', '{$nome_professor}','{$nome_linguagem}','{$foto}', 
+		'{$ano}', '{$palavras}', '{$nome_grupo}', '{$video}', '{$carga}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
 
 		<li class="dropdown head-dpdn2 {$excluir}" style="display: inline-block;">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><big><i class="fa fa-trash-o text-danger"></i></big></a>
@@ -133,11 +114,7 @@ HTML;
 		</ul>
 		</li>
 
-		<big><a href="#" onclick="sessao('{$id}', '{$nome}')" title="Criar Sessão"><i class="fa fa-globe verde"></i></a></big>
-
-		<big><a class="{$acesso}" href="#" onclick="ativar('{$id}', '{$acao}')" title="{$titulo_link}"><i class="fa {$icone} $classe_square"></i></a></big>
-
-		<big><a href="#" onclick="obs('{$id}', '{$nome}', '{$mensagem}')" title="Ver Mensagens"><i class="fa fa-comment-o {$classe_mensagem}"></i></a></big>
+		<big><a href="#" onclick="cursos('{$id}', '{$nome}', '{$cursos}')" title="Inserir Pacotes"><i class="fa fa-book verde"></i></a></big>
 
 		</td>
 </tr>
@@ -169,7 +146,7 @@ HTML;
 		$('#tabela_filter label input').focus();
 	});
 
-	function editar(id, nome, desc_rapida, desc_longa, valor, categoria, foto, carga, arquivo, ano, palavras, grupo, pacote, sistema, link, tecnologias) {
+	function editar(id, nome, desc_rapida, desc_longa, valor, promocao, linguagem, foto, palavras, grupo, video, carga) {
 
 	for (let letra of desc_longa){  				
 			if (letra === '*'){
@@ -182,19 +159,13 @@ HTML;
 		$('#desc_rapida').val(desc_rapida);
 		nicEditors.findEditor("area").setContent(desc_longa);	
 		$('#valor').val(valor);
-		$('#categoria').val(categoria).change();		
-		$('#carga').val(carga);
-		$('#arquivo').val(arquivo);
-		$('#ano').val(ano);
+		$('#promocao').val(promocao);
+		$('#linguagem').val(linguagem).change();
 		$('#palavras').val(palavras);
 		$('#grupo').val(grupo).change();	;
-		$('#pacote').val(pacote);
-		$('#link').val(link);
-		$('#sistema').val(sistema).change();	;
-		$('#tecnologias').val(tecnologias);
-	
+
 		$('#foto').val('');
-		$('#target').attr('src','img/cursos/' + foto);		
+		$('#target').attr('src','img/pacotes/' + foto);		
 		
 		$('#tituloModal').text('Editar Registro');
 		$('#modalForm').modal('show');
@@ -203,41 +174,24 @@ HTML;
 
 
 	
-	function mostrar(nome, desc_rapida, desc_longa, valor, professor, categoria, foto, status, carga, arquivo, ano, palavras, grupo, pacote, sistema, link, tecnologias){	
+	function mostrar(nome, desc_rapida, desc_longa, valor, promocao, professor, linguagem, foto, ano, palavras, grupo, video, carga){	
 		
 		$('#nome_mostrar').text(nome);
 		$('#desc_rapida_mostrar').text(desc_rapida);
 		$('#desc_longa_mostrar').html(desc_longa);
 		$('#valor_mostrar').text(valor);
+		$('#promocao_mostrar').text(valor);
 		$('#professor_mostrar').text(professor);
-		$('#categoria_mostrar').text(categoria);
-		$('#status_mostrar').text(status);
+		$('#categoria_mostrar').text(linguagem);
 		$('#carga_mostrar').text(carga);
-		$('#arquivo_mostrar').text(arquivo);
 		$('#ano_mostrar').text(ano);
 		$('#palavras_mostrar').text(palavras);
 		$('#grupo_mostrar').text(grupo);
-		$('#pacote_mostrar').text(pacote);	
-		$('#sistema_mostrar').text(sistema);	
-		$('#link_mostrar').text(link);			
-		$('#tecnologias_mostrar').text(tecnologias);	
-		$('#target_mostrar').attr('src','img/cursos/' + foto);
 
-		$('#linkpacote').attr('href','<?=$url_sistema?>' + pacote);
-		$('#linkcurso').attr('href', link);
-		$('#linkarquivo').attr('href', arquivo);
+		$('#target_mostrar').attr('src','img/cursos/' + foto);
+		$('#target_video_mostrar').attr('src', video);
 
 		$('#modalMostrar').modal('show');
-		
-	}
-
-	function obs(id, nome, mensagem){	
-		
-		$('#nome_mensagem').text(nome);
-		$('#id_mensagem').val(id);
-		nicEditors.findEditor("mensagem_mensagem").setContent(mensagem);
-
-		$('#modalMensagem').modal('show');
 		
 	}
 
@@ -247,19 +201,16 @@ HTML;
 		$('#nome').val('');
 		$('#desc_rapida').val('');
 		nicEditors.findEditor("area").setContent('');				
-		$('#valor').val('');	
-		$('#carga').val('');	
-		$('#palavras').val('');	
-		$('#pacote').val('');	
-		$('#tecnologias').val('');	
-		$('#arquivo').val('');	
-		$('#link').val('');		
-		nicEditors.findEditor("mensagem_mensagem").setContent('');		
+		$('#valor').val('');
+		$('#promocao').val('');		
+		$('#palavras').val('');		
 		$('#foto').val('');
-		$('#target').attr('src','img/cursos/sem-foto.png');		
+		$('#video').val('');
+		$('#target').attr('src','img/cursos/sem-foto.png');
+		$('#target-video').attr('src','');
 	}
 
-	function aulas(id, nome, aulas){
+	function cursos(id, nome, cursos){
 		$('#id-aulas').val(id);
 		$('#nome_aula_titulo').text(nome);
 		$('#modalAulas').modal('show');
@@ -267,26 +218,6 @@ HTML;
 		listarSessaoAulas(id);
 	}
 
-	function sessao(curso, nome){
-		$('#id-curso-sessao').val(curso);
-		$('#nome_curso_sessao').text(nome);
-		$('#nome_sessao').val('');
-		$('#modalSessao').modal('show');
-		listarSessao();
-	}
-
-	function listarSessaoAulas(curso){
-			$.ajax({
-			url: 'paginas/' + pag + "/listar-sessao-aulas.php",
-			method: 'POST',
-			data: {curso},
-			dataType: "html",
-
-			success: function(result) {
-				$("#listar-sessao-aula").html(result);
-			}
-		});
-	}
 
 
 </script>
