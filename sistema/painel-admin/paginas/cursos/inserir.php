@@ -83,10 +83,14 @@ if(@$_FILES['foto']['name'] != ""){
 
 if($id == ""){
 
-	$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, desc_rapida = :desc_rapida, desc_longa = :desc_longa, valor = :valor, professor = '$id_usuario', categoria = '$categoria', imagem = '$foto', status = 'Aguardando', carga = :carga, arquivo = :arquivo, ano = '$ano_atual', palavras = :palavras, grupo = '$grupo', nome_url = '$url', pacote = :pacote, sistema = '$sistema', link = :link, tecnologias = :tecnologias ");
+	$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, desc_rapida = :desc_rapida, desc_longa = :desc_longa, valor = :valor, professor = '$id_usuario',
+	 categoria = '$categoria', imagem = '$foto', status = 'Aguardando', carga = :carga, arquivo = :arquivo, ano = '$ano_atual', palavras = :palavras, grupo = '$grupo',
+	  nome_url = '$url', pacote = :pacote, sistema = '$sistema', link = :link, tecnologias = :tecnologias ");
 
 }else{
-	$query = $pdo->prepare("UPDATE $tabela SET nome = :nome, desc_rapida = :desc_rapida, desc_longa = :desc_longa, valor = :valor, professor = '$id_usuario', categoria = '$categoria', imagem = '$foto', status = 'Aguardando', carga = :carga, arquivo = :arquivo, ano = '$ano_atual', palavras = :palavras, grupo = '$grupo', nome_url = '$url', pacote = :pacote, sistema = '$sistema', link = :link, tecnologias = :tecnologias WHERE id = '$id'");
+	$query = $pdo->prepare("UPDATE $tabela SET nome = :nome, desc_rapida = :desc_rapida, desc_longa = :desc_longa, valor = :valor, professor = '$id_usuario',
+	 categoria = '$categoria', imagem = '$foto', status = 'Aguardando', carga = :carga, arquivo = :arquivo, palavras = :palavras, grupo = '$grupo',
+	  nome_url = '$url', pacote = :pacote, sistema = '$sistema', link = :link, tecnologias = :tecnologias WHERE id = '$id'");
 
 }
 

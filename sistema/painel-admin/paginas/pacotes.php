@@ -52,8 +52,8 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>Linguagem</label>
-								<option value="0">Selecionar Linguagem</option>
 								<select class="form-control sel2" name="linguagem" id="linguagem" required style="width:100%;">
+									<option value="0">Selecionar Linguagem</option>
 									<?php
 									$query = $pdo->query("SELECT * FROM linguagens order by nome asc");
 									$res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -89,7 +89,6 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 						<div class="col-md-2">
 							<div class="form-group">
 								<label>Valor</label>
-
 								<input type="text" class="form-control" name="valor" id="valor">
 							</div>
 						</div>
@@ -103,6 +102,7 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 					</div>
 
 					<div class="row">
+
 						<div class="col-md-8 col-sm-12">
 							<div class="form-group">
 								<label>Descrição do Pacote</label>
@@ -124,62 +124,40 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 
 					</div>
 
-
-
 					<div class="row">
 
-						<div class="col-md-2">
-							<div class="form-group">
-								<label>Sistema (Fontes)</label>
-								<select class="form-control" name="sistema" id="sistema">
-									<option value="Não">Não</option>
-									<option value="Sim">Sim</option>
-								</select>
-							</div>
+						<div class="col-md-8">
+						<div class="form-group">
+							<label>Vídeo <small>(Url Incorporada)</small></label>
+							<input onkeyup="carregarVideo();" type="text" name="video" id="video" class="form-control">
+						</div>
 						</div>
 
-
-					</div>
-
-					<div class="row">
-
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Arquivo <small>(Link Material Apoio)</small></label>
-								<input type="text" class="form-control" name="arquivo" id="arquivo" placeholder="Link para baixar os arquivos">
-							</div>
+						<div class="col-md-2" style="margin-top:15px">
+							<iframe width="100%" height="130" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+							allowfullscreen id="target-video"></iframe>
 						</div>
 
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Link do curso</label>
-								<input type="text" class="form-control" name="link" id="link" placeholder="Caso disponibiliza para download, colocar o link">
-							</div>
+						<div class="col-md-2" style="margin-top:17px">
+							<button type="submit" class="btn btn-primary">Salvar</button>
 						</div>
 
 					</div>
-
-
-
 
 					<br>
 					<input type="hidden" name="id" id="id">
-					<small>
-						<div id="mensagem" align="center" class="mt-3"></div>
-					</small>
+					<small><div id="mensagem" align="center" class="mt-3"></div></small>
 				</div>
 
-
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary">Salvar</button>
-				</div>
+	
+				
 			</form>
 		</div>
 	</div>
 </div>
 
 
-<!-- ModalMostrar -->
+<!-- Modal Mostrar -->
 <div class="modal fade" id="modalMostrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -213,18 +191,14 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
 					<div class="col-md-4">
-						<span><b>Categoria: </b></span>
+						<span><b>Linguagem: </b></span>
 						<span id="categoria_mostrar"></span>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<span><b>Grupo: </b></span>
 						<span id="grupo_mostrar"></span>
 					</div>
-					<div class="col-md-3">
-						<span><b>Carga: </b></span>
-						<span id="carga_mostrar"></span> Horas
-					</div>
-					<div class="col-md-2">
+					<div class="col-md-4">
 						<span><b>Ano: </b></span>
 						<span id="ano_mostrar"></span>
 					</div>
@@ -238,202 +212,29 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 					</div>
 				</div>
 
-				<div class="row" style="border-bottom: 1px solid #cac7c7;">
-					<div class="col-md-4">
-						<span><b>Pacote: </b></span>
-						<a target="_blank" href="" id="linkpacote"> <span id="pacote_mostrar"></span> </a>
+				<div class="row">
+					<div class="col-md-8">
+						<span><b>Descrição do Pacote: </b></span>
+						<small><span id="desc_longa_mostrar"></span></small>
 					</div>
-					<div class="col-md-2">
-						<span><b>Sistema: </b></span>
-						<span id="sistema_mostrar"></span>
-					</div>
-					<div class="col-md-6">
-						<span><b>Tecnologias: </b></span>
-						<span id="tecnologias_mostrar"></span>
-					</div>
-				</div>
-
-				<div class="row" style="border-bottom: 1px solid #cac7c7;">
-
-					<div class="col-md-12">
-						<span><b>Link Arquivos (Material Apoio Drive): </b></span>
-						<a target="_blank" href="" id="linkarquivo"> <span id="arquivo_mostrar"></span> </a>
-					</div>
-				</div>
-
-				<div class="row" style="border-bottom: 1px solid #cac7c7;">
-
-					<div class="col-md-12">
-						<span><b>Link do curso (Drive): </b></span>
-						<a target="_blank" href="" id="linkcurso"> <span id="link_mostrar"></span> </a>
-					</div>
-
 				</div>
 
 				<div class="row">
-					<div class="col-md-8">
-						<span><b>Descrição do Curso: </b></span>
-						<small><span id="desc_longa_mostrar"></span></small> </a>
-					</div>
-
 					<div class="col-md-4" align="center">
 						<img width="200px" id="target_mostrar">
 					</div>
+
+					<div class="col-md-8" align="center">
+						<iframe width="100%" height="250" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+						allowfullscreen id="target_video_mostrar"></iframe>
+					</div>
+
 				</div>
+
+
 			</div>
 		</div>
 	</div>
-</div>
-
-<!-- Modal Mensagem -->
-<div class="modal fade" id="modalMensagem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title"><span id="nome_mensagem"> </span></h4>
-				<button id="btn-fechar-mensagem" type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<form id="form-mensagem">
-				<div class="modal-body">
-
-					<div class="form-group">
-						<label>Mensagem do Curso</label>
-						<textarea class="textarea" name="mensagem" id="mensagem_mensagem"></textarea>
-
-					</div>
-
-					<input type="hidden" name="id" id="id_mensagem">
-
-
-
-
-
-				</div>
-
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary">Salvar</button>
-				</div>
-
-			</form>
-
-
-		</div>
-	</div>
-</div>
-
-
-<!-- Modal Aulas -->
-<div class="modal fade" id="modalAulas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title"><span id="nome_aula_titulo"> </span> - <span id="aulas_aula"> </span> Aulas </h4>
-				<button id="btn-fechar-aula" type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-
-			<div class="modal-body">
-				<div class="row">
-					<div class="col-md-6">
-						<form id="form-aulas">
-
-							<div class="row">
-								<div class="col-md-3">
-									<div class="form-group">
-										<label>Num Aula</label>
-										<input type="number" name="num_aula" id="num_aula" class="form-control" required>
-									</div>
-								</div>
-
-								<div class="col-md-9">
-									<div class="form-group">
-										<label>Nome Aula</label>
-										<input type="text" name="nome_aula" id="nome_aula" class="form-control" required>
-									</div>
-								</div>
-
-								<div class="col-md-12">
-								<div class="form-group">
-									<label>Link <small>(Url Incorporada)</small></label>
-									<input onkeyup="carregarVideo();" type="text" name="link_aula" id="link_aula" class="form-control">
-								</div>
-								</div>
-
-								<div class="col-md-9">
-									<label>Módulo ou Sessão</label>
-									<div id="listar-sessao-aula"></div>
-								</div>
-
-								<div class="col-md-3">
-									<button type="submit" class="btn btn-primary" style="margin-top:21px">Salvar</button>
-								</div>
-
-								<div class="col-md-12" style="margin-top:15px">
-									<iframe width="100%" height="200" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen id="target-video"></iframe>
-								</div>
-
-							</div>
-
-							<input type="hidden" name="id" id="id-aulas">
-							<input type="hidden" name="id_aula" id="id-da-aula">
-
-							<small><small><div id="mensagem_aulas" align="center" class="mt-3 col-md-12"></div></small></small>
-						
-						</form>
-					</div>
-
-					<div class="col-md-6">
-						<div id="listar-aulas"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-<!-- Modal Sessão -->
-<div class="modal fade" id="modalSessao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title"><span id="nome_curso_sessao"> </span> </h4>
-				<button id="btn-fechar-sessao" type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-
-			<div class="modal-body">
-
-				<div class="row">
-					<form id="form-sessao">
-						<div class="col-md-6">
-
-							<div class="form-group">
-								<label>Nome Sessão</label>
-								<input type="text" name="nome_sessao" id="nome_sessao" class="form-control" required>
-							</div>
-
-							<div>
-								<button type="submit" class="btn btn-primary" style="">Salvar</button>
-							</div>
-
-							<input type="hidden" name="id" id="id-curso-sessao">
-
-							</form>
-							<br>
-							<small><small><div id="mensagem_sessao" align="center" class="mt-3 col-md-12"></div></small></small>
-							</div>
-
-							<div class="col-md-6">
-							<div id="listar-sessao"></div>
-					</div>
-				</div>
-			</div>
-		</div>
 </div>
 
 <script type="text/javascript">var pag = "<?= $pag ?>"</script>
@@ -506,133 +307,8 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 
 
 <script type="text/javascript">
-	$("#form-mensagem").submit(function() {
-		event.preventDefault();
-		nicEditors.findEditor('mensagem_mensagem').saveContent();
-		var formData = new FormData(this);
-
-		$.ajax({
-			url: 'paginas/' + pag + "/mensagem.php",
-			type: 'POST',
-			data: formData,
-
-			success: function(mensagem) {
-				$('#mensagem_msg').text('');
-				$('#mensagem_msg').removeClass()
-				if (mensagem.trim() == "Salvo com Sucesso") {
-					$('#btn-fechar-mensagem').click();
-					listar();
-				} else {
-					$('#mensagem_msg').addClass('text-danger')
-					$('#mensagem_msg').text(mensagem)
-				}
-
-			},
-
-			cache: false,
-			contentType: false,
-			processData: false,
-
-		});
-
-	});
-</script>
-
-<script type="text/javascript">
-	function listarAulas() {
-		var id_curso = $('#id-aulas').val();
-		var sessao_sel = $('#sessao_aula').val();
-		$.ajax({
-			url: 'paginas/' + pag + "/listar-aulas.php",
-			method: 'POST',
-			data: {id_curso, sessao_sel},
-			dataType: "text",
-
-			success: function(result) {
-				$("#listar-aulas").html(result);
-				$('#mensagem-excluir-aulas').text('');
-				$('#mensagem-aulas').text('');
-				limparCamposAulas();
-			}
-		});
-	}
-</script>
-
-<script type="text/javascript">
-	$("#form-aulas").submit(function() {
-		event.preventDefault();
-		var formData = new FormData(this);
-		$.ajax({
-			url: 'paginas/' + pag + "/inserir-aulas.php",
-			type: 'POST',
-			data: formData,
-			success: function(mensagem) {
-				$('#mensagem_aulas').text('');
-				$('#mensagem_aulas').removeClass()
-				if (mensagem.trim() == "Salvo com Sucesso") {
-					//$('#btn-fechar').click();
-					listarAulas();
-				} else {
-					$('#mensagem_aulas').addClass('text-danger')
-					$('#mensagem_aulas').text(mensagem)
-				}
-			},
-			cache: false,
-			contentType: false,
-			processData: false,
-		});
-	});
-</script>
-
-<script type="text/javascript">
-	function listarSessao() {
-		var id_curso = $('#id-curso-sessao').val();
-		$.ajax({
-			url: 'paginas/' + pag + "/listar-sessao.php",
-			method: 'POST',
-			data: {id_curso},
-			dataType: "html",
-
-			success: function(result) {
-				$("#listar-sessao").html(result);
-				$('#mensagem-excluir-sessao').text('');
-				$('#mensagem-sessao').text('');
-			}
-		});
-	}
-</script>
-
-<script type="text/javascript">
-	$("#form-sessao").submit(function() {
-		event.preventDefault();
-		var formData = new FormData(this);
-		$.ajax({
-			url: 'paginas/' + pag + "/inserir-sessao.php",
-			type: 'POST',
-			data: formData,
-			success: function(mensagem) {
-				$('#mensagem_sessao').text('');
-				$('#mensagem_sessao').removeClass()
-				if (mensagem.trim() == "Salvo com Sucesso") {
-					//$('#btn-fechar').click();
-					$('#nome_sessao').val('')
-					listarSessao();
-				} else {
-					$('#mensagem_sessao').addClass('text-danger')
-					$('#mensagem_sessao').text(mensagem)
-				}
-			},
-			cache: false,
-			contentType: false,
-			processData: false,
-		});
-	});
-</script>
-
-
-<script type="text/javascript">
 	function carregarVideo() {
-		$('#target-video').attr('src', $('#link_aula').val());
+		$('#target-video').attr('src', $('#video').val());
 	}
 </script>
 
