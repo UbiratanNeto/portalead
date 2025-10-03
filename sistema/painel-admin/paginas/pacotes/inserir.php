@@ -19,6 +19,7 @@ $promocao = $_POST['promocao'];
 $promocao = str_replace(',', '.', $promocao);
 $palavras = $_POST['palavras'];
 $desc_longa = $_POST['desc_longa'];
+$video = $_POST['video'];
 
 $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "-", 
         strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
@@ -80,13 +81,11 @@ if(@$_FILES['foto']['name'] != ""){
 if($id == ""){
 
 	$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, desc_rapida = :desc_rapida, desc_longa = :desc_longa, valor = :valor, professor = '$id_usuario', 
-	linguagem = '$linguagem', imagem = '$foto', ano = '$ano_atual', palavras = :palavras, grupo = '$grupo', 
-	nome_url = '$url', promocao = :promocao ");
+	linguagem = '$linguagem', imagem = '$foto', ano = '$ano_atual', palavras = :palavras, grupo = '$grupo', nome_url = '$url', promocao = :promocao, video = :video");
 
 }else{
 	$query = $pdo->prepare("UPDATE $tabela SET nome = :nome, desc_rapida = :desc_rapida, desc_longa = :desc_longa, valor = :valor, professor = '$id_usuario', 
-	linguagem = '$linguagem', imagem = '$foto', palavras = :palavras, grupo = '$grupo',
-	 nome_url = '$url', promocao = :promocao WHERE id = '$id'");
+	linguagem = '$linguagem', imagem = '$foto', palavras = :palavras, grupo = '$grupo', nome_url = '$url', promocao = :promocao, video = :video WHERE id = '$id'");
 
 }
 
@@ -96,6 +95,7 @@ $query->bindValue(":desc_longa", "$desc_longa");
 $query->bindValue(":valor", "$valor");
 $query->bindValue(":palavras", "$palavras");
 $query->bindValue(":promocao", "$promocao");
+$query->bindValue(":video", "$video");
 $query->execute();
 
 echo 'Salvo com Sucesso';

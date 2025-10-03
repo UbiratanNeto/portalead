@@ -174,12 +174,17 @@ HTML;
 		$('#valor').val(valor);
 		$('#promocao').val(promocao);
 		$('#linguagem').val(linguagem).change();
+
 		$('#palavras').val(palavras);
 		$('#grupo').val(grupo).change();	;
 
 		$('#foto').val('');
-		$('#target').attr('src','img/pacotes/' + foto);		
+		$('#target').attr('src','img/pacotes/' + foto);	
 		
+		$('#video').val(video);
+		$('#target-video').attr('src', video);
+		
+
 		$('#tituloModal').text('Editar Registro');
 		$('#modalForm').modal('show');
 		$('#mensagem').text('');
@@ -197,11 +202,12 @@ HTML;
 		$('#professor_mostrar').text(professor);
 		$('#categoria_mostrar').text(linguagem);
 		$('#carga_mostrar').text(carga);
+
 		$('#ano_mostrar').text(ano);
 		$('#palavras_mostrar').text(palavras);
 		$('#grupo_mostrar').text(grupo);
 
-		$('#target_mostrar').attr('src','img/cursos/' + foto);
+		$('#target_mostrar').attr('src','img/pacotes/' + foto);
 		$('#target_video_mostrar').attr('src', video);
 
 		$('#modalMostrar').modal('show');
@@ -226,6 +232,7 @@ HTML;
 	function cursos(id, nome, cursos){
 		$('#id-pacote').val(id);
 		$('#nome_pacote_titulo').text(nome);
+		$('#total_cursos').text(cursos);
 		$('#modalCursos').modal('show');
 		listarCursos();
 	}

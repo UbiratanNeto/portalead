@@ -86,6 +86,7 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 					</div>
 
 					<div class="row">
+
 						<div class="col-md-2">
 							<div class="form-group">
 								<label>Valor</label>
@@ -180,7 +181,7 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 
 
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
-					<div class="col-md-5">
+					<div class="col-md-4">
 						<span><b>Subtítulo: </b></span>
 						<span id="desc_rapida_mostrar"></span>
 					</div>
@@ -188,7 +189,11 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 						<span><b>Valor: </b></span>
 						<span id="valor_mostrar"></span>
 					</div>
-					<div class="col-md-5">
+					<div class="col-md-2">
+						<span><b>Promoção: </b></span>
+						<span id="promocao_mostrar"></span>
+					</div>
+					<div class="col-md-4">
 						<span><b>Professor: </b></span>
 						<span id="professor_mostrar"></span>
 					</div>
@@ -197,17 +202,21 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 
 
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<span><b>Linguagem: </b></span>
 						<span id="categoria_mostrar"></span>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<span><b>Grupo: </b></span>
 						<span id="grupo_mostrar"></span>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<span><b>Ano: </b></span>
 						<span id="ano_mostrar"></span>
+					</div>
+					<div class="col-md-3">
+						<span><b>Carga: </b></span>
+						<span id="carg_mostrar"></span>
 					</div>
 				</div>
 
@@ -227,11 +236,11 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 				</div>
 
 				<div class="row">
-					<div class="col-md-4" align="center">
-						<img width="200px" id="target_mostrar">
+					<div class="col-md-6" align="center">
+						<img width="100%" id="target_mostrar">
 					</div>
 
-					<div class="col-md-8" align="center">
+					<div class="col-md-6" align="center">
 						<iframe width="100%" height="250" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
 						allowfullscreen id="target_video_mostrar"></iframe>
 					</div>
@@ -243,6 +252,69 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 		</div>
 	</div>
 </div>
+
+
+<!-- Modal Cursos -->
+<div class="modal fade" id="modalCursos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title"><span id="nome_pacote_titulo"> </span> - <span id="total_cursos"> </span> Cursos </h4>
+				<button id="btn-fechar-aula" type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+					<div class="row">
+					<div class="col-md-6">
+						<?php
+						$query = $pdo->query("SELECT * FROM cursos where professor LIKE '$id_usuario' ORDER BY id asc");
+						$res = $query->fetchAll(PDO::FETCH_ASSOC);
+						$total_reg = @count($res);
+						if ($total_reg > 0) {
+						?>
+
+						<table class="table table-hover" id="tabela">
+						<thead> 
+						<tr> 
+						<th>Nome</th>
+						<th>Ações</th>
+						</tr> 
+						</thead> 
+						<tbody>
+
+						<?php 
+						for ($i = 0; $i < $total_reg; $i++) {
+						foreach ($res[$i] as $key => $value) {
+						}
+						$id = $res[$i]['id'];
+						$nome = $res[$i]['nome'];
+						?>
+
+						<tr>
+						<td><?php echo $nome ?></td>
+						<td>
+							<big><a href="#" onclick="add('{$id}')" title="Adicionar Curso"><i class="fa fa-check verde"></i></a></big>
+						</td>
+
+						</tr>
+
+
+						<?php } } ?>
+
+					</div>
+
+					<div class="col-md-6">
+						<div id="listar-cursos"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 
 <script type="text/javascript">var pag = "<?= $pag ?>"</script>
 <script src="js/ajax.js"></script>
