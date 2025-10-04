@@ -230,7 +230,7 @@ HTML;
 	}
 
 	function cursos(id, nome, cursos){
-		$('#id-pacote').val(id);
+		$('#id_pacote').val(id);
 		$('#nome_pacote_titulo').text(nome);
 		$('#total_cursos').text(cursos);
 		$('#modalCursos').modal('show');
