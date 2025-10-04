@@ -1,14 +1,15 @@
 <?php
 require_once("../../../conexao.php");
-$tabela = 'sessao';
+$tabela = 'cursos_pacotes';
 
-$id_curso = $_POST['id_curso'];
+$id_pacote = $_POST['id_pacote'];
+
 
 echo <<<HTML
 <small>
 HTML;
 
-$query = $pdo->query("SELECT * FROM $tabela where curso = '$id_curso' ORDER BY id asc");
+$query = $pdo->query("SELECT * FROM $tabela where id_pacote = '$id_pacote' ORDER BY id asc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if ($total_reg > 0) {
@@ -26,18 +27,22 @@ HTML;
 	for ($i = 0; $i < $total_reg; $i++) {
 		foreach ($res[$i] as $key => $value){}
 		$id = $res[$i]['id'];
-		$nome = $res[$i]['nome'];
+		$id_curso = $res[$i]['id_curso'];
+
+		$query2 = $pdo->query("SELECT * FROM cursos where id = '$id_curso'");
+		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+		$nome_curso = $res2[0]['nome'];
 
 		echo <<<HTML
 <tr> 
-		<td class="esc">{$nome}</td>
+		<td class="esc">{$nome_curso}</td>
 		<td>
 		<li class="dropdown head-dpdn2" style="display: inline-block;">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><big><i class="fa fa-trash-o text-danger"></i></big></a>
 		<ul class="dropdown-menu" style="margin-left:-230px;">
 		<li>
 		<div class="notification_desc2">
-		<p>Confirmar Exclusão? <a href="#" onclick="excluirSessao('{$id}')"><span class="text-danger">Sim</span></a></p>
+		<p>Confirmar Exclusão? <a href="#" onclick="excluirCurso('{$id}')"><span class="text-danger">Sim</span></a></p>
 		</div>
 		</li>										
 		</ul>
@@ -50,7 +55,7 @@ HTML;
 
 	echo <<<HTML
 </tbody>
-<small><div align="center" id="mensagem-excluir-sessao"></div></small>
+<small><div align="center" id="mensagem-excluir-curso"></div></small>
 </table>
 </small>
 HTML;
@@ -70,9 +75,9 @@ HTML;
 		
 	});
 
-	function excluirSessao(id) {
+	function excluirCurso(id) {
 		$.ajax({
-			url: 'paginas/' + pag + "/excluir-sessao.php",
+			url: 'paginas/' + pag + "/excluir-curso.php",
 			method: 'POST',
 			data: { id },
 			dataType: "text",
@@ -81,8 +86,8 @@ HTML;
 				if (mensagem.trim() == "Excluído com Sucesso") {
 					listarSessao();
 				} else {
-					$('#mensagem-excluir-sessao').addClass('text-danger')
-					$('#mensagem-excluir-sessao').text(mensagem)
+					$('#mensagem-excluir-curso').addClass('text-danger')
+					$('#mensagem-excluir-curso').text(mensagem)
 				}
 
 			},

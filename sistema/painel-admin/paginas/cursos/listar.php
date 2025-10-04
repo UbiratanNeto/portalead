@@ -110,7 +110,8 @@ HTML;
 
 		echo <<<HTML
 <tr class="{$classe_linha}"> 
-		<td><img src="img/cursos/{$foto}" width="27px" class="mr-2">
+		<td>
+		<img src="img/cursos/{$foto}" width="27px" class="mr-2">
 		<a href="#" onclick="aulas('{$id}', '{$nome}', '{$aulas}')" class="cinza_escuro">
 		{$nome}
 		<small><i class="fa fa-video-camera text-dark"></i></small>

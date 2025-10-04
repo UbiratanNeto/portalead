@@ -274,12 +274,12 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 						$total_reg = @count($res);
 						if ($total_reg > 0) {
 						?>
-
-						<table class="table table-hover" id="tabela">
+						<smal><small>
+						<table class="table table-hover" id="tabela2">
 						<thead> 
 						<tr> 
-						<th>Nome</th>
-						<th>Ações</th>
+						<th></th>
+						<th></th>
 						</tr> 
 						</thead> 
 						<tbody>
@@ -290,18 +290,24 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 						}
 						$id = $res[$i]['id'];
 						$nome = $res[$i]['nome'];
+						$foto = $res[$i]['imagem'];
 						?>
 
 						<tr>
-						<td><?php echo $nome ?></td>
-						<td>
-							<big><a href="#" onclick="add('{$id}')" title="Adicionar Curso"><i class="fa fa-check verde"></i></a></big>
-						</td>
-
+							<td>
+								<img src="img/cursos/<?php echo $foto ?>" width="25px" class="mr-2">
+								<?php echo $nome ?></td>
+							<td>
+								<big><a href="#" onclick="add(<?php echo $id ?>)" title="Adicionar Curso"><i class="fa fa-check verde"></i></a></big>
+							</td>
 						</tr>
 
 
 						<?php } } ?>
+
+						</tbody>
+						</table>
+						</small></smal>
 
 					</div>
 
@@ -309,6 +315,11 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 						<div id="listar-cursos"></div>
 					</div>
 				</div>
+
+				<input type="hidden" name="id_pacote" id="id_pacote">
+
+				<small><small><div id="mensagem_cursos" align="center" class="mt-3 col-md-12"></div></small></small>
+
 			</div>
 		</div>
 	</div>
@@ -318,6 +329,16 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 
 <script type="text/javascript">var pag = "<?= $pag ?>"</script>
 <script src="js/ajax.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#tabela2').DataTable({
+			"ordering": false,
+			"stateSave": true,
+		});
+		$('#tabela_filter label input').focus();
+	});
+</script>
 
 
 <script type="text/javascript">
@@ -382,6 +403,26 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 
 
 	});
+</script>
+
+
+<script type="text/javascript">
+	function listarCursos() {
+		var id_pacote = $('#id_pacote').val();
+
+		$.ajax({
+			url: 'paginas/' + pag + "/listar-cursos.php",
+			method: 'POST',
+			data: {id_pacote},
+			dataType: "text",
+
+			success: function(result) {
+				$("#listar-cursos").html(result);
+				$('#mensagem-excluir-cursos').text('');
+				$('#mensagem_cursos').text('');
+			}
+		});
+	}
 </script>
 
 
