@@ -65,7 +65,6 @@ HTML;
 			$nome_linguagem = 'Sem Registro';
 		}
 		
-
 		$query2 = $pdo->query("SELECT * FROM grupos where id = '$grupo'");
 		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
 		$nome_grupo = $res2[0]['nome'];
@@ -74,9 +73,13 @@ HTML;
 		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
 		$cursos = @count($res2);
 		if($cursos > 0){
-				for ($i2 = 0; $i2 < $$cursos; $i2++){
-				foreach ($res[$i2] as $key => $value){}
-				$carga += $res[$i2]['carga'];
+				for ($i2 = 0; $i2 < $cursos; $i2++){
+				foreach ($res2[$i2] as $key => $value){}
+				$id_curso = $res2[$i2]['id_curso'];
+
+				$query3 = $pdo->query("SELECT * FROM cursos where id = '$id_curso'");
+				$res3 = $query3->fetchAll(PDO::FETCH_ASSOC);
+				$carga += $res3[0]['carga'];
 			}
 		} else {
 			$carga = 0;
@@ -94,7 +97,7 @@ HTML;
 			$promo = '';
 		}
 
-		echo <<<HTML
+echo <<<HTML
 <tr class=""> 
 		<td><img src="img/pacotes/{$foto}" width="27px" class="mr-2">
 		<a href="#" onclick="cursos('{$id}', '{$nome}', '{$cursos}')" class="cinza_escuro">
@@ -109,7 +112,7 @@ HTML;
 		<td class="esc">0</td>
 		<td class="esc">{$cursos}</td>
 		<td>
-		<big><a href="#" onclick="editar('{$id}', '{$nome}', '{$desc_rapida}', '{$desc_longa}', '{$valor}', '{$promocao}', '{$linguagem}', '{$foto}', '{$palavras}','{$grupo}', '{$video}')" 
+		<big><a href="#" onclick="editar('{$id}', '{$nome}', '{$desc_rapida}', '{$desc_longa}', '{$valor}', '{$promocao}', '{$linguagem}', '{$foto}', '{$palavras}','{$grupo}','{$video}')" 
 		title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
 		<big><a href="#" onclick="mostrar('{$nome}', '{$desc_rapida}','{$desc_longa}','{$valorF}', '{$promocaoF}', '{$nome_professor}','{$nome_linguagem}','{$foto}', 
