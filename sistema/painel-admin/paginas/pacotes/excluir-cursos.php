@@ -1,6 +1,6 @@
 <?php 
 require_once("../../../conexao.php");
-$tabela = 'sessao';
+$tabela = 'cursos_pacotes';
 
 $id = $_POST['id'];
 

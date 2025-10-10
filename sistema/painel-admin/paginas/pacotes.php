@@ -7,6 +7,11 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 	echo "<script>window.location='../index.php'</script>";
 	exit();
 }
+if($_SESSION['nivel'] == 'Administrador'){
+	$id_usuario = '%%';
+}else{
+	$id_usuario = '%'.$_SESSION['id'].'%';
+}
 ?>
 
 
@@ -166,7 +171,7 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 
 
 <!-- Modal Mostrar -->
-<div class="modal fade" id="modalMostrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalMostrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -175,83 +180,79 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-
-			<div class="modal-body">
-
-
+		
+			<div class="modal-body">			
 
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
-					<div class="col-md-4">
+					<div class="col-md-5">							
 						<span><b>Subtítulo: </b></span>
-						<span id="desc_rapida_mostrar"></span>
+						<span id="desc_rapida_mostrar"></span>							
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-3">							
 						<span><b>Valor: </b></span>
 						<span id="valor_mostrar"></span>
 					</div>
-					<div class="col-md-2">
-						<span><b>Promoção: </b></span>
-						<span id="promocao_mostrar"></span>
-					</div>
-					<div class="col-md-4">
+
+					<div class="col-md-4">							
 						<span><b>Professor: </b></span>
 						<span id="professor_mostrar"></span>
 					</div>
-
 				</div>
 
-
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
-					<div class="col-md-3">
+					<div class="col-md-3">							
 						<span><b>Linguagem: </b></span>
 						<span id="categoria_mostrar"></span>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-3">							
 						<span><b>Grupo: </b></span>
 						<span id="grupo_mostrar"></span>
 					</div>
-					<div class="col-md-3">
+
+					<div class="col-md-3">							
 						<span><b>Ano: </b></span>
 						<span id="ano_mostrar"></span>
 					</div>
-					<div class="col-md-3">
+
+					<div class="col-md-3">							
 						<span><b>Carga: </b></span>
-						<span id="carg_mostrar"></span>
+						<span id="carga_mostrar"></span>
 					</div>
 				</div>
 
-
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
-					<div class="col-md-12">
+					<div class="col-md-8">			
 						<span><b>Palavras Chaves: </b></span>
 						<span id="palavras_mostrar"></span>
 					</div>
+
+					<div class="col-md-4">							
+						<span><b>Valor Promoção: </b></span>
+						<span id="promocao_mostrar"></span>
+					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-12">							
 						<span><b>Descrição do Pacote: </b></span>
-						<small><span id="desc_longa_mostrar"></span></small>
+						<small><span id="desc_longa_mostrar"></span></small>						
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-md-6" align="center">
-						<img width="100%" id="target_mostrar">
+					<div class="col-md-6" align="center">		
+						<img  width="100%" id="target_mostrar">	
 					</div>
 
-					<div class="col-md-6" align="center">
-						<iframe width="100%" height="250" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-						allowfullscreen id="target_video_mostrar"></iframe>
+					<div class="col-md-6" align="center">		
+						<iframe width="100%" height="250" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen id="target_video_mostrar"></iframe>
 					</div>
-
 				</div>
-
-
 			</div>
 		</div>
 	</div>
 </div>
+
 
 
 <!-- Modal Cursos -->
@@ -312,6 +313,8 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 					</div>
 
 					<div class="col-md-6">
+						<b>Cursos do Pacote</b>
+						<hr>
 						<div id="listar-cursos"></div>
 					</div>
 				</div>
@@ -421,6 +424,32 @@ if (@$_SESSION['nivel'] != 'Administrador' and @$_SESSION['nivel'] != 'Professor
 				$('#mensagem-excluir-cursos').text('');
 				$('#mensagem_cursos').text('');
 			}
+		});
+	}
+</script>
+
+
+<script type="text/javascript">
+	function add(id_curso) {
+		var id_pacote = $('#id_pacote').val();
+
+		$.ajax({
+			url: 'paginas/' + pag + "/inserir-cursos.php",
+			method: 'POST',
+			data: {id_curso, id_pacote},
+			dataType: "html",
+
+			success: function(mensagem) {
+				$('#mensagem_cursos').text('');
+				$('#mensagem_cursos').removeClass()
+				if (mensagem.trim() == "Salvo com Sucesso") {
+					//$('#btn-fechar').click();
+					listarCursos();
+				} else {
+					$('#mensagem_cursos').addClass('text-danger')
+					$('#mensagem_cursos').text(mensagem)
+				}
+			},
 		});
 	}
 </script>

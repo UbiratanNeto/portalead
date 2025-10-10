@@ -4,7 +4,6 @@ $tabela = 'cursos_pacotes';
 
 $id_pacote = $_POST['id_pacote'];
 
-
 echo <<<HTML
 <small>
 HTML;
@@ -33,9 +32,11 @@ HTML;
 		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
 		$nome_curso = $res2[0]['nome'];
 
+		$numero_curso = $i + 1;
+
 		echo <<<HTML
 <tr> 
-		<td class="esc">{$nome_curso}</td>
+		<td class="esc">{$numero_curso} - {$nome_curso}</td>
 		<td>
 		<li class="dropdown head-dpdn2" style="display: inline-block;">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><big><i class="fa fa-trash-o text-danger"></i></big></a>
@@ -60,7 +61,7 @@ HTML;
 </small>
 HTML;
 } else {
-	echo 'Não possui nenhuma sessão cadastrada!';
+	echo 'Não possui nenhum curso no pacote!';
 }
 echo <<<HTML
 </small>
@@ -72,19 +73,19 @@ HTML;
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		
+		$('#total_cursos').text('<?=$total_reg?>');
 	});
 
 	function excluirCurso(id) {
 		$.ajax({
-			url: 'paginas/' + pag + "/excluir-curso.php",
+			url: 'paginas/' + pag + "/excluir-cursos.php",
 			method: 'POST',
 			data: { id },
 			dataType: "text",
 
 			success: function (mensagem) {
 				if (mensagem.trim() == "Excluído com Sucesso") {
-					listarSessao();
+					listarCursos();
 				} else {
 					$('#mensagem-excluir-curso').addClass('text-danger')
 					$('#mensagem-excluir-curso').text(mensagem)
