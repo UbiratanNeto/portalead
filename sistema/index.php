@@ -8,12 +8,26 @@ $query = $pdo->query("SELECT * FROM usuarios where nivel = 'Administrador'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 if (@count($res) == 0) {
 	//CRIAR UM USUÁRIO ADMINISTRADOR CASO NÃO EXISTA NENHUM USUÁRIO
-	$pdo->query("INSERT INTO usuarios SET nome = 'Administrador', cpf = '000.000.000-00', usuario = '$email_sistema', senha='$senha', senha_crip = '$senha_crip', nivel = 'Administrador', foto = 'sem-perfil.jpg', id_pessoa = 1, ativo = 'Sim', data = curDate() ");
+	$pdo->query("INSERT INTO usuarios SET nome = 'Administrador', cpf = '000.000.000-00', usuario = '$email_sistema', senha='$senha', senha_crip = '$senha_crip',
+	nivel = 'Administrador', foto = 'sem-perfil.jpg', id_pessoa = 1, ativo = 'Sim', data = curDate() ");
 
 	//CRIAR UM ADMINISTRADOR NA TABELA ADMINISTRADORES
-	$pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.000.000-00', email = '$email_sistema', telefone = '$tel_sistema', foto = 'sem-perfil.jpg', ativo = 'Sim', data = curDate() ");
+	$pdo->query("INSERT INTO administradores SET nome = 'Administrador', cpf = '000.000.000-00', email = '$email_sistema', telefone = '$tel_sistema',
+foto = 'sem-perfil.jpg', ativo = 'Sim', data = curDate() ");
 }
 
+//Trazer dados do banner login
+$query = $pdo->query("SELECT * FROM banner_login where ativo = 'Sim'");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+if (@count($res) > 0) {
+	$foto_banner = $res[0]['foto'];
+	$link_banner = $res[0]['link'];
+	$nome_banner = $res[0]['nome'];
+} else {
+	$foto_banner = 'banner.jpg';
+	$link_banner = [''];
+	$nome_banner = [''];
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -97,8 +111,8 @@ if (@count($res) == 0) {
 
 								<div class="carousel-inner">
 									<div class="carousel-item active">
-										<a href="#" target="_blank">
-											<img src="painel-admin/img/login/banner-login.jpg" height="" width="100%">
+										<a href="<?php echo $link_banner ?>" target="_blank" title=" Ir para <?php echo $nome_banner ?>">
+											<img src="painel-admin/img/login/<?php echo $foto_banner ?>" height="" width="100%">
 										</a>
 
 									</div>

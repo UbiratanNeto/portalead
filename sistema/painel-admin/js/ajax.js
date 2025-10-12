@@ -92,6 +92,9 @@ function ativar(id, acao) {
         success: function (mensagem) {
             if (mensagem.trim() == "Alterado com Sucesso") {
                 listar();
+            } else {
+                $('#mensagem-excluir').addClass('text-danger')
+                $('#mensagem-excluir').text(mensagem)
             }
         },
 

@@ -72,6 +72,7 @@ HTML;
 		$query2 = $pdo->query("SELECT * FROM cursos_pacotes where id_pacote = '$id'");
 		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
 		$cursos = @count($res2);
+		$carga = 0;
 		if($cursos > 0){
 				for ($i2 = 0; $i2 < $cursos; $i2++){
 				foreach ($res2[$i2] as $key => $value){}
@@ -81,8 +82,6 @@ HTML;
 				$res3 = $query3->fetchAll(PDO::FETCH_ASSOC);
 				$carga += $res3[0]['carga'];
 			}
-		} else {
-			$carga = 0;
 		}
 
 
