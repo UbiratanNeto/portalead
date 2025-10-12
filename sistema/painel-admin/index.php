@@ -194,6 +194,17 @@ $senha_usuario = $res[0]['senha'];
 								</ul>
 							</li>
 
+								<li class="treeview">
+								<a href="#">
+									<i class="fa fa-cog"></i>
+									<span>Recursos do site</span>
+									<i class="fa fa-angle-left pull-right"></i>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="index.php?pagina=banner_login"><i class="fa fa-angle-right"></i>Banner login</a></li>
+								</ul>
+							</li>
+
 						</ul>
 					</div>
 					<!-- /.navbar-collapse -->

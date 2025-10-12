@@ -1,4 +1,4 @@
-<?php
+<?php 
 require_once("../../../conexao.php");
 $tabela = 'cursos';
 
@@ -10,6 +10,7 @@ if($_SESSION['nivel'] == 'Administrador'){
 	$acesso = 'ocultar';
 	$id_usuario = '%'.$_SESSION['id'].'%';
 }
+
 echo <<<HTML
 <small>
 HTML;
@@ -17,120 +18,121 @@ HTML;
 $query = $pdo->query("SELECT * FROM $tabela where professor LIKE '$id_usuario' ORDER BY id desc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
-if ($total_reg > 0) {
-	echo <<<HTML
+if($total_reg > 0){
+echo <<<HTML
 	<table class="table table-hover" id="tabela">
 	<thead> 
 	<tr> 
 	<th>Nome</th>
 	<th class="esc">Valor</th> 
-	<th class="esc">Professor</th>
-	<th class="esc">Categoria</th>
-	<th class="esc">Alunos</th>
-	<th class="esc">Aulas</th>
+	<th class="esc">Professor</th> 	
+	<th class="esc">Categoria</th> 	
+	<th class="esc">Alunos</th> 
+	<th class="esc">Aulas</th>	
 	<th>Ações</th>
 	</tr> 
 	</thead> 
 	<tbody>
 HTML;
 
-	for ($i = 0; $i < $total_reg; $i++) {
-		foreach ($res[$i] as $key => $value) {
-		}
-		$id = $res[$i]['id'];
-		$nome = $res[$i]['nome'];
-		$desc_rapida = $res[$i]['desc_rapida'];
-		$desc_longa = $res[$i]['desc_longa'];
-		$valor = $res[$i]['valor'];
-		$professor = $res[$i]['professor'];
-		$categoria = $res[$i]['categoria'];
-		$foto = $res[$i]['imagem'];
-		$status = $res[$i]['status'];
-		$carga = $res[$i]['carga'];
-		$mensagem = $res[$i]['mensagem'];
-		$arquivo = $res[$i]['arquivo'];
-		$ano = $res[$i]['ano'];
-		$palavras = $res[$i]['palavras'];
-		$grupo = $res[$i]['grupo'];
-		$nome_url = $res[$i]['nome_url'];
-		$pacote = $res[$i]['pacote'];
-		$sistema = $res[$i]['sistema'];
-		$link = $res[$i]['link'];
-		$tecnologias = $res[$i]['tecnologias'];
-		$promocao = $res[$i]['promocao'];
+for($i=0; $i < $total_reg; $i++){
+	foreach ($res[$i] as $key => $value){}
+	$id = $res[$i]['id'];
+	$nome = $res[$i]['nome'];
+	$desc_rapida = $res[$i]['desc_rapida'];	
+	$desc_longa = $res[$i]['desc_longa'];	
+	$valor = $res[$i]['valor'];	
+	$professor = $res[$i]['professor'];	
+	$categoria = $res[$i]['categoria'];	
+	$foto = $res[$i]['imagem'];	
+	$status = $res[$i]['status'];	
+	$carga = $res[$i]['carga'];	
+	$mensagem = $res[$i]['mensagem'];	
+	$arquivo = $res[$i]['arquivo'];	
+	$ano = $res[$i]['ano'];	
+	$palavras = $res[$i]['palavras'];	
+	$grupo = $res[$i]['grupo'];	
+	$nome_url = $res[$i]['nome_url'];	
+	$pacote = $res[$i]['pacote'];	
+	$sistema = $res[$i]['sistema'];	
+	$link = $res[$i]['link'];	
+	$tecnologias = $res[$i]['tecnologias'];	
+	$promocao = $res[$i]['promocao'];	
+	
+
+	$query2 = $pdo->query("SELECT * FROM usuarios where id = '$professor'");
+	$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+	$nome_professor = $res2[0]['nome'];
+
+	$query2 = $pdo->query("SELECT * FROM categorias where id = '$categoria'");
+	$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+	$nome_categoria = $res2[0]['nome'];
+
+	$query2 = $pdo->query("SELECT * FROM grupos where id = '$grupo'");
+	$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+	$nome_grupo = $res2[0]['nome'];
+
+	$query2 = $pdo->query("SELECT * FROM aulas where curso = '$id'");
+	$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+	$aulas = @count($res2);
 
 
-		$query2 = $pdo->query("SELECT * FROM usuarios where id = '$professor'");
-		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-		$nome_professor = $res2[0]['nome'];
+	if($status == 'Aprovado'){
+		$excluir = 'ocultar';
+		$icone = 'fa-check-square';
+		$titulo_link = 'Desaprovar Curso';
+		$acao = 'Aguardando';
+		$classe_linha = '';
+		$classe_square = 'verde';
+	}else{
+		$excluir = '';
+		$icone = 'fa-square-o';
+		$titulo_link = 'Aprovar Curso';
+		$acao = 'Aprovado';
+		$classe_linha = 'text-muted';
+		$classe_square = 'text-danger';
+	}
 
-		$query2 = $pdo->query("SELECT * FROM categorias where id = '$categoria'");
-		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-		$nome_categoria = $res2[0]['nome'];
 
-		$query2 = $pdo->query("SELECT * FROM grupos where id = '$grupo'");
-		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-		$nome_grupo = $res2[0]['nome'];
+	if($mensagem != ''){
+		$classe_mensagem = 'warning';
+	}else{
+		$classe_mensagem = 'text-warning';
+	}
 
-		$query2 = $pdo->query("SELECT * FROM aulas where curso = '$id'");
-		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-		$aulas = @count($res2);
+	//FORMATAR VALORES
+	$valorF = number_format($valor, 2, ',', '.');
+	$desc_longa = str_replace('"', "**", $desc_longa);
+	$promocaoF = number_format($promocao, 2, ',', '.');
 
-		if ($status == 'Aprovado') {
-			$excluir = 'ocultar';
-			$icone = 'fa-check-square';
-			$titulo_link = 'Desaprovar Curso';
-			$acao = 'Aguardando';
-			$classe_linha = '';
-			$classe_square = 'verde';
-		} else {
-			$excluir = '';
-			$icone = 'fa-square-o';
-			$titulo_link = 'Aprovar Curso';
-			$acao = 'Aprovado';
-			$classe_linha = 'text-muted';
-			$classe_square = 'text-danger';
-		}
-
-		if($mensagem != ''){
-			$classe_mensagem = 'warning';
-		}else{
-			$classe_mensagem = 'text-warning';
-		}
-		//FORMATAR VALORES
-		$valorF = number_format($valor, 2, ',', '.');
-		$desc_longa = str_replace('"', "**", $desc_longa);
-		$promocaoF = number_format($promocao, 2, ',', '.');
-
-		if($promocao > 0 ){
-			$promo = ' / '.$promocaoF;
-		} else {
-			$promo = '';
-		}
-
-		echo <<<HTML
+	if($promocao > 0){
+		$promo = ' / '.$promocaoF;
+	}else{
+		$promo = '';
+	}
+	
+echo <<<HTML
 <tr class="{$classe_linha}"> 
 		<td>
 		<img src="img/cursos/{$foto}" width="27px" class="mr-2">
-		<a href="#" onclick="aulas('{$id}', '{$nome}', '{$aulas}')" class="cinza_escuro">
+		<a href="#" onclick="aulas('{$id}', '{$nome}', '{$aulas}')" class="cinza_escuro">		
 		{$nome}
-		<small><i class="fa fa-video-camera text-dark"></i></small>
+		<small><i class="fa fa-video-camera text-dark"></i>	</small>
 		</a>
 		</td> 
 		<td class="esc">
-		R$ {$valorF} <small><b><span class="text-danger">{$promo}</span></b></small>
+		R$ {$valorF} <small><b><span class="text-danger">{$promo}</span></b></small>		
 		</td>
 		<td class="esc">{$nome_professor}</td>		
 		<td class="esc">{$nome_categoria}</td>
 		<td class="esc">0</td>
-		<td class="esc">{$aulas}</td>
+		<td class="esc">{$aulas}</td>				
 		<td>
-		<big><a href="#" onclick="editar('{$id}', '{$nome}', '{$desc_rapida}', '{$desc_longa}', '{$valor}', '{$categoria}', '{$foto}', '{$carga}' , '{$arquivo}', '{$ano}', 
-		'{$palavras}','{$grupo}', '{$pacote}','{$sistema}', '{$link}' ,'{$tecnologias}','{$promocao}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+		<big><a href="#" onclick="editar('{$id}', '{$nome}', '{$desc_rapida}', '{$desc_longa}' , '{$valor}' , '{$categoria}' , '{$foto}' , '{$carga}' , '{$arquivo}' , '{$ano}' , '{$palavras}' , '{$grupo}' , '{$pacote}', '{$sistema}', '{$link}', '{$tecnologias}', '{$promocao}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
-		<big><a href="#" onclick="mostrar('{$nome}', '{$desc_rapida}','{$desc_longa}','{$valorF}','{$nome_professor}','{$nome_categoria}','{$foto}','{$status}', 
-		'{$carga}', '{$arquivo}', '{$ano}', '{$palavras}', '{$nome_grupo}', '{$pacote}', '{$sistema}', '{$link}', '{$tecnologias}', '{$promocaoF}')" 
-		title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
+
+		<big><a href="#" onclick="mostrar('{$nome}', '{$desc_rapida}','{$desc_longa}','{$valorF}','{$nome_professor}','{$nome_categoria}','{$foto}','{$status}', '{$carga}', '{$arquivo}', '{$ano}', '{$palavras}', '{$nome_grupo}', '{$pacote}', '{$sistema}', '{$link}', '{$tecnologias}', '{$promocaoF}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
+
 
 		<li class="dropdown head-dpdn2 {$excluir}" style="display: inline-block;">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><big><i class="fa fa-trash-o text-danger"></i></big></a>
@@ -146,21 +148,26 @@ HTML;
 
 		<big><a href="#" onclick="sessao('{$id}', '{$nome}')" title="Criar Sessão"><i class="fa fa-globe verde"></i></a></big>
 
+
 		<big><a class="{$acesso}" href="#" onclick="ativar('{$id}', '{$acao}')" title="{$titulo_link}"><i class="fa {$icone} $classe_square"></i></a></big>
 
+
 		<big><a href="#" onclick="obs('{$id}', '{$nome}', '{$mensagem}')" title="Ver Mensagens"><i class="fa fa-comment-o {$classe_mensagem}"></i></a></big>
+		
 
 		</td>
 </tr>
 HTML;
-	}
 
-	echo <<<HTML
+}
+
+echo <<<HTML
 </tbody>
 <small><div align="center" id="mensagem-excluir"></div></small>
 </table>	
 HTML;
-} else {
+
+}else{
 	echo 'Não possui nenhum registro cadastrado!';
 }
 echo <<<HTML
@@ -172,17 +179,18 @@ HTML;
 
 
 <script type="text/javascript">
-	$(document).ready(function() {
+
+	$(document).ready( function () {
 		$('#tabela').DataTable({
 			"ordering": false,
 			"stateSave": true,
 		});
 		$('#tabela_filter label input').focus();
-	});
+	} );
+	
+	function editar(id, nome, desc_rapida, desc_longa, valor, categoria, foto, carga, arquivo, ano, palavras, grupo, pacote, sistema, link, tecnologias, promocao){	
 
-	function editar(id, nome, desc_rapida, desc_longa, valor, categoria, foto, carga, arquivo, ano, palavras, grupo, pacote, sistema, link, tecnologias, promocao) {
-
-	for (let letra of desc_longa){  				
+		for (let letra of desc_longa){  				
 			if (letra === '*'){
 				desc_longa = desc_longa.replace('**', '"');
 			}			
@@ -199,10 +207,10 @@ HTML;
 		$('#arquivo').val(arquivo);
 		$('#ano').val(ano);
 		$('#palavras').val(palavras);
-		$('#grupo').val(grupo).change();	;
+		$('#grupo').val(grupo).change();
 		$('#pacote').val(pacote);
 		$('#link').val(link);
-		$('#sistema').val(sistema).change();	;
+		$('#sistema').val(sistema).change();
 		$('#tecnologias').val(tecnologias);
 	
 		$('#foto').val('');
@@ -214,7 +222,8 @@ HTML;
 	}
 
 
-	
+
+
 	function mostrar(nome, desc_rapida, desc_longa, valor, professor, categoria, foto, status, carga, arquivo, ano, palavras, grupo, pacote, sistema, link, tecnologias, promocao){	
 		
 		$('#nome_mostrar').text(nome);
@@ -244,24 +253,30 @@ HTML;
 		
 	}
 
+
+
+
+
 	function obs(id, nome, mensagem){	
 		
 		$('#nome_mensagem').text(nome);
 		$('#id_mensagem').val(id);
-		nicEditors.findEditor("mensagem_mensagem").setContent(mensagem);
-
+		nicEditors.findEditor("mensagem_mensagem").setContent(mensagem);	
+		
 		$('#modalMensagem').modal('show');
 		
 	}
 
 
-		function limparCampos(){
+	
+
+	function limparCampos(){
 		$('#id').val('');
 		$('#nome').val('');
 		$('#desc_rapida').val('');
 		nicEditors.findEditor("area").setContent('');				
-		$('#valor').val('');
-		$('#promocao').val('');
+		$('#valor').val('');	
+		$('#promocao').val('');	
 		$('#carga').val('');	
 		$('#palavras').val('');	
 		$('#pacote').val('');	
@@ -273,34 +288,41 @@ HTML;
 		$('#target').attr('src','img/cursos/sem-foto.png');		
 	}
 
+
 	function aulas(id, nome, aulas){
 		$('#id-aulas').val(id);
-		$('#nome_aula_titulo').text(nome);
+		$('#nome_aula_titulo').text(nome);		
 		$('#modalAulas').modal('show');
 		listarAulas();
 		listarSessaoAulas(id);
 	}
 
+
+
 	function sessao(curso, nome){
 		$('#id-curso-sessao').val(curso);
-		$('#nome_curso_sessao').text(nome);
-		$('#nome_sessao').val('');
+		$('#nome_curso_sessao').text(nome);	
+		$('#nome_sessao').val('');		
 		$('#modalSessao').modal('show');
 		listarSessao();
 	}
 
-	function listarSessaoAulas(curso){
-			$.ajax({
-			url: 'paginas/' + pag + "/listar-sessao-aulas.php",
-			method: 'POST',
-			data: {curso},
-			dataType: "html",
 
-			success: function(result) {
-				$("#listar-sessao-aula").html(result);
-			}
-		});
+	function listarSessaoAulas(curso){
+		$.ajax({
+        url: 'paginas/' + pag + "/listar-sessao-aulas.php",
+        method: 'POST',
+        data: {curso},
+        dataType: "html",
+
+        success:function(result){
+            $("#listar-sessao-aula").html(result);                     
+        }
+    });
 	}
 
 
+
+
 </script>
+
