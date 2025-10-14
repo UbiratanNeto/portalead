@@ -62,7 +62,11 @@ for($i=0; $i < $total_reg; $i++){
 
 	$query2 = $pdo->query("SELECT * FROM usuarios where id = '$professor'");
 	$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+	if (@count($res2) > 0){
 	$nome_professor = $res2[0]['nome'];
+		} else {
+			$nome_professor = "Professor não encontrado";
+		}
 
 	$query2 = $pdo->query("SELECT * FROM categorias where id = '$categoria'");
 	$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
