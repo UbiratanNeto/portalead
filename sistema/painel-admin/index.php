@@ -501,7 +501,6 @@ $senha_usuario = $res[0]['senha'];
 					</div>
 
 
-
 					<div class="row">
 
 						<div class="col-md-4">
@@ -531,9 +530,32 @@ $senha_usuario = $res[0]['senha'];
 							</div>
 						</div>
 
-
 					</div>
 
+					<div class="row">
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Facebook</label>
+								<input type="text" class="form-control" id="facebook_sistema" name="facebook_sistema" value="<?php echo $facebook_sistema ?>">
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Instagram</label>
+								<input type="text" class="form-control" id="instagram_sistema" name="instagram_sistema" value="<?php echo $instagram_sistema ?>">
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Youtube</label>
+								<input type="text" class="form-control" id="youtube_sistema" name="youtube_sistema" value="<?php echo $youtube_sistema ?>">
+							</div>
+						</div>
+
+					</div>
 
 
 
