@@ -63,7 +63,7 @@ if($url == "cursos" || $url == "lista-cursos"){
 
                     <div class="search-box social_links">
                         <button class="btn-search"><i class="fa fa-search"></i></button>
-                        <input type="text" class="input-search" placeholder="Busque um Curso...">
+                        <input type="text" class="input-search" placeholder="Busque um curso...">
                     </div>
 
                 </div>
