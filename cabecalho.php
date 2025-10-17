@@ -77,6 +77,7 @@ if($url == "cursos" || $url == "lista-cursos"){
         <nav class="navbar navbar-inverse">
             <div class="container">
                 <div class="row">
+                    
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                             <span class="sr-only">Toggle navigation</span>
@@ -86,7 +87,8 @@ if($url == "cursos" || $url == "lista-cursos"){
                         </button>
                         <a class="navbar-brand" href="index.php">
                             <h1> <img src="sistema/img/logo.png" width="45px"></h1><span><?php echo $nome_sistema ?></span></a>
-                        </div>
+                    </div>
+
                         <div id="navbar" class="collapse navbar-collapse navbar-right">
                             <ul class="nav navbar-nav">
                                 <li class="<?php echo $index ?>"><a href="index.php">Home</a></li>

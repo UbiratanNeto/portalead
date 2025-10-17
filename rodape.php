@@ -10,7 +10,9 @@ require_once("sistema/conexao.php");
                     <a href="temos.php">Termos de Uso</a>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-12 copyright">
-                   <?php echo $nome_sistema ?> /   <i class="fa fa-envelope" style="color:#FFF; margin-right:5px">  </i><a href="#" style="color:#FFF"><?php echo $email_sistema ?></a> / <i class="fa fa-whatsapp" style="color:#FFF; margin-right:5px"></i><a href="http://api.whatsapp.com/send?1=pt_BR&phone=55<?php echo $tel_sistema ?>" target="_blank" style="color:#FFF"><?php echo $tel_sistema ?></a>
+                   <?php echo $nome_sistema ?> /   <i class="fa fa-envelope" style="color:#FFF; margin-right:5px"></i>
+                   <a href="#" style="color:#FFF"><?php echo $email_sistema ?></a> / <i class="fa fa-whatsapp" style="color:#FFF; margin-right:5px"></i>
+                   <a href="http://api.whatsapp.com/send?1=pt_BR&phone=55<?php echo $tel_sistema ?>" target="_blank" style="color:#FFF"><?php echo $tel_sistema ?></a>
                 </div>
             </div>
         </div>
