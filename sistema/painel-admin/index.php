@@ -202,6 +202,7 @@ $senha_usuario = $res[0]['senha'];
 								</a>
 								<ul class="treeview-menu">
 									<li><a href="index.php?pagina=banner_login"><i class="fa fa-angle-right"></i>Banner login</a></li>
+									<li><a href="index.php?pagina=banner_index"><i class="fa fa-angle-right"></i>Banner Index</a></li>
 								</ul>
 							</li>
 
