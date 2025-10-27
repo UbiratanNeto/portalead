@@ -117,7 +117,8 @@ if($total_reg > 0){
         <div class="section-heading text-center">
             <div class="col-md-12 col-xs-12">
                 <h1>Principais <span>Formações</span></h1>
-                <p class="subheading">Conheça nossas principais categorias de treinamentos, temos <?php echo $total_reg ?> áreas de atuação! Clique <a href="categorias.php"><span>aqui</span></a> para ver todas as categorias.</p>
+                <p class="subheading">Conheça nossas principais categorias de treinamentos, temos <?php echo $total_reg ?> áreas de atuação! Clique <a href="categorias.php"><span>aqui</span></a>
+                 para ver todas as categorias.</p>
             </div>
         </div>
 
@@ -188,12 +189,12 @@ if($total_reg > 0){
    ?>
 
             <section>
-                 <div class="section-heading text-center">
-                <div class="col-md-12 col-xs-12">
-                <h1>Últimos <span>Lançamentos</span></h1>
-                <p class="subheading">Clique <a href="cursos.php"><span>aqui</span></a> para ver todos os cursos.</p>
-            </div>
-        </div>
+                <div class="section-heading text-center">
+                    <div class="col-md-12 col-xs-12">
+                        <h1>Últimos <span>Lançamentos</span></h1>
+                        <p class="subheading">Clique <a href="cursos.php"><span>aqui</span></a> para ver todos os cursos.</p>
+                    </div>
+                </div>
 
                 <div class="row" style="margin-left:10px; margin-right:10px; margin-top:-20px;">
 

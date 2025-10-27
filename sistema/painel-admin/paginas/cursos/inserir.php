@@ -91,7 +91,7 @@ if($id == ""){
 
 }else{
 	$query = $pdo->prepare("UPDATE $tabela SET nome = :nome, desc_rapida = :desc_rapida, desc_longa = :desc_longa, valor = :valor, professor = '$id_usuario',
-	 categoria = '$categoria', imagem = '$foto', status = 'Aguardando', carga = :carga, arquivo = :arquivo, palavras = :palavras, grupo = '$grupo',
+	 categoria = '$categoria', imagem = '$foto', carga = :carga, arquivo = :arquivo, palavras = :palavras, grupo = '$grupo',
 	  nome_url = '$url', pacote = :pacote, sistema = '$sistema', link = :link, tecnologias = :tecnologias, promocao = :promocao WHERE id = '$id'");
 
 }
