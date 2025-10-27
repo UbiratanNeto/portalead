@@ -14,7 +14,8 @@ if ($total_reg > 0) {
 	<table class="table table-hover" id="tabela">
 	<thead> 
 	<tr> 
-	<th>Nome</th> 
+	<th>Nome</th>
+	<th class="esc">Descrição</th> 
 	<th class="esc">Pacotes</th>
 	<th>Ações</th>
 	</tr> 
@@ -27,6 +28,8 @@ HTML;
 		}
 		$id = $res[$i]['id'];
 		$nome = $res[$i]['nome'];
+		$descricao = $res[$i]['descricao'];
+		$foto = $res[$i]['imagem'];
 
 		$query2 = $pdo->query("SELECT * FROM pacotes where linguagem = '$id'");
 		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
@@ -35,12 +38,16 @@ HTML;
 		echo <<<HTML
 <tr> 
 		<td>
+		<img src="img/linguagens/{$foto}" width="27px" class="mr-2">
 		{$nome}	
+		</td> 
+		<td class="esc">
+		{$descricao}
 		</td>
 		<td class="esc">{$cursos}</td>		
 		
 		<td>
-		<big><a href="#" onclick="editar('{$id}', '{$nome}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+		<big><a href="#" onclick="editar('{$id}', '{$nome}', '{$descricao}','{$foto}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
 		<li class="dropdown head-dpdn2" style="display: inline-block;">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><big><i class="fa fa-trash-o text-danger"></i></big></a>
@@ -84,10 +91,14 @@ HTML;
 		$('#tabela_filter label input').focus();
 	});
 
-	function editar(id, nome){
+	function editar(id, nome, descricao, foto) {
 
 		$('#id').val(id);
 		$('#nome').val(nome);
+		$('#descricao').val(descricao);
+
+		$('#foto').val('');
+		$('#target').attr('src', 'img/linguagens/' + foto);
 
 		$('#tituloModal').text('Editar Registro');
 		$('#modalForm').modal('show');
@@ -98,6 +109,8 @@ HTML;
 	function limparCampos() {
 		$('#id').val('');
 		$('#nome').val('');
-		
+		$('#descricao').val('');
+		$('#foto').val('');
+		$('#target').attr('src', 'img/linguagens/sem-foto.png');
 	}
 </script>

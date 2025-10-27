@@ -555,9 +555,16 @@ $senha_usuario = $res[0]['senha'];
 								<input type="text" class="form-control" id="youtube_sistema" name="youtube_sistema" value="<?php echo $youtube_sistema ?>">
 							</div>
 						</div>
-
 					</div>
 
+					<div class="row">
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Itens paginação</label>
+								<input type="number" class="form-control" id="itens_pag" name="itens_pag" value="<?php echo $itens_pag ?>">
+							</div>
+						</div>
+					</div>
 
 
 					<div class="row">

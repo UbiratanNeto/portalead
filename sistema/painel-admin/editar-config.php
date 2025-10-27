@@ -10,6 +10,7 @@ $chave_pix = $_POST['chave_pix'];
 $facebook_sistema = $_POST['facebook_sistema'];
 $instagram_sistema = $_POST['instagram_sistema'];
 $youtube_sistema = $_POST['youtube_sistema'];
+$itens_pag = $_POST['itens_pag'];
 
 
 
@@ -76,7 +77,7 @@ $ext = pathinfo(@$_FILES['imgQRCode']['name'], PATHINFO_EXTENSION);
 //atualizar os dados do config
 $query = $pdo->prepare("UPDATE config SET nome_sistema = :nome_sistema, tel_sistema = :tel_sistema, email_sistema = :email_sistema, cnpj_sistema = :cnpj_sistema,
 tipo_chave_pix = '$tipo_chave_pix', chave_pix = :chave_pix, logo = 'logo.png', icone = 'favicon.ico', logo_rel = 'logo_rel.jpg', qrcode_pix = 'qrcode.jpg',
-facebok = :facebook, instagram = :instagram, youtube = :youtube");
+facebook = :facebook, instagram = :instagram, youtube = :youtube, itens_pag = '$itens_pag'");
 
 $query->bindValue(":nome_sistema", "$nome_sistema");
 $query->bindValue(":email_sistema", "$email_sistema");

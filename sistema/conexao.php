@@ -28,7 +28,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 if (@count($res) == 0) {
 
 	$pdo->query("INSERT INTO config SET nome_sistema = '$nome_sistema', tel_sistema = '$tel_sistema', email_sistema = '$email_sistema', logo = 'logo.png',
-	 icone = 'favicon.ico', logo_rel = 'logo.jpg' ");
+	 icone = 'favicon.ico', logo_rel = 'logo.jpg', itens_pag = '18' ");
 } else {
 	$nome_sistema = $res[0]['nome_sistema'];
 	$email_sistema = $res[0]['email_sistema'];
@@ -39,4 +39,5 @@ if (@count($res) == 0) {
 	$facebook_sistema = $res[0]['facebook'];
 	$instagram_sistema = $res[0]['instagram'];
 	$youtube_sistema = $res[0]['youtube'];
+	$itens_pag = $res[0]['itens_pag'];
 }
