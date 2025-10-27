@@ -18,18 +18,14 @@ if($total_reg > 0){
 
 
     <div class="section-heading">
-                <div class="col-md-12 col-xs-12">
-                <h2><small><small><span>Cursos Mais Vendidos</span> - <a href="lista-cursos.php">Ver todos os Cursos</a></small></small></h2>
-             
-            </div>
+        <div class="col-md-12 col-xs-12">
+            <h2><small><small><span>Cursos Mais Vendidos</span> - <a href="lista-cursos.php">Ver todos os Cursos</a></small></small></h2>
         </div>
+    </div>
 
-        <hr>
+    <hr>
 
-    
-                
-
-      <div class="row" style="margin-left:10px; margin-right:10px; margin-top:-50px;">
+    <div class="row" style="margin-left:10px; margin-right:10px; margin-top:-50px;">
 
                  <?php 
                     for($i=0; $i < $total_reg; $i++){

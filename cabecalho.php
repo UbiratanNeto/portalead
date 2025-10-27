@@ -99,8 +99,8 @@ if($url == "cursos" || $url == "lista-cursos"){
                                     <ul class="dropdown-menu">
                                        <li><a href="cursos.php">Cursos</a></li>
                                        <li><a href="lista-cursos.php">Todos os Cursos</a></li>
-                                       <li><a href="pacotes.php">Pacotes Promocionais</a></li> 
-                                       <li><a href="formacoes.php">Formações</a></li> 
+                                       <li><a href="pacotes.php">Pacotes Promocionais</a></li>
+                                       <li><a href="formacoes.php">Formações</a></li>
                                        <li><a href="categorias.php">Categorias</a></li>
                                        <li><a href="sistemas.php">Sistemas Prontos</a></li>
                                        <li><a href="cursos-2021.php">Cursos 2021</a></li>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once("cabecalho.php");
 
 ?>
@@ -9,56 +9,54 @@ require_once("cabecalho.php");
 <hr>
 
 
-<?php 
+<?php
 $query = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Não' ORDER BY id desc ");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
-if($total_reg > 0){
-   ?>
+if ($total_reg > 0) {
+?>
 
 
-    <div class="row" style="margin-left: 10px;">
-                <div class="col-md-6 col-xs-6" >
-                <p><span>Total de Cursos</span> - <?php echo $total_reg ?> Cursos</p>
-             
-            </div>
+  <div class="row" style="margin-left: 10px;">
+    <div class="col-md-6 col-xs-6">
+      <p><span>Total de Cursos</span> - <?php echo $total_reg ?> Cursos</p>
+    </div>
 
-             <div class="col-md-6 col-xs-6" align="right">
-                  <div class="search-box-pag " style="margin-top: 10px;">
-                        <button class="btn-search-pag"><i class="fa fa-search"></i></button>
-                        <input onkeyup="listar()" type="text" class="input-search-pag" placeholder="Busque um Curso..." id="buscar">
-                    </div>
-
-                  </div>
-
-        </div>
-
-        <hr>
-
-    <br>
-                
-      <div id="listar-cursos">    
-
-
+    <div class="col-md-6 col-xs-6" align="right">
+      <div class="search-box-pag " style="margin-top: 10px;">
+        <button class="btn-search-pag"><i class="fa fa-search"></i>
+          << /button>
+            <input onkeyup="listar()" type="text" class="input-search-pag" placeholder="Busque um Curso..." id="buscar">
       </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <br>
+
+  <div id="listar-cursos">
+
+
+  </div>
 
 
 
-   
 
 
 
-       
 
-          
 
-        <?php } ?>
+
+
+
+<?php } ?>
 
 
 
 <br><br>
 
-<?php 
+<?php
 require_once("rodape.php");
 ?>
 
@@ -67,24 +65,27 @@ require_once("rodape.php");
 <script type="text/javascript">
   $(document).ready(function() {
     listar();
-} );
+  });
 
 
 
-function listar(pagina){
-  console.log(pagina)
+  function listar(pagina) {
+    console.log(pagina)
 
-  var busca = $("#buscar").val();
+    var busca = $("#buscar").val();
     $.ajax({
-        url: "ajax-listar-cursos.php",
-        method: 'POST',
-        data: {busca, pagina},
-        dataType: "html",
+      url: "ajax-listar-cursos.php",
+      method: 'POST',
+      data: {
+        busca,
+        pagina
+      },
+      dataType: "html",
 
-        success:function(result){
-            $("#listar-cursos").html(result);
-           
-        }
+      success: function(result) {
+        $("#listar-cursos").html(result);
+
+      }
     });
-}
+  }
 </script>

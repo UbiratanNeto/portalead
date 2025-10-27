@@ -10,7 +10,7 @@ if (@$_SESSION['nivel'] != 'Administrador') {
 ?>
 
 
-<button onclick="inserir()" type="button" class="btn btn-primary btn-flat btn-pri"><i class="fa fa-plus" aria-hidden="true"></i>Nova Linguagem</button>
+<button onclick="inserir()" type="button" class="btn btn-primary btn-flat btn-pri"><i class="fa fa-plus" aria-hidden="true"></i> Nova Linguagem</button>
 
 
 <div class="bs-example widget-shadow" style="padding:15px" id="listar">
@@ -35,13 +35,35 @@ if (@$_SESSION['nivel'] != 'Administrador') {
 				<div class="modal-body">
 
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>Nome</label>
 								<input type="text" class="form-control" name="nome" id="nome" required>
 							</div>
 						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Descrição</label>
+								<input type="text" class="form-control" name="descricao" id="descricao">
+							</div>
+						</div>
 					</div>
+
+					<div class="row">
+						<div class="col-md-8">
+							<div class="form-group">
+								<label>Foto</label>
+								<input class="form-control" type="file" name="foto" onChange="carregarImg();" id="foto">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div id="divImg">
+								<img src="img/categorias/sem-foto.png" width="100px" id="target">
+							</div>
+						</div>
+					</div>
+
 
 					<br>
 					<input type="hidden" name="id" id="id">
@@ -62,5 +84,28 @@ if (@$_SESSION['nivel'] != 'Administrador') {
 
 
 
-<script type="text/javascript"> var pag = "<?= $pag ?>"</script>
+<script type="text/javascript">
+	var pag = "<?= $pag ?>"
+</script>
 <script src="js/ajax.js"></script>
+
+
+<script type="text/javascript">
+	function carregarImg() {
+		var target = document.getElementById('target');
+		var file = document.querySelector("#foto").files[0];
+
+		var reader = new FileReader();
+
+		reader.onloadend = function() {
+			target.src = reader.result;
+		};
+
+		if (file) {
+			reader.readAsDataURL(file);
+
+		} else {
+			target.src = "";
+		}
+	}
+</script>
