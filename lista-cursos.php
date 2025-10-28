@@ -24,9 +24,8 @@ if ($total_reg > 0) {
 
     <div class="col-md-6 col-xs-6" align="right">
       <div class="search-box-pag " style="margin-top: 10px;">
-        <button class="btn-search-pag"><i class="fa fa-search"></i>
-          << /button>
-            <input onkeyup="listar()" type="text" class="input-search-pag" placeholder="Busque um Curso..." id="buscar">
+        <button class="btn-search-pag"><i class="fa fa-search"></i></button>
+        <input onkeyup="listar()" type="text" class="input-search-pag" placeholder="Busque um Curso..." id="buscar">
       </div>
     </div>
   </div>

@@ -1,11 +1,11 @@
-<?php 
+<?php
 require_once("sistema/conexao.php");
 
-$busca = '%'.$_POST['busca'].'%';
+$busca = '%' . $_POST['busca'] . '%';
 
 // pegar a pagina atual
-if(@$_POST['pagina'] == ""){
-    @$_POST['pagina'] = 0;
+if (@$_POST['pagina'] == "") {
+  @$_POST['pagina'] = 0;
 }
 $pagina = intval(@$_POST['pagina']);
 $limite = $pagina * $itens_pag;
@@ -15,41 +15,42 @@ echo @$_POST['pagina'];
 $query = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Não' and (nome LIKE '$busca' or desc_rapida LIKE '$busca') ORDER BY id desc LIMIT $limite, $itens_pag");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
-if($total_reg > 0){
+if ($total_reg > 0) {
 
-echo <<<HTML
+  echo <<<HTML
 <div class="row" style="margin-left:10px; margin-right:10px; margin-top:-50px;" >
 HTML;
 
-for($i=0; $i < $total_reg; $i++){
-    foreach ($res[$i] as $key => $value){}
-        $id = $res[$i]['id'];
+  for ($i = 0; $i < $total_reg; $i++) {
+    foreach ($res[$i] as $key => $value) {
+    }
+    $id = $res[$i]['id'];
     $nome = $res[$i]['nome'];
-    $desc_rapida = $res[$i]['desc_rapida'];      
-    $valor = $res[$i]['valor'];     
-    $foto = $res[$i]['imagem']; 
+    $desc_rapida = $res[$i]['desc_rapida'];
+    $valor = $res[$i]['valor'];
+    $foto = $res[$i]['imagem'];
     $promocao = $res[$i]['promocao'];
 
-    $valorF = number_format($valor, 2, ',', '.');    
+    $valorF = number_format($valor, 2, ',', '.');
     $promocaoF = number_format($promocao, 2, ',', '.');
 
-    if($promocao > 0){
-        $ativo = '';
-        $ativo2 = 'ocultar';
-    }else{
-        $ativo = 'ocultar';
-         $ativo2 = '';
-    } 
+    if ($promocao > 0) {
+      $ativo = '';
+      $ativo2 = 'ocultar';
+    } else {
+      $ativo = 'ocultar';
+      $ativo2 = '';
+    }
 
 
     $query2 = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Não' and (nome LIKE '$busca' or desc_rapida LIKE '$busca') ORDER BY id desc ");
     $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
     $total_reg2 = @count($res2);
 
-     $num_paginas = ceil($total_reg2/$itens_pag);
-    
+    $num_paginas = ceil($total_reg2 / $itens_pag);
 
-echo <<<HTML
+
+    echo <<<HTML
     <div class="col-md-2 col-sm-6 col-xs-6">    
         <div class="product-card">                  
             <div class="product-tumb">
@@ -72,12 +73,10 @@ echo <<<HTML
         </div>
     </div>
 HTML;
+  }
 
 
-}
-
-
-echo <<<HTML
+  echo <<<HTML
 </div>
 <hr>
    <div class="row" align="center">
@@ -91,27 +90,26 @@ echo <<<HTML
             </li>
 HTML;
 
-            for($i=0;$i<$num_paginas;$i++){
-            $estilo = "";
-            if($pagina >= ($i - 2) and $pagina <= ($i + 2)){
-            if($pagina == $i)
-              $estilo = "active";
+  for ($i = 0; $i < $num_paginas; $i++) {
+    $estilo = "";
+    if ($pagina >= ($i - 2) and $pagina <= ($i + 2)) {
+      if ($pagina == $i)
+        $estilo = "active";
 
-          $pag = $i+1;
-          $ultimo_reg = $num_paginas - 1;
+      $pag = $i + 1;
+      $ultimo_reg = $num_paginas - 1;
 
-echo <<<HTML
+      echo <<<HTML
 
              <li class="page-item {$estilo}">
               <a onclick="listar({$i})" class="paginador " href="#" >{$pag}
                 
               </a></li>
 HTML;
+    }
+  }
 
-          } 
-      } 
-
-echo <<<HTML
+  echo <<<HTML
 
             <li class="page-item">
               <a onclick="listar({$ultimo_reg})" class="paginador" href="#" aria-label="Next">
@@ -123,10 +121,7 @@ echo <<<HTML
         </nav>
       </div> 
 
-HTML;      
-
-}else{
-    echo '<br><p align="center">Não possui nenhum curso com este nome!</p>';
+HTML;
+} else {
+  echo '<br><p align="center">Não possui nenhum curso com este nome!</p>';
 }
-
-?>
