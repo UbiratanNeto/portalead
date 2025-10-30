@@ -12,7 +12,7 @@ $limite = $pagina * $itens_pag;
 
 echo @$_POST['pagina'];
 
-$query = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Não' and (nome LIKE '$busca' or desc_rapida LIKE '$busca') ORDER BY id desc LIMIT $limite, $itens_pag");
+$query = $pdo->query("SELECT * FROM pacotes where nome LIKE '$busca' or desc_rapida LIKE '$busca' ORDER BY id desc LIMIT $limite, $itens_pag");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if ($total_reg > 0 ) {
@@ -31,6 +31,7 @@ HTML;
     $valor = $res[$i]['valor'];
     $foto = $res[$i]['imagem'];
     $promocao = $res[$i]['promocao'];
+    $primeira_aula = $res[$i]['video'];
 
     $valorF = number_format($valor, 2, ',', '.');
     $promocaoF = number_format($promocao, 2, ',', '.');
@@ -41,15 +42,6 @@ HTML;
     } else {
       $ativo = 'ocultar';
       $ativo2 = '';
-    }
-
-    $query2 = $pdo->query("SELECT * FROM aulas where curso = '$id' and num_aula = 1 order by id asc");
-    $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-    $total_reg2 = @count($res2);
-    if ($total_reg2 > 0) {
-      $primeira_aula = $res2[0]['link'];
-    } else {
-      $primeira_aula = "";
     }
 
     $query2 = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Não' and (nome LIKE '$busca' or desc_rapida LIKE '$busca') ORDER BY id desc ");

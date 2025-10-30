@@ -247,7 +247,7 @@ if ($total_reg > 0) {
 
                                 <?php if ($promocao > 0) { ?>
                                     <div class="product-bottom-details">
-                                        <div class="product-price"><small>R$ <?php echo $valorF ?></small>R$ <?php echo $promocaoF ?></div>
+                                        <div class="product-price"><small>De <?php echo $valorF ?></small>Por R$ <?php echo $promocaoF ?></div>
                                     </div>
                                 <?php } else { ?>
                                     <div class="product-bottom-details">
