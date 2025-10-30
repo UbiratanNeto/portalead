@@ -32,7 +32,14 @@ require_once("sistema/conexao.php");
             </div>
 
         </div>
-        <a class="open" href="#"><span><i class="fa fa-gear fa-spin"></i></span></a>
+        <?php 
+            $url = basename($_SERVER['PHP_SELF'],'.php');
+
+            if($url == "index"){
+              echo '<a class="open" href="#"><span><i class="fa fa-gear fa-spin"></i></span></a>';
+            }
+             ?>
+        
     </div>
 
 </html>
