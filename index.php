@@ -2,42 +2,40 @@
 require_once("cabecalho.php");
 ?>
 
-
 <?php
 $query = $pdo->query("SELECT * FROM banner_index where ativo = 'Sim' ORDER BY id desc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if ($total_reg > 0) {
-?>
+ ?>
 
-    <div id="myCarousel" class="carousel slide">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
+<div id="myCarousel" class="carousel slide">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
 
-            <?php
-            for ($i = 0; $i < $total_reg; $i++) {
-                foreach ($res[$i] as $key => $value) {
-                }
-                $id = $res[$i]['id'];
-                $titulo = $res[$i]['titulo'];
-                $descricao = $res[$i]['descricao'];
-                $link = $res[$i]['link'];
-                $foto = $res[$i]['foto'];
-                $ativo = $res[$i]['ativo'];
+        <?php
+        for ($i=0; $i < $total_reg; $i++) {
+            foreach ($res[$i] as $key => $value) {}
+            $id = $res[$i]['id'];
+            $titulo = $res[$i]['titulo'];
+            $descricao = $res[$i]['descricao'];
+            $link = $res[$i]['link'];
+            $foto = $res[$i]['foto'];
+            $ativo = $res[$i]['ativo'];
 
-                $classe_ativo = '';
-                if ($i == 0) {
-                    $classe_ativo = 'active';
-                }
+            $classe_ativo = '';
+            if ($i == 0) {
+                $classe_ativo = 'active';
+            }
 
-            ?>
+        ?>
 
 
                 <div class="item <?php echo $classe_ativo ?>">
@@ -54,18 +52,18 @@ if ($total_reg > 0) {
             <?php } ?>
 
 
-        </div>
-
-        <!-- Left and right controls -->
-
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> <i class="fa fa-angle-left" aria-hidden="true"></i>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"> <i class="fa fa-angle-right" aria-hidden="true"></i>
-            <span class="sr-only">Next</span>
-        </a>
-
     </div>
+
+    <!-- Left and right controls -->
+
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> <i class="fa fa-angle-left" aria-hidden="true"></i>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"> <i class="fa fa-angle-right" aria-hidden="true"></i>
+        <span class="sr-only">Next</span>
+    </a>
+
+</div>
 
 <?php } ?>
 
@@ -118,8 +116,7 @@ if ($total_reg > 0) {
             <div class="section-heading text-center">
                 <div class="col-md-12 col-xs-12">
                     <h1>Principais <span>Formações</span></h1>
-                    <p class="subheading">Conheça nossas principais categorias de treinamentos, temos <?php echo $total_reg ?> áreas de atuação! Clique <a href="categorias.php"><span>aqui</span></a>
-                        para ver todas as categorias.</p>
+                    <p class="subheading">Conheça nossas principais categorias de treinamentos, temos <?php echo $total_reg ?> áreas de atuação! Clique <a href="categorias.php"><span>aqui</span></a> para ver todas as categorias.</p>
                 </div>
             </div>
 
@@ -127,8 +124,7 @@ if ($total_reg > 0) {
                 <div class="col-md-3 col-sm-6 block process-block">
                     <div class="process-icon-holder">
                         <div class="process-border">
-                            <span class="process-icon"><a href="#"><i class="fa fa-globe feature_icon"></i></a></span>
-                        </div>
+                            <span class="process-icon"><a href="#"><i class="fa fa-globe feature_icon"></i></a></span></div>
                         <div class="clearfix"></div>
                     </div>
 
@@ -140,8 +136,7 @@ if ($total_reg > 0) {
                 <div class="col-md-3 col-sm-6 block process-block">
                     <div class="process-icon-holder">
                         <div class="process-border">
-                            <span class="process-icon"><a href="#"><i class="fa fa-mobile feature_icon"></i></a></span>
-                        </div>
+                            <span class="process-icon"><a href="#"><i class="fa fa-mobile feature_icon"></i></a></span></div>
                         <div class="clearfix"></div>
                     </div>
 
@@ -153,8 +148,7 @@ if ($total_reg > 0) {
                 <div class="col-md-3 col-sm-6 block process-block">
                     <div class="process-icon-holder">
                         <div class="process-border">
-                            <span class="process-icon"><a href="#"><i class="fa fa-magic feature_icon"></i></a></span>
-                        </div>
+                            <span class="process-icon"><a href="#"><i class="fa fa-magic feature_icon"></i></a></span></div>
                         <div class="clearfix"></div>
                     </div>
 
@@ -166,8 +160,7 @@ if ($total_reg > 0) {
                 <div class="col-md-3 col-sm-6 block process-block lastchild">
                     <div class="process-icon-holder">
                         <div class="process-border">
-                            <span class="process-icon"><a href="#"><i class="fa fa-cog feature_icon"></i></a></span>
-                        </div>
+                            <span class="process-icon"><a href="#"><i class="fa fa-cog feature_icon"></i></a></span></div>
                         <div class="clearfix"></div>
                     </div>
 
@@ -184,16 +177,16 @@ if ($total_reg > 0) {
 <?php } ?>
 
 
-<hr>
+        <hr>
 
-<?php
-$query = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Não' ORDER BY id desc limit 6");
-$res = $query->fetchAll(PDO::FETCH_ASSOC);
-$total_reg = @count($res);
-if ($total_reg > 0) {
-?>
+        <?php
+        $query = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Não' ORDER BY id desc limit 4");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        $total_reg = @count($res);
+        if ($total_reg > 0) {
+        ?>
 
-    <section>
+   
         <div class="section-heading text-center">
             <div class="col-md-12 col-xs-12">
                 <h1>Últimos <span>Lançamentos</span></h1>
@@ -201,132 +194,82 @@ if ($total_reg > 0) {
             </div>
         </div>
 
-        <div class="row" style="margin-left:10px; margin-right:10px; margin-top:-20px;">
-
-            <?php
-            for ($i = 0; $i < $total_reg; $i++) {
-                foreach ($res[$i] as $key => $value) {
-                }
-                $id = $res[$i]['id'];
-                $nome = $res[$i]['nome'];
-                $desc_rapida = $res[$i]['desc_rapida'];
-                $valor = $res[$i]['valor'];
-                $foto = $res[$i]['imagem'];
-                $promocao = $res[$i]['promocao'];
-
-                $valorF = number_format($valor, 2, ',', '.');
-                $promocaoF = number_format($promocao, 2, ',', '.');
 
 
-            ?>
-
-                <div class="col-md-2 col-sm-4 col-xs-6">
-                    <div class="product-card">
-                        <div class="product-tumb">
-                            <a href=""><img src="sistema/painel-admin/img/cursos/<?php echo $foto ?>" alt="" width="100%"></a>
-                        </div>
-                        <div class="product-details">
-                            <h4><a href=""><?php echo $nome ?></a></h4>
-                            <p><?php echo $desc_rapida ?></p>
-                            <?php if ($promocao > 0) { ?>
-                                <div class="product-bottom-details">
-                                    <div class="product-price"><small><?php echo $valorF ?></small>R$ <?php echo $promocaoF ?></div>
-                                </div>
-                            <?php } else { ?>
-                                <div class="product-bottom-details">
-                                    <div class="product-price">R$ <?php echo $valorF ?></div>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                </div>
-
-            <?php } ?>
-
-
-
-        </div>
-        
         <section id="portfolio">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 portfolio-item">
-                        <div class="portfolio-one">
-                            <div class="portfolio-head">
-                                <div class="portfolio-img"><img alt="" src="img/portfolio-1.jpg"></div>
-                                <div class="portfolio-hover">
-                                    <a class="portfolio-link" href="#"><i class="fa fa-link"></i></a>
-                                    <a class="portfolio-zoom" href="#"><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                            <!-- End portfolio-head -->
-                            <div class="portfolio-content">
-                                <h5 class="title">Lorem Ipsum</h5>
-                                <p>Lorem ipsum dolor sit amet sit legimus copiosae instructior ei ut vix denique fierentis ea saperet inimicu ut qui dolor oratio mnesarchum.</p>
-                            </div>
-                            <!-- End portfolio-content -->
-                        </div>
-                        <!-- End portfolio-item -->
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 portfolio-item">
-                        <div class="portfolio-one">
-                            <div class="portfolio-head">
-                                <div class="portfolio-img"><img alt="" src="img/portfolio-1.jpg"></div>
-                                <div class="portfolio-hover">
-                                    <a class="portfolio-link" href="#"><i class="fa fa-link"></i></a>
-                                    <a class="portfolio-zoom prettyPhoto" href="#"><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                            <!-- End portfolio-head -->
-                            <div class="portfolio-content">
-                                <h5 class="title">Lorem Ipsum</h5>
-                                <p>Lorem ipsum dolor sit amet sit legimus copiosae instructior ei ut vix denique fierentis ea saperet inimicu ut qui dolor oratio mnesarchum.</p>
-                            </div>
-                            <!-- End portfolio-content -->
-                        </div>
-                        <!-- End portfolio-item -->
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 portfolio-item">
-                        <div class="portfolio-one">
-                            <div class="portfolio-head">
-                                <div class="portfolio-img"><img alt="" src="img/portfolio-1.jpg"></div>
-                                <div class="portfolio-hover">
-                                    <a class="portfolio-link" href="#"><i class="fa fa-link"></i></a>
-                                    <a class="portfolio-zoom prettyPhoto" href="#"><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                            <!-- End portfolio-head -->
-                            <div class="portfolio-content">
-                                <h5 class="title">Lorem Ipsum</h5>
-                                <p>Lorem ipsum dolor sit amet sit legimus copiosae instructior ei ut vix denique fierentis ea saperet inimicu ut qui dolor oratio mnesarchum.</p>
-                            </div>
-                            <!-- End portfolio-content -->
-                        </div>
-                        <!-- End portfolio-item -->
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 portfolio-item">
-                        <div class="portfolio-one">
-                            <div class="portfolio-head">
-                                <div class="portfolio-img"><img alt="" src="img/portfolio-1.jpg"></div>
-                                <div class="portfolio-hover">
-                                    <a class="portfolio-link" href="#"><i class="fa fa-link"></i></a>
-                                    <a class="portfolio-zoom prettyPhoto" href="#"><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                            <!-- End portfolio-head -->
-                            <div class="portfolio-content">
-                                <h5 class="title">Lorem Ipsum</h5>
-                                <p>Lorem ipsum dolor sit amet sit legimus copiosae instructior ei ut vix denique fierentis ea saperet inimicu ut qui dolor oratio mnesarchum.</p>
-                            </div>
-                            <!-- End portfolio-content -->
-                        </div>
-                        <!-- End portfolio-item -->
-                    </div>
 
+            <div class="row" style="margin-left:5px; margin-right:5px; margin-top:-40px;">
+
+               <?php 
+               for($i=0; $i < $total_reg; $i++){
+                foreach ($res[$i] as $key => $value){}
+                    $id = $res[$i]['id'];
+                $nome = $res[$i]['nome'];
+                $desc_rapida = $res[$i]['desc_rapida'];      
+                $valor = $res[$i]['valor'];     
+                $foto = $res[$i]['imagem']; 
+                $promocao = $res[$i]['promocao'];
+                $url = $res[$i]['nome_url'];
+
+                $valorF = number_format($valor, 2, ',', '.');    
+                $promocaoF = number_format($promocao, 2, ',', '.'); 
+
+                  $query2 = $pdo->query("SELECT * FROM aulas where curso = '$id' and num_aula = 1 order by id asc");
+                  $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                  $total_reg2 = @count($res2);
+                  if($total_reg2 > 0){
+                    $primeira_aula = $res2[0]['link'];
+                  }else{
+                    $primeira_aula = "";
+                  }
+
+
+                ?>
+
+
+                  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 portfolio-item">
+                    <div class="portfolio-one">
+                        <div class="portfolio-head">
+                            <div class="portfolio-img"><img alt="" src="sistema/painel-admin/img/cursos/<?php echo $foto ?>"></div>
+                            <div class="portfolio-hover">
+                                <iframe class="video-card" src="<?php echo $primeira_aula ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <div class="" align="center" style="margin-top: 20px; ">
+                                    <a href="<?php echo $link ?>" type="button" class="btn btn-primary2 slide">Veja Mais <i class="fa fa-caret-right"></i></a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- End portfolio-head -->
+                        <a href="#" title="Detalhes do Curso">
+                            <div class="portfolio-content" style="text-align: center;">
+                                <h5 class="title"><?php echo $nome ?></h5>
+                                <div style="margin-top: -10px; text-decoration: none !important"><?php echo $desc_rapida ?></div>
+
+                                <?php if ($promocao > 0) { ?>
+                                    <div class="product-bottom-details">
+                                        <div class="product-price"><small>R$ <?php echo $valorF ?></small>R$ <?php echo $promocaoF ?></div>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="product-bottom-details">
+                                        <div class="product-price"><span>R$ <?php echo $valorF ?></span></div>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </a>
+                        <!-- End portfolio-content -->
+                    </div>
+                    <!-- End portfolio-item -->
                 </div>
+
+
+                <?php } ?>
+
+
+
             </div>
         </section>
-    </section>
+
+
 
 <?php } ?>
 
@@ -338,13 +281,13 @@ if ($total_reg > 0) {
 <hr>
 
 <?php
-$query = $pdo->query("SELECT * FROM pacotes ORDER BY id desc limit 6");
+$query = $pdo->query("SELECT * FROM pacotes ORDER BY id desc limit 4");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if ($total_reg > 0) {
 ?>
 
-    <section>
+
         <div class="section-heading text-center">
             <div class="col-md-12 col-xs-12">
                 <h1>Últimos <span>Pacotes</span></h1>
@@ -352,53 +295,70 @@ if ($total_reg > 0) {
             </div>
         </div>
 
+<section id="portfolio">
+
         <div class="row" style="margin-left:10px; margin-right:10px; margin-top:-20px;">
 
             <?php
-            for ($i = 0; $i < $total_reg; $i++) {
-                foreach ($res[$i] as $key => $value) {
-                }
+                for ($i = 0; $i < $total_reg; $i++) {
+                foreach ($res[$i] as $key => $value) {}
                 $id = $res[$i]['id'];
                 $nome = $res[$i]['nome'];
                 $desc_rapida = $res[$i]['desc_rapida'];
                 $valor = $res[$i]['valor'];
                 $foto = $res[$i]['imagem'];
                 $promocao = $res[$i]['promocao'];
+                $primeira_aula = $res[$i]['video'];
+                $url = $res[$i]['nome_url'];
 
                 $valorF = number_format($valor, 2, ',', '.');
                 $promocaoF = number_format($promocao, 2, ',', '.');
 
 
-            ?>
+                ?>
 
-                <div class="col-md-2 col-sm-4 col-xs-6">
-                    <div class="product-card">
-                        <div class="product-tumb">
-                            <a href=""><img src="sistema/painel-admin/img/pacotes/<?php echo $foto ?>" alt="" width="100%"></a>
+
+                               <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 portfolio-item">
+                    <div class="portfolio-one">
+                        <div class="portfolio-head">
+                            <div class="portfolio-img"><img alt="" src="sistema/painel-admin/img/pacotes/<?php echo $foto ?>"></div>
+                            <div class="portfolio-hover">
+                               <iframe class="video-card" src="<?php echo $primeira_aula ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <div class="" align="center" style="margin-top:20px; ">                   
+                                     <a href="cursos-do-<?php echo $url ?>" type="button" class="btn btn-primary2">Veja Mais <i class="fa fa-caret-right"></i></a>
+                                 </div>
+
+                            </div>
                         </div>
-                        <div class="product-details">
-                            <h4><a href=""><?php echo $nome ?></a></h4>
-                            <p><?php echo $desc_rapida ?></p>
-                            <?php if ($promocao > 0) { ?>
+                        <!-- End portfolio-head -->
+                        <a href="cursos-do-<?php echo $url ?>" title="Detalhes do Pacote">
+                        <div class="portfolio-content" style="text-align: center">
+                            <h5 class="title"><?php echo $nome ?></h5>
+                            <p style="margin-top:-10px;"><?php echo $desc_rapida ?></p>
+
+                            <?php if($promocao > 0){ ?>
                                 <div class="product-bottom-details">
-                                    <div class="product-price"><small><?php echo $valorF ?></small>R$ <?php echo $promocaoF ?></div>
+                                    <div class="product-price"><small>De  <?php echo $valorF ?></small>Por R$ <?php echo $promocaoF ?></div>
                                 </div>
-                            <?php } else { ?>
+                            <?php }else{?>
                                 <div class="product-bottom-details">
                                     <div class="product-price">R$ <?php echo $valorF ?></div>
                                 </div>
                             <?php } ?>
                         </div>
+                        </a>
+                        <!-- End portfolio-content -->
                     </div>
+                    <!-- End portfolio-item -->
                 </div>
+                
 
-            <?php } ?>
+               <?php } ?>
 
+              
 
-
-        </div>
-
-    </section>
+            </div>
+        </section>
 
 <?php } ?>
 
@@ -468,6 +428,6 @@ if ($total_reg > 0) {
 </section>
 
 
-<?php
+<?php 
 require_once("rodape.php");
 ?>
