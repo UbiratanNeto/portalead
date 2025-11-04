@@ -4,6 +4,8 @@ require_once("sistema/conexao.php");
 $index = '';
 $categorias = '';
 $cursos = '';
+$sobre = '';
+$linguagens = '';
 
 $url = basename($_SERVER['PHP_SELF'],'.php');
 
@@ -15,8 +17,17 @@ if($url == "categorias"){
   $categorias = 'active';
 }
 
-if($url == "cursos" || $url == "lista-cursos"){
+if($url == "cursos" || $url == "lista-cursos" || $url == "pacotes" || $url == "formacoes" || $url == "sistemas" 
+|| $url == "cursos-2021" || $url == "cursos-2022"){
   $cursos = 'active';
+}
+
+if($url == "sobre" || $url == "planos" || $url == "parcerias" || $url == "perguntas" || $url == "politica" || $url == "termos"){
+  $sobre = 'active';
+}
+
+if($url == "linguagens"){
+  $linguagens = 'active';
 }
 
 
@@ -108,7 +119,17 @@ if($url == "cursos" || $url == "lista-cursos"){
                                    </ul>
                                </li>
 
-                               <li><a href="sobre.php">Sobre</a></li>
+                               <li class="dropdown <?php echo $sobre ?>">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sobre<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                       <li><a href="sobre.php">Nossa Escola</a></li>
+                                       <li><a href="planos.php">Planos de assinaturas</a></li>
+                                       <li><a href="parcerias.php">Parcerias</a></li>
+                                       <li><a href="perguntas.php">Perguntas frequentes</a></li>
+                                       <li><a href="politica.php">Política de privacidade</a></li>
+                                       <li><a href="termos.php">Termos de uso</a></li>
+                                   </ul>
+                               </li>
                                <li><a href="linguagens.php">Linguagens</a></li>
                                <li><a href="contatos.php">Contato</a></li>
                                <li><a href="sistema">Login</a></li>
