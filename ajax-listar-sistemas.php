@@ -11,7 +11,7 @@ $pagina = intval(@$_POST['pagina']);
 $limite = $pagina * $itens_pag;
 
 
-$query = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Não' and (nome LIKE '$busca' or desc_rapida LIKE '$busca') ORDER BY id desc LIMIT $limite, $itens_pag");
+$query = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Sim' and (nome LIKE '$busca' or desc_rapida LIKE '$busca') ORDER BY id desc LIMIT $limite, $itens_pag");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if ($total_reg > 0 ) {
@@ -51,7 +51,7 @@ HTML;
       $primeira_aula = "";
     }
 
-    $query2 = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Não' and (nome LIKE '$busca' or desc_rapida LIKE '$busca') ORDER BY id desc ");
+    $query2 = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Sim' and (nome LIKE '$busca' or desc_rapida LIKE '$busca') ORDER BY id desc ");
     $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
     $total_reg2 = @count($res2);
 
@@ -59,7 +59,7 @@ HTML;
 
 
     echo <<<HTML
-    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 portfolio-item">
+    <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2 portfolio-item">
                     <div class="portfolio-one">
                         <div class="portfolio-head">
                             <div class="portfolio-img"><img alt="" src="sistema/painel-admin/img/cursos/{$foto}"></div>
@@ -72,17 +72,17 @@ HTML;
                             </div>
                         </div>
                         <!-- End portfolio-head -->
-                        <a href="#" title="Detalhes do Curso">
+                        <a href="#" title="Detalhes do Sistema">
                             <div class="portfolio-content" style="text-align: center;">
-                                <h5 class="title">{$nome}</h5>
+                                <h6 class="title" style="font-size: 13px">{$nome}</h6>
                                 <div style="margin-top: -10px; text-decoration: none !important">{$desc_rapida}</div>
                 
                     <div class="product-bottom-details {$ativo}">
-                        <div class="product-price"><small>De {$valorF}</small>Por R$ {$promocaoF}</div>
+                        <div class="product-price-menor"><small>De {$valorF}</small>Por R$ {$promocaoF}</div>
                     </div>
                 
                     <div class="product-bottom-details {$ativo2}">
-                        <div class="product-price">R$ {$valorF}</div>
+                        <div class="product-price-menor">R$ {$valorF}</div>
                     </div>
               
 

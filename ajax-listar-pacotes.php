@@ -10,16 +10,14 @@ if (@$_POST['pagina'] == "") {
 $pagina = intval(@$_POST['pagina']);
 $limite = $pagina * $itens_pag;
 
-echo @$_POST['pagina'];
-
-$query = $pdo->query("SELECT * FROM pacotes where nome LIKE '$busca' or desc_rapida LIKE '$busca' ORDER BY id desc LIMIT $limite, $itens_pag");
+$query = $pdo->query("SELECT * FROM pacotes where nome LIKE '$busca' or desc_rapida LIKE '$busca' ORDER BY id desc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if ($total_reg > 0 ) {
 
   echo <<<HTML
 <section id="portfolio">
-<div class="row" style="margin-left:5px; margin-right:5px; margin-top:-40px;">
+<div class="row" style="margin-left:5px; margin-right:5px; margin-top:-80px;">
 HTML;
 
   for ($i = 0; $i < $total_reg; $i++) {
@@ -44,7 +42,7 @@ HTML;
       $ativo2 = '';
     }
 
-    $query2 = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Não' and (nome LIKE '$busca' or desc_rapida LIKE '$busca') ORDER BY id desc ");
+    $query2 = $pdo->query("SELECT * FROM pacotes where nome LIKE '$busca' or desc_rapida LIKE '$busca' ORDER BY id desc ");
     $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
     $total_reg2 = @count($res2);
 
@@ -55,7 +53,7 @@ HTML;
     <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 portfolio-item">
                     <div class="portfolio-one">
                         <div class="portfolio-head">
-                            <div class="portfolio-img"><img alt="" src="sistema/painel-admin/img/cursos/{$foto}"></div>
+                            <div class="portfolio-img"><img alt="" src="sistema/painel-admin/img/pacotes/{$foto}"></div>
                             <div class="portfolio-hover">
                                 <iframe class="video-card" src="{$primeira_aula}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 <div class="" align="center" style="margin-top:20px; ">
@@ -65,7 +63,7 @@ HTML;
                             </div>
                         </div>
                         <!-- End portfolio-head -->
-                        <a href="#" title="Detalhes do Curso">
+                        <a href="#" title="Detalhes do Pacote">
                             <div class="portfolio-content" style="text-align: center;">
                                 <h5 class="title">{$nome}</h5>
                                 <div style="margin-top: -10px; text-decoration: none !important">{$desc_rapida}</div>

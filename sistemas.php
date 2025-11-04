@@ -10,7 +10,7 @@ require_once("cabecalho.php");
 
 
 <?php
-$query = $pdo->query("SELECT * FROM pacotes ORDER BY id desc ");
+$query = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Sim' ORDER BY id desc ");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if ($total_reg > 0) {
@@ -19,13 +19,13 @@ if ($total_reg > 0) {
 
   <div class="row" style="margin-left: 10px;">
     <div class="col-md-6 col-xs-6">
-      <p><span>Total de Pacotes</span> - <?php echo $total_reg ?> Pacotes</p>
+      <p><span>Total de sistemas prontos</span> - <?php echo $total_reg ?> Sistemas</p>
     </div>
 
     <div class="col-md-6 col-xs-6" align="right">
       <div class="search-box-pag " style="margin-top: 10px;">
         <button class="btn-search-pag"><i class="fa fa-search"></i></button>
-        <input onkeyup="listar()" type="text" class="input-search-pag" placeholder="Busque um Pacote..." id="buscar">
+        <input onkeyup="listar()" type="text" class="input-search-pag" placeholder="Busque um sistema..." id="buscar">
       </div>
     </div>
   </div>
@@ -73,9 +73,12 @@ require_once("rodape.php");
 
     var busca = $("#buscar").val();
     $.ajax({
-      url: "ajax-listar-pacotes.php",
+      url: "ajax-listar-sistemas.php",
       method: 'POST',
-      data: {busca, pagina},
+      data: {
+        busca,
+        pagina
+      },
       dataType: "html",
 
       success: function(result) {
