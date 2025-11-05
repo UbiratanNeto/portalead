@@ -19,7 +19,7 @@ if ($total_reg > 0) {
 
     <div class="section-heading" align="center">
         <div class="col-md-12 col-xs-12">
-            <h1><small><small><span>Cursos Mais Vendidos</span> - <a href="lista-cursos.php">Ver todos os Cursos</a></small></small></h1>
+            <h1><small><small><span>Cursos Mais Vendidos</span> - <a href="lista-cursos">Ver todos os Cursos</a></small></small></h1>
 
         </div>
     </div>
@@ -133,7 +133,7 @@ if ($total_reg > 0) {
 
     <div class="section-heading" align="center">
         <div class="col-md-12 col-xs-12">
-            <h1><small><small><span>Pacotes Mais Vendidos</span> - <a href="pacotes.php">Ver todos os Pacotes</a></small></small></h1>
+            <h1><small><small><span>Pacotes Mais Vendidos</span> - <a href="pacotes">Ver todos os Pacotes</a></small></small></h1>
 
         </div>
     </div>
@@ -235,7 +235,7 @@ if ($total_reg > 0) {
 
     <div class="section-heading" align="center">
         <div class="col-md-12 col-xs-12">
-            <h1><small><small><span>Últimos Lançamentos</span> - <a href="lista-cursos.php">Ver todos os Cursos</a></small></small></h1>
+            <h1><small><small><span>Últimos Lançamentos</span> - <a href="lista-cursos">Ver todos os Cursos</a></small></small></h1>
 
         </div>
     </div>

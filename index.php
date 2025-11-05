@@ -94,7 +94,7 @@ if ($total_reg > 0) {
                     <li> <i class="fa fa-check"></i>Tantas propriae mediocritatem id vix qui everti efficiantur an ocurreret consetetur.</li>
                 </ul>
 
-                <a href="sobre.php" type="button" class="btn btn-primary slide">Veja Mais <i class="fa fa-caret-right"></i> </a>
+                <a href="sobre" type="button" class="btn btn-primary slide">Veja Mais <i class="fa fa-caret-right"></i> </a>
 
 
             </div>
@@ -116,7 +116,7 @@ if ($total_reg > 0) {
             <div class="section-heading text-center">
                 <div class="col-md-12 col-xs-12">
                     <h1>Principais <span>Formações</span></h1>
-                    <p class="subheading">Conheça nossas principais categorias de treinamentos, temos <?php echo $total_reg ?> áreas de atuação! Clique <a href="categorias.php"><span>aqui</span></a> para ver todas as categorias.</p>
+                    <p class="subheading">Conheça nossas principais categorias de treinamentos, temos <?php echo $total_reg ?> áreas de atuação! Clique <a href="categorias"><span>aqui</span></a> para ver todas as categorias.</p>
                 </div>
             </div>
 
@@ -190,7 +190,7 @@ if ($total_reg > 0) {
         <div class="section-heading text-center">
             <div class="col-md-12 col-xs-12">
                 <h1>Últimos <span>Lançamentos</span></h1>
-                <p class="subheading">Clique <a href="cursos.php"><span>aqui</span></a> para ver todos os cursos.</p>
+                <p class="subheading">Clique <a href="cursos"><span>aqui</span></a> para ver todos os cursos.</p>
             </div>
         </div>
 
@@ -234,13 +234,13 @@ if ($total_reg > 0) {
                             <div class="portfolio-hover">
                                 <iframe class="video-card" src="<?php echo $primeira_aula ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 <div class="" align="center" style="margin-top: 20px; ">
-                                    <a href="<?php echo $link ?>" type="button" class="btn btn-primary2 slide">Veja Mais <i class="fa fa-caret-right"></i></a>
+                                    <a href="curso-de-<?php echo $url ?>" type="button" class="btn btn-primary2 slide">Veja Mais <i class="fa fa-caret-right"></i></a>
                                 </div>
 
                             </div>
                         </div>
                         <!-- End portfolio-head -->
-                        <a href="#" title="Detalhes do Curso">
+                        <a href="curso-de-<?php echo $url ?>" title="Detalhes do Curso">
                             <div class="portfolio-content" style="text-align: center;">
                                 <h5 class="title"><?php echo $nome ?></h5>
                                 <div style="margin-top: -10px; text-decoration: none !important"><?php echo $desc_rapida ?></div>
@@ -291,7 +291,7 @@ if ($total_reg > 0) {
         <div class="section-heading text-center">
             <div class="col-md-12 col-xs-12">
                 <h1>Últimos <span>Pacotes</span></h1>
-                <p class="subheading">Clique <a href="pacotes.php"><span>aqui</span></a> para ver todos os pacotes.</p>
+                <p class="subheading">Clique <a href="pacotes"><span>aqui</span></a> para ver todos os pacotes.</p>
             </div>
         </div>
 

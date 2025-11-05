@@ -7,8 +7,8 @@ require_once("sistema/conexao.php");
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12 btm-footer-links">
-                    <a href="politica.php">Politica de Privacidade</a>
-                    <a href="temos.php">Termos de Uso</a>
+                    <a href="politica">Politica de Privacidade</a>
+                    <a href="temos">Termos de Uso</a>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-12 copyright">
                    <?php echo $nome_sistema ?> /   <i class="fa fa-envelope" style="color:#FFF; margin-right:5px"></i>
@@ -18,6 +18,13 @@ require_once("sistema/conexao.php");
             </div>
         </div>
     </section>
+
+    <?php 
+            $url = basename($_SERVER['PHP_SELF'],'.php');
+
+            if($url == "index"){
+
+                ?>
 
     <div id="panel">
         <div id="panel-admin">
@@ -33,15 +40,12 @@ require_once("sistema/conexao.php");
             </div>
 
         </div>
-        <?php 
-            $url = basename($_SERVER['PHP_SELF'],'.php');
-
-            if($url == "index"){
-              echo '<a class="open" href="#"><span><i class="fa fa-gear fa-spin"></i></span></a>';
-            }
-             ?>
+        
+              <a class="open" href="#"><span><i class="fa fa-gear fa-spin"></i></span></a>';
         
     </div>
+
+<?php } ?>
 
 </html>
 
