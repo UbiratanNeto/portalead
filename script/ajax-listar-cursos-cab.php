@@ -3,17 +3,90 @@ require_once("../sistema/conexao.php");
 
 $busca = '%' . $_POST['busca'] . '%';
 
+if($busca == '%%'){
+  exit();
+}
 
+
+
+$query = $pdo->query("SELECT * FROM pacotes where nome LIKE '$busca' or desc_rapida LIKE '$busca' ORDER BY id desc");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$total_reg = @count($res);
+if ($total_reg > 0 ) {
+
+echo <<<HTML
+<br>
+<hr>
+<section id="portfolio">
+<div class="row" style="margin-left:5px; margin-right:5px; margin-top:-80px;">
+HTML;
+
+  for ($i = 0; $i < $total_reg; $i++) {
+    foreach ($res[$i] as $key => $value) {
+    }
+    $id = $res[$i]['id'];
+    $nome = $res[$i]['nome'];
+    $desc_rapida = $res[$i]['desc_rapida'];
+    $valor = $res[$i]['valor'];
+    $foto = $res[$i]['imagem'];
+    $promocao = $res[$i]['promocao'];
+    $primeira_aula = $res[$i]['video'];
+
+    $valorF = number_format($valor, 2, ',', '.');
+    $promocaoF = number_format($promocao, 2, ',', '.');
+
+    if ($promocao > 0) {
+      $ativo = '';
+      $ativo2 = 'ocultar';
+    } else {
+      $ativo = 'ocultar';
+      $ativo2 = '';
+    }
+
+    echo <<<HTML
+    <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 portfolio-item">
+                    <div class="portfolio-one">
+                        <div class="portfolio-head">
+                            <div class="portfolio-img"><img alt="" src="sistema/painel-admin/img/pacotes/{$foto}"></div>
+                            <div class="portfolio-hover">
+                                <iframe class="video-card" src="{$primeira_aula}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <div class="" align="center" style="margin-top:20px; ">
+                                    <a href="" type="button" class="btn btn-primary2 slide">Veja Mais<i class="fa fa-caret-right"></i></a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- End portfolio-head -->
+                        <a href="#" title="Detalhes do Pacote">
+                            <div class="portfolio-content" style="text-align: center;">
+                                <h6 class="title" style="font-size: 13px">{$nome}</h6>
+                                <p style="margin-top: -10px;">{$desc_rapida}</p>
+                
+                    <div class="product-bottom-details {$ativo}">
+                        <div class="product-price-menor"><small>{$valorF}</small>R$ {$promocaoF}</div>
+                    </div>
+                
+                    <div class="product-bottom-details {$ativo2}">
+                        <div class="product-price-menor">R$ {$valorF}</div>
+                    </div>
+              
+
+              </div>
+                        </a>
+                        <!-- End portfolio-content -->
+                    </div>
+                    <!-- End portfolio-item -->
+                </div>
+HTML;
+  }
+
+}
 
 $query = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Não' and (nome LIKE '$busca' or desc_rapida LIKE '$busca') ORDER BY id desc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if ($total_reg > 0 ) {
 
-  echo <<<HTML
-<section id="portfolio">
-<div class="row" style="margin-left:5px; margin-right:5px; margin-top:-80px;">
-HTML;
 
   for ($i = 0; $i < $total_reg; $i++) {
     foreach ($res[$i] as $key => $value) {
@@ -46,7 +119,7 @@ HTML;
     }
 
     echo <<<HTML
-    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 portfolio-item">
+    <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 portfolio-item">
                     <div class="portfolio-one">
                         <div class="portfolio-head">
                             <div class="portfolio-img"><img alt="" src="sistema/painel-admin/img/cursos/{$foto}"></div>
@@ -61,15 +134,15 @@ HTML;
                         <!-- End portfolio-head -->
                         <a href="#" title="Detalhes do Curso">
                             <div class="portfolio-content" style="text-align: center;">
-                                <h5 class="title">{$nome}</h5>
+                                <h6 class="title" style="font-size: 13px">{$nome}</h6>
                                 <div style="margin-top: -10px; text-decoration: none !important">{$desc_rapida}</div>
                 
                     <div class="product-bottom-details {$ativo}">
-                        <div class="product-price"><small>De {$valorF}</small>Por R$ {$promocaoF}</div>
+                        <div class="product-price-menor"><small>{$valorF}</small>R$ {$promocaoF}</div>
                     </div>
                 
                     <div class="product-bottom-details {$ativo2}">
-                        <div class="product-price">R$ {$valorF}</div>
+                        <div class="product-price-menor">R$ {$valorF}</div>
                     </div>
               
 
@@ -89,10 +162,8 @@ HTML;
 </section>
 
 HTML;
+exit();
 
-
-} else {
-  echo '<br><p align="center">Não possui nenhum curso com este nome!</p>';
 }
 
 ?>
