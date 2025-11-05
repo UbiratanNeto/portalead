@@ -75,7 +75,7 @@ require_once("rodape.php");
 
     var busca = $("#buscar").val();
     $.ajax({
-      url: "ajax-listar-cursos-2021.php",
+      url: "script/ajax-listar-cursos-2021.php",
       method: 'POST',
       data: {
         busca,

@@ -1,0 +1,98 @@
+<?php
+require_once("../sistema/conexao.php");
+
+$busca = '%' . $_POST['busca'] . '%';
+
+
+
+$query = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Não' and (nome LIKE '$busca' or desc_rapida LIKE '$busca') ORDER BY id desc");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$total_reg = @count($res);
+if ($total_reg > 0 ) {
+
+  echo <<<HTML
+<section id="portfolio">
+<div class="row" style="margin-left:5px; margin-right:5px; margin-top:-80px;">
+HTML;
+
+  for ($i = 0; $i < $total_reg; $i++) {
+    foreach ($res[$i] as $key => $value) {
+    }
+    $id = $res[$i]['id'];
+    $nome = $res[$i]['nome'];
+    $desc_rapida = $res[$i]['desc_rapida'];
+    $valor = $res[$i]['valor'];
+    $foto = $res[$i]['imagem'];
+    $promocao = $res[$i]['promocao'];
+
+    $valorF = number_format($valor, 2, ',', '.');
+    $promocaoF = number_format($promocao, 2, ',', '.');
+
+    if ($promocao > 0) {
+      $ativo = '';
+      $ativo2 = 'ocultar';
+    } else {
+      $ativo = 'ocultar';
+      $ativo2 = '';
+    }
+
+    $query2 = $pdo->query("SELECT * FROM aulas where curso = '$id' and num_aula = 1 order by id asc");
+    $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+    $total_reg2 = @count($res2);
+    if ($total_reg2 > 0) {
+      $primeira_aula = $res2[0]['link'];
+    } else {
+      $primeira_aula = "";
+    }
+
+    echo <<<HTML
+    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 portfolio-item">
+                    <div class="portfolio-one">
+                        <div class="portfolio-head">
+                            <div class="portfolio-img"><img alt="" src="sistema/painel-admin/img/cursos/{$foto}"></div>
+                            <div class="portfolio-hover">
+                                <iframe class="video-card" src="{$primeira_aula}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <div class="" align="center" style="margin-top:20px; ">
+                                    <a href="" type="button" class="btn btn-primary2 slide">Veja Mais<i class="fa fa-caret-right"></i></a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- End portfolio-head -->
+                        <a href="#" title="Detalhes do Curso">
+                            <div class="portfolio-content" style="text-align: center;">
+                                <h5 class="title">{$nome}</h5>
+                                <div style="margin-top: -10px; text-decoration: none !important">{$desc_rapida}</div>
+                
+                    <div class="product-bottom-details {$ativo}">
+                        <div class="product-price"><small>De {$valorF}</small>Por R$ {$promocaoF}</div>
+                    </div>
+                
+                    <div class="product-bottom-details {$ativo2}">
+                        <div class="product-price">R$ {$valorF}</div>
+                    </div>
+              
+
+              </div>
+                        </a>
+                        <!-- End portfolio-content -->
+                    </div>
+                    <!-- End portfolio-item -->
+                </div>
+HTML;
+
+
+  }
+
+  echo <<<HTML
+  </div>
+</section>
+
+HTML;
+
+
+} else {
+  echo '<br><p align="center">Não possui nenhum curso com este nome!</p>';
+}
+
+?>

@@ -73,7 +73,7 @@ require_once("rodape.php");
 
     var busca = $("#buscar").val();
     $.ajax({
-      url: "ajax-listar-sistemas.php",
+      url: "script/ajax-listar-sistemas.php",
       method: 'POST',
       data: {
         busca,

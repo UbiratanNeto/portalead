@@ -6,6 +6,7 @@ $categorias = '';
 $cursos = '';
 $sobre = '';
 $linguagens = '';
+$contatos = '';~
 
 $url = basename($_SERVER['PHP_SELF'],'.php');
 
@@ -28,6 +29,10 @@ if($url == "sobre" || $url == "planos" || $url == "parcerias" || $url == "pergun
 
 if($url == "linguagens"){
   $linguagens = 'active';
+}
+
+if($url == "contatos"){
+  $contatos = 'active';
 }
 
 
@@ -74,7 +79,8 @@ if($url == "linguagens"){
 
                     <div class="search-box social_links">
                         <button class="btn-search"><i class="fa fa-search"></i></button>
-                        <input type="text" class="input-search" placeholder="Busque um curso...">
+                        <input name="buscar_cab" id="buscar_cab"  type="text" class="input-search" placeholder="Busque um curso...">
+                        
                     </div>
 
                 </div>
@@ -130,8 +136,8 @@ if($url == "linguagens"){
                                        <li><a href="termos.php">Termos de uso</a></li>
                                    </ul>
                                </li>
-                               <li><a href="linguagens.php">Linguagens</a></li>
-                               <li><a href="contatos.php">Contato</a></li>
+                               <li class="dropdown <?php echo $linguagens ?>"><a href="linguagens.php">Linguagens</a></li>
+                               <li class=" <?php echo $contatos ?>"><a href="contatos.php">Contato</a></li>
                                <li><a href="sistema">Login</a></li>
 
                            </ul>
