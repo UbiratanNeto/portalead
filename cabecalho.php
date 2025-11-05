@@ -79,7 +79,7 @@ if($url == "contatos"){
 
                     <div class="search-box social_links">
                         <button class="btn-search"><i class="fa fa-search"></i></button>
-                        <input name="buscar_cab" id="buscar_cab"  type="text" class="input-search" placeholder="Busque um curso...">
+                        <input onkeyup="listar()" name="buscar_cab" id="buscar_cab"  type="text" class="input-search" placeholder="Busque um curso...">
                         
                     </div>
 
@@ -148,3 +148,34 @@ if($url == "contatos"){
            </nav>
        </header>
     <!--/.nav-ends -->
+
+    <div id="listar-cab"></div>
+
+
+    <div id="area-conteudo">
+
+
+    <script type="text/javascript">
+      
+function listar(pagina){
+  console.log(pagina)
+
+  var busca = $("#buscar_cab").val();
+    $.ajax({
+        url: "script/ajax-listar-cursos-cab.php",
+        method: 'POST',
+        data: {busca, pagina},
+        dataType: "html",
+
+        success:function(result){
+          
+            $("#listar-cab").html(result);
+            if(result.trim() != ""){              
+             document.getElementById('area-conteudo').style.display = 'none';
+            }else{
+              document.getElementById('area-conteudo').style.display = 'block';
+            }
+        }
+    });
+}
+    </script>
