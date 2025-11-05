@@ -102,42 +102,42 @@ if($url == "contatos"){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.php">
+                        <a class="navbar-brand" href="./">
                             <h1> <img src="sistema/img/logo.png" width="45px"></h1><span><?php echo $nome_sistema ?></span></a>
                     </div>
 
                         <div id="navbar" class="collapse navbar-collapse navbar-right">
                             <ul class="nav navbar-nav">
-                                <li class="<?php echo $index ?>"><a href="index.php">Home</a></li>
-                                <li class="<?php echo $categorias ?>"><a href="categorias.php">Categorias</a></li>
+                                <li class="<?php echo $index ?>"><a href="./">Home</a></li>
+                                <li class="<?php echo $categorias ?>"><a href="categorias">Categorias</a></li>
 
                                 <li class="dropdown <?php echo $cursos ?>">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cursos e Pacotes <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                       <li><a href="cursos.php">Cursos</a></li>
-                                       <li><a href="lista-cursos.php">Todos os Cursos</a></li>
-                                       <li><a href="pacotes.php">Pacotes Promocionais</a></li>
-                                       <li><a href="formacoes.php">Formações</a></li>
-                                       <li><a href="categorias.php">Categorias</a></li>
-                                       <li><a href="sistemas.php">Sistemas Prontos</a></li>
-                                       <li><a href="cursos-2021.php">Cursos 2021</a></li>
-                                       <li><a href="cursos-2022.php">Cursos 2022</a></li>
+                                       <li><a href="cursos">Cursos</a></li>
+                                       <li><a href="lista-cursos">Todos os Cursos</a></li>
+                                       <li><a href="pacotes">Pacotes Promocionais</a></li>
+                                       <li><a href="formacoes">Formações</a></li>
+                                       <li><a href="categorias">Categorias</a></li>
+                                       <li><a href="sistemas">Sistemas Prontos</a></li>
+                                       <li><a href="cursos-2021">Cursos 2021</a></li>
+                                       <li><a href="cursos-2022">Cursos 2022</a></li>
                                    </ul>
                                </li>
 
                                <li class="dropdown <?php echo $sobre ?>">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sobre<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                       <li><a href="sobre.php">Nossa Escola</a></li>
-                                       <li><a href="planos.php">Planos de assinaturas</a></li>
-                                       <li><a href="parcerias.php">Parcerias</a></li>
-                                       <li><a href="perguntas.php">Perguntas frequentes</a></li>
-                                       <li><a href="politica.php">Política de privacidade</a></li>
-                                       <li><a href="termos.php">Termos de uso</a></li>
+                                       <li><a href="sobre">Nossa Escola</a></li>
+                                       <li><a href="planos">Planos de assinaturas</a></li>
+                                       <li><a href="parcerias">Parcerias</a></li>
+                                       <li><a href="perguntas">Perguntas frequentes</a></li>
+                                       <li><a href="politica">Política de privacidade</a></li>
+                                       <li><a href="termos">Termos de uso</a></li>
                                    </ul>
                                </li>
-                               <li class="dropdown <?php echo $linguagens ?>"><a href="linguagens.php">Linguagens</a></li>
-                               <li class=" <?php echo $contatos ?>"><a href="contatos.php">Contato</a></li>
+                               <li class="dropdown <?php echo $linguagens ?>"><a href="linguagens">Linguagens</a></li>
+                               <li class=" <?php echo $contatos ?>"><a href="contatos">Contato</a></li>
                                <li><a href="sistema">Login</a></li>
 
                            </ul>
