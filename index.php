@@ -318,7 +318,7 @@ if ($total_reg > 0) {
                 ?>
 
 
-                               <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 portfolio-item">
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 portfolio-item">
                     <div class="portfolio-one">
                         <div class="portfolio-head">
                             <div class="portfolio-img"><img alt="" src="sistema/painel-admin/img/pacotes/<?php echo $foto ?>"></div>
