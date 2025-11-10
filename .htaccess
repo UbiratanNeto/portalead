@@ -23,6 +23,7 @@ RewriteRule ^linguagens(.*)$ linguagens.php [L]
 RewriteRule ^curso-de-(.*)$ curso.php?url=$1 [L]
 RewriteRule ^cursos-do-(.*)$ pacote.php?url=$1 [L]
 RewriteRule ^categoria-(.*)$ categoria.php?url=$1 [L]
+RewriteRule ^linguagem-(.*)$ linguagem.php?url=$1 [L]
 
 RewriteRule ^cursos(.*)$ cursos.php [L]
 RewriteRule ^categorias(.*)$ categorias.php [L]

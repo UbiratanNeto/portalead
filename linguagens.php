@@ -37,7 +37,8 @@ if($total_reg > 0){
     $id = $res[$i]['id'];
     $nome = $res[$i]['nome'];
     $desc_rapida = $res[$i]['descricao']; 
-    $foto = $res[$i]['imagem']; 
+    $foto = $res[$i]['imagem'];
+    $url = $res[$i]['nome_url']; 
 
     $query2 = $pdo->query("SELECT * FROM pacotes where linguagem = '$id'");
     $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
@@ -49,10 +50,10 @@ if($total_reg > 0){
                 <div class="col-md-2 col-sm-6 col-xs-6">    
                 <div class="product-card">                  
                     <div class="product-tumb">
-                        <a href=""><img src="sistema/painel-admin/img/linguagens/<?php echo $foto ?>" alt="" width="100%"></a>
+                        <a href="linguagem-<?php echo $url ?>"><img src="sistema/painel-admin/img/linguagens/<?php echo $foto ?>" alt="" width="100%"></a>
                     </div>
                     <div class="product-details">                       
-                        <h4><a href=""><?php echo $nome ?></a></h4>
+                        <h4><a href="linguagem-<?php echo $url ?>"><?php echo $nome ?></a></h4>
                         <p><?php echo $desc_rapida ?></p>
                        
                         <div class="product-bottom-details">
