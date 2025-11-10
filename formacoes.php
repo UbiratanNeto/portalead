@@ -28,10 +28,9 @@ if($total_reg > 0){
 
     
                 
-
 <section id="portfolio">
 
-        <div class="row" style="margin-left:10px; margin-right:10px; margin-top:-20px;">
+        <div class="row" style="margin-left:10px; margin-right:10px; margin-top:-40px;">
 
             <?php
                 for ($i = 0; $i < $total_reg; $i++) {
@@ -52,7 +51,7 @@ if($total_reg > 0){
                 ?>
 
 
-                <div class="col-xs-12 col-sm-4 col-md-2 col-lg-2 portfolio-item">
+                <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2 portfolio-item">
                     <div class="portfolio-one">
                         <div class="portfolio-head">
                             <div class="portfolio-img"><img alt="" src="sistema/painel-admin/img/pacotes/<?php echo $foto ?>"></div>

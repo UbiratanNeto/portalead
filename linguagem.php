@@ -1,13 +1,13 @@
 <?php
 require_once("cabecalho.php");
 $url = $_GET['url'];
-$query = $pdo->query("SELECT * FROM categorias where nome_url = '$url'");
+$query = $pdo->query("SELECT * FROM linguagens where nome_url = '$url'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $id_cat = $res[0]['id'];
 $nome_cat = $res[0]['nome'];
 
 
-$query = $pdo->query("SELECT * FROM cursos where categoria = '$id_cat' ORDER BY id desc");
+$query = $pdo->query("SELECT * FROM pacotes where linguagem = '$id_cat' ORDER BY id desc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if($total_reg > 0){
@@ -18,7 +18,7 @@ if($total_reg > 0){
 
     <div class="section-heading text-center">
                 <div class="col-md-12 col-xs-12">
-                <h3><small>Cursos da categoria <span><?php echo $nome_cat ?></span></small></h3>
+                <h3><small>Pacotes da linguagem <span><?php echo $nome_cat ?></span></small></h3>
              
             </div>
         </div>
@@ -40,28 +40,20 @@ if($total_reg > 0){
                 $foto = $res[$i]['imagem']; 
                 $promocao = $res[$i]['promocao'];
                 $url = $res[$i]['nome_url'];
+                $primeira_aula = $res[$i]['video'];
 
     $valorF = number_format($valor, 2, ',', '.');    
                 $promocaoF = number_format($promocao, 2, ',', '.'); 
-
-                  $query2 = $pdo->query("SELECT * FROM aulas where curso = '$id' and num_aula = 1 order by id asc");
-                  $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-                  $total_reg2 = @count($res2);
-                  if($total_reg2 > 0){
-                    $primeira_aula = $res2[0]['link'];
-                  }else{
-                    $primeira_aula = "";
-                  }
 
                   ?>
 
                 <div class="col-md-2 col-sm-6 col-xs-6">    
                 <div class="product-card">                  
                     <div class="product-tumb">
-                        <a href="curso-de-<?php echo $url ?>"><img src="sistema/painel-admin/img/cursos/<?php echo $foto ?>" alt="" width="100%"></a>
+                        <a href="cursos-do-<?php echo $url ?>"><img src="sistema/painel-admin/img/pacotes/<?php echo $foto ?>" alt="" width="100%"></a>
                     </div>
                     <div class="product-details">                       
-                        <h4><a href="curso-de-<?php echo $url ?>"><?php echo $nome ?></a></h4>
+                        <h4><a href="cursos-do-<?php echo $url ?>"><?php echo $nome ?></a></h4>
                         <p><?php echo $desc_rapida ?></p>
                        
                          <?php if ($promocao > 0) { ?>
@@ -87,7 +79,7 @@ if($total_reg > 0){
           
 
         <?php } else {
-            echo '<br><br><h2 align="center">Nenhum curso cadastrado para esta categoria!</h2>';
+            echo '<br><br><h2 align="center">Nenhum pacote cadastrado para esta linguagem!</h2>';
         }  ?>
 
 <br><hr>

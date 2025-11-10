@@ -30,6 +30,7 @@ HTML;
     $valor = $res[$i]['valor'];
     $foto = $res[$i]['imagem'];
     $promocao = $res[$i]['promocao'];
+    $url = $res[$i]['nome_url'];
 
     $valorF = number_format($valor, 2, ',', '.');
     $promocaoF = number_format($promocao, 2, ',', '.');
@@ -66,13 +67,13 @@ HTML;
                             <div class="portfolio-hover">
                                 <iframe class="video-card" src="{$primeira_aula}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 <div class="" align="center" style="margin-top:20px; ">
-                                    <a href="" type="button" class="btn btn-primary2 slide">Veja Mais<i class="fa fa-caret-right"></i></a>
+                                    <a href="curso-de-{$url}" type="button" class="btn btn-primary2 slide">Veja Mais<i class="fa fa-caret-right"></i></a>
                                 </div>
 
                             </div>
                         </div>
                         <!-- End portfolio-head -->
-                        <a href="#" title="Detalhes do Curso">
+                        <a href="curso-de-{$url}" title="Detalhes do Curso">
                             <div class="portfolio-content" style="text-align: center;">
                                 <h5 class="title">{$nome}</h5>
                                 <div style="margin-top: -10px; text-decoration: none !important">{$desc_rapida}</div>
