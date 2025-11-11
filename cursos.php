@@ -32,7 +32,7 @@ if ($total_reg > 0) {
 
     <section id="portfolio">
 
-        <div class="row" style="margin-left:5px; margin-right:5px; margin-top:-40px;">
+        <div class="row" style="margin-left:40px; margin-right:40px; margin-top:-40px;">
 
             <?php
             for ($i = 0; $i < $total_reg; $i++) {
@@ -146,7 +146,7 @@ if ($total_reg > 0) {
 
     <section id="portfolio">
 
-        <div class="row" style="margin-left:10px; margin-right:10px; margin-top:-20px;">
+        <div class="row" style="margin-left:40px; margin-right:40px; margin-top:-40px;">
 
             <?php
                 for ($i = 0; $i < $total_reg; $i++) {
@@ -250,7 +250,7 @@ if ($total_reg > 0) {
 
         <section id="portfolio">
 
-        <div class="row" style="margin-left:10px; margin-right:10px; margin-top:-40px;">
+        <div class="row" style="margin-left:40px; margin-right:40px; margin-top:-40px;">
 
             <?php
                 for ($i = 0; $i < $total_reg; $i++) {

@@ -17,7 +17,7 @@ if ($total_reg > 0 ) {
 
   echo <<<HTML
 <section id="portfolio">
-<div class="row" style="margin-left:5px; margin-right:5px; margin-top:-80px;">
+<div class="row" style="margin-left:40px; margin-right:40px; margin-top:-80px;">
 HTML;
 
   for ($i = 0; $i < $total_reg; $i++) {
