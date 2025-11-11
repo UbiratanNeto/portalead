@@ -1,7 +1,16 @@
 <?php
+/*
+//servidor local
 $usuario = 'root';
 $senha = '';
 $banco = 'portal';
+$servidor = 'localhost';
+*/
+
+//servidor hostgator
+$usuario = 'hg171165_portalead';
+$senha = 'portalead';
+$banco = 'hg171165_portalead';
 $servidor = 'localhost';
 
 try {
