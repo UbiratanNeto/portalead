@@ -104,7 +104,7 @@ if($url == "contatos"){
     </section>
 
     <header>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse" style="z-index: 1000">
             <div class="container">
                 <div class="row">
                     
@@ -140,7 +140,7 @@ if($url == "contatos"){
 
                                <li class="dropdown <?php echo $sobre ?>">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sobre<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
+                                    <ul class="dropdown-menu navbar-nav-sub">
                                        <li><a href="sobre">Nossa Escola</a></li>
                                        <li><a href="planos">Planos de assinaturas</a></li>
                                        <li><a href="parcerias">Parcerias</a></li>
