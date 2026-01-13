@@ -11,7 +11,7 @@ $servidor = 'localhost';
 $usuario = 'hg171165_portalead';
 $senha = 'portalead';
 $banco = 'hg171165_portalead';
-$servidor = 'localhost';
+$servidor = 'ns00104.hostgator.com.br';
 
 try {
 	$pdo = new PDO("mysql:dbname=$banco;host=$servidor", "$usuario", "$senha");
@@ -22,7 +22,7 @@ try {
 $url_sistema = "http://$_SERVER[HTTP_HOST]/";
 $url = explode("//", $url_sistema);
 if ($url[1] == 'localhost/') {
-	$url_sistema = "http://$_SERVER[HTTP_HOST]/gestaodecursos/";
+	$url_sistema = "http://$_SERVER[HTTP_HOST]/portalead/";
 }
 
 //VARIÁVEIS DO SISTEMA
