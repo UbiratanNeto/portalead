@@ -9,7 +9,7 @@ if($busca == '%%'){
 
 
 
-$query = $pdo->query("SELECT * FROM pacotes where nome LIKE '$busca' or desc_rapida LIKE '$busca' ORDER BY id desc");
+$query = $pdo->query("SELECT * FROM pacotes where nome LIKE '$busca' or desc_rapida LIKE '$busca' ORDER BY nome asc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if ($total_reg > 0 ) {
@@ -45,20 +45,14 @@ HTML;
     }
 
     echo <<<HTML
+    <a href="cursos-do-{$url}" title="Detalhes do Pacote">
     <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 portfolio-item">
                     <div class="portfolio-one">
                         <div class="portfolio-head">
                             <div class="portfolio-img"><img alt="" src="sistema/painel-admin/img/pacotes/{$foto}"></div>
-                            <div class="portfolio-hover">
-                                <iframe class="video-card" src="{$primeira_aula}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                <div class="" align="center" style="margin-top:20px; ">
-                                    <a href="cursos-do-{$url}" type="button" class="btn btn-primary2 slide">Veja Mais<i class="fa fa-caret-right"></i></a>
-                                </div>
-
-                            </div>
                         </div>
                         <!-- End portfolio-head -->
-                        <a href="cursos-do-{$url}" title="Detalhes do Pacote">
+                        
                             <div class="portfolio-content" style="text-align: center;">
                                 <h6 class="title" style="font-size: 13px">{$nome}</h6>
                                 <p style="margin-top: -10px;">{$desc_rapida}</p>
@@ -73,17 +67,18 @@ HTML;
               
 
               </div>
-                        </a>
+                        
                         <!-- End portfolio-content -->
                     </div>
                     <!-- End portfolio-item -->
                 </div>
+                </a>
 HTML;
   }
 
 }
 
-$query = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Não' and (nome LIKE '$busca' or desc_rapida LIKE '$busca') ORDER BY id desc");
+$query = $pdo->query("SELECT * FROM cursos where status = 'Aprovado' and sistema = 'Não' and (nome LIKE '$busca' or desc_rapida LIKE '$busca') ORDER BY nome asc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if ($total_reg > 0 ) {

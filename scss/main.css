@@ -6285,7 +6285,7 @@ body #about .section-block, body #about #features, body #about #process, body #a
 	display: inline-block;
 }
 body #about .background-imgholder {
-	background: url(../img/1.jpg);
+	background: url(../img/sobre2.jpg);
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -7920,8 +7920,11 @@ body #login-reg .btn-link-1 {
 
 @media only screen and (max-width: 700px) {
 .video-card{
-	height: 250px;
-}
+	height: 220px;
+	}
+	.search-box{
+		left: 70%
+	}
 }
 
 .btn-primary2 {
@@ -7943,4 +7946,37 @@ body #login-reg .btn-link-1 {
 	color: #1abac8;
 	background-color: #fff;
 	border-color: #fff;
+}
+
+.navbar-nav-sub {
+	margin: 7.5px - 15px;
+}
+.navbar-nav-sub > li > a {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	line-height: 20px;
+}
+
+@media (max-width: 768px) {
+	.navbar-nav-sub > li > a {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		line-height: 20px;
+		width: 100%;
+		text-align: center;
+		font-size:16px;
+		border-bottom: 1px solid #cecece;
+	}
+.navbar-nav-sub > li:hover {
+	background: #f7f7f7;
+}
+
+.navbar-nav-sub > li > a:hover {
+	color:#696969 !important;
+}
+
+}
+
+.cor-branca{
+	color:#FFF !important;
 }

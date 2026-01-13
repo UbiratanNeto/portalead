@@ -72,7 +72,7 @@ if ($total_reg > 0) {
 <section id="about">
     <div class="image-holder col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-left">
         <div class="background-imgholder">
-            <img src="img/1.jpg" alt="about" class="img-responsive" style="display:none;" />
+            <img src="img/sobre2.jpg" alt="about" class="img-responsive" style="display:none;" />
         </div>
     </div>
 

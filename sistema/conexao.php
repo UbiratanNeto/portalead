@@ -1,18 +1,18 @@
 <?php
-/*
+
 //servidor local
 $usuario = 'root';
 $senha = '';
 $banco = 'portal';
 $servidor = 'localhost';
-*/
+
 
 //servidor hostgator
-$usuario = 'hg171165_portalead';
+/*$usuario = 'hg171165_portalead';
 $senha = 'portalead';
 $banco = 'hg171165_portalead';
 $servidor = 'ns00104.hostgator.com.br';
-
+*/
 try {
 	$pdo = new PDO("mysql:dbname=$banco;host=$servidor", "$usuario", "$senha");
 } catch (Exception $e) {
